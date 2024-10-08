@@ -1,18 +1,15 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
+  "name": "Svalync",
+ 
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#FE5B1E",
+    "light": "#FFC0AA",
+    "dark": "#FE5B1E",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#FE5B1E",
+      "to": "#FFC0AA"
     }
   },
   "topbarLinks": [
@@ -23,7 +20,7 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://svalync.com/workflows"
   },
   "tabs": [
     {
@@ -43,7 +40,7 @@
       "group": "Get Started",
       "pages": [
         "Introduction",
-        "Terminology"
+        "Services"
       ]
     },
     {
@@ -73,8 +70,8 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/imudayyyy",
+    "github": "https://github.com/Uday032/",
+    "linkedin": "https://www.linkedin.com/in/imudayyyy"
   }
 }
