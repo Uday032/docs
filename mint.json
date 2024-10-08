@@ -1,7 +1,14 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Svalync",
- 
+  "font": {
+    "headings": {
+      "family": "Bricolage Grotesque"
+    },
+    "body": {
+      "family": "Inter"
+    }
+  },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#FE5B1E",
@@ -15,57 +22,37 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:uday@buildfast.co.in"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
     "url": "https://svalync.com/workflows"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
+
   "anchors": [
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "name": "Github",
+      "icon": "GITHUB",
+      "url": "https://github.com/Uday032/svalync-webapp"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "Introduction",
-        "Services"
-      ]
+      "pages": ["Introduction", "Services"]
     },
     {
       "group": "Nodes",
       "pages": [
+        "essentials/claude",
+        "essentials/common-utilities",
         "essentials/markdown",
         "essentials/code",
         "essentials/images",
         "essentials/settings",
         "essentials/navigation",
         "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
       ]
     }
   ],
