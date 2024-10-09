@@ -3,10 +3,14 @@
   "name": "Svalync",
   "font": {
     "headings": {
-      "family": "Bricolage Grotesque"
+      "family": "Recoleta",
+      "weight": 300,
+      "url": "https://ik.imagekit.io/codeui/font/RecoletaAlt-Medium.woff?updatedAt=1713167591524",
+      "format": "woff"
     },
     "body": {
-      "family": "Inter"
+      "family": "Inter",
+      "weight": 400
     }
   },
   "favicon": "/favicon.svg",
@@ -47,12 +51,11 @@
       "pages": [
         "essentials/claude",
         "essentials/common-utilities",
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "essentials/google-sheet",
+        "essentials/google-docs",
+        "essentials/stripe",
+        "essentials/blandai",
+        "essentials/website-scrapper"
       ]
     }
   ],
