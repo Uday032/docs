@@ -1,27 +1,45 @@
 ---
-title: 'Claude AI'
-description: '**Claude AI** is an advanced natural language processing (NLP) tool integrated with **Svalync** to enhance text-based workflows. It efficiently processes and analyzes large amounts of text, making it ideal for tasks like drafting documents, generating summaries, and reviewing contracts. By automating text handling, Claude AI streamlines workflows, such as generating invoices or creating detailed reports, without requiring manual intervention, thus improving productivity and accuracy in document-based operations.'
-icon: 'brain-circuit'
+title: "Claude AI"
+description: "**Claude AI** is an advanced natural language processing (NLP) tool integrated with **Svalync** to enhance text-based workflows. It efficiently processes and analyzes large amounts of text, making it ideal for tasks like drafting documents, generating summaries, and reviewing contracts. By automating text handling, Claude AI streamlines workflows, such as generating invoices or creating detailed reports, without requiring manual intervention, thus improving productivity and accuracy in document-based operations."
+icon: "brain-circuit"
 ---
 
-## **Step 1**  - Select Claude in App
-<img className="" src="/images/claude/1.png" alt="claud" />
+<Steps>
+  <Step title="Select Claude in App">
+  Navigate to the app's interface and locate the "Claude" option. Click on it to select the Claude AI model, which will enable you to utilize its features
+    <Frame>
+      <img className="" src="/images/claude/1.png" alt="claud" />
+    </Frame>
+  </Step>
+  <Step title="Integrate Account">
+  You need to link your Claude account to the app. Go to the account settings or integration section and follow the prompts to connect your Claude account. This integration allows the app to access Claude's features and personalized settings, ensuring a seamless experience while using its capabilities.
+    <Frame>
+      <img className="" src="/images/claude/2.png" alt="claud" />
+    </Frame>
+  </Step>
+  <Step title="Choose Model">
+  Access the dropdown menu within the app to select the desired AI model. Browse through the available options and choose the one that best fits your requirements, whether it's for **Analyse Candidate Profiles , Write SEO-Optimized Blog , Extract Information & Analyse Contracts with Docs**. This selection ensures that you leverage the most suitable model for your intended use case, optimizing your experience with the app.
+    <Frame>
+      <img className="" src="/images/claude/3.png" alt="claud" />
+    </Frame>
+    ---
 
-## **Step 2**  - Integrate Account
-<img className="" src="/images/claude/2.png" alt="claud" />
+### Claude AI Integrations Models
 
-## **Step 3**  - Choose Model
-<img className="" src="/images/claude/3.png" alt="claud" />
-
---- 
-
-## Claude AI Integrations Models
 ### Analyse Candidate Profiles
 
 **Claude AI** processes resumes or job applications and generates summaries based on key qualifications, experiences, and skills. This helps HR teams quickly assess candidate profiles.
 
 #### Automation:
+
 Claude AI can scan **Google Sheets** or **Google Docs** containing candidate information and analyze data to recommend the best candidates based on predefined criteria.
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
@@ -30,7 +48,15 @@ Claude AI can scan **Google Sheets** or **Google Docs** containing candidate inf
 **Claude AI** assists in generating high-quality, SEO-friendly content for blogs. It analyzes keywords, audience intent, and search trends to create optimized blog posts.
 
 #### Automation:
+
 AI-generated blog drafts can be directly sent to **Google Docs** for editing and review.
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
@@ -39,7 +65,15 @@ AI-generated blog drafts can be directly sent to **Google Docs** for editing and
 **Claude AI** is used to extract key information from large datasets, forms, or documents. This can include pulling out essential details from contracts, reports, or feedback forms.
 
 #### Automation:
+
 Extracted information can be transferred to **Google Sheets** for structured data management.
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
@@ -48,9 +82,25 @@ Extracted information can be transferred to **Google Sheets** for structured dat
 **Claude AI** can analyze legal contracts or documents stored in **Google Docs** to highlight critical clauses, identify risks, and provide a summary or review.
 
 #### Automation:
+
 This node is used for contract review, where AI analyzes legal terms and highlights areas for attention.
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
-## **Step 4**  - Run the Node
-<img className="" src="/images/claude/4.png" alt="claud" />
+  </Step>
+  <Step title="Run the Node">
+  Initiate the node within the application to activate the selected AI model. This process involves executing the necessary scripts or commands to start the node, allowing the app to begin utilizing the integrated features.
+    <Frame>
+      <img className="" src="/images/claude/4.png" alt="claud" />
+    </Frame>
+  </Step>
+</Steps>
+
+---

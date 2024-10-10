@@ -3,10 +3,7 @@
   "name": "Svalync",
   "font": {
     "headings": {
-      "family": "Recoleta",
-      "weight": 300,
-      "url": "https://ik.imagekit.io/codeui/font/RecoletaAlt-Medium.woff?updatedAt=1713167591524",
-      "format": "woff"
+      "family": "Recoleta"
     },
     "body": {
       "family": "Inter",
