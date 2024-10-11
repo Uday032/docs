@@ -1,17 +1,31 @@
 ---
-title: 'Google Sheet'
-description: 'The **Google Sheets** integration streamlines tasks involving spreadsheets by automating processes like reading, writing, and updating data. It connects directly with Google Sheets, allowing users to create workflows that handle spreadsheet operations without manual input. This makes data management more efficient, especially when dealing with large datasets, ensuring smooth collaboration and real-time updates. Whether it’s transferring data from other apps, performing analysis, or generating reports, this integration simplifies spreadsheet management within automated workflows.'
-icon: 'file-spreadsheet'
+title: "Google Sheet"
+description: "The **Google Sheets** integration streamlines tasks involving spreadsheets by automating processes like reading, writing, and updating data. It connects directly with Google Sheets, allowing users to create workflows that handle spreadsheet operations without manual input. This makes data management more efficient, especially when dealing with large datasets, ensuring smooth collaboration and real-time updates. Whether it’s transferring data from other apps, performing analysis, or generating reports, this integration simplifies spreadsheet management within automated workflows."
+icon: "file-spreadsheet"
 ---
 
-## **Step 1**  - Select Google Sheet in App
-<img className="" src="/images/googlesheet/1.png" alt="googlesheet" />
+<Steps>
+  <Step title="Select Google Sheet in App">
+   Start by navigating to the application interface and selecting the "Google Sheet" option. This allows access to the models designed for interacting with Google Sheets.
+    <Frame>
+     <img className="" src="/images/googlesheet/1.png" alt="googlesheet" />
+    </Frame>
+  </Step>
+  <Step title="Integrate the Google Sheet Account">
+ If you log in using your Google account, the app automatically gains access to your Google Sheets, allowing you to add or retrieve data without any further integration steps. However, if you log in using an email and password (non-Google login), you will need to manually connect your Google account by going to the account settings or integration section to grant the necessary permissions for managing your Google Sheets.
+    <Frame>
+     <img className="" src="/images/googlesheet/2.png" alt="googlesheet" />
+    </Frame>
+  </Step>
+  <Step title="Choose Models in Dropdown">
+In this step, access the dropdown menu and select the desired model:
 
-## **Step 2**  - Choose Model
-<img className="" src="/images/googlesheet/2.png" alt="googlesheet" />
+Add Data to Sheet: This model allows you to input and organize data into your Google Sheet, automating the data entry process.
+Get Sheet: This model retrieves data from an existing Google Sheet, enabling easy access to the sheet's content for review or analysis.
 
---- 
-
+<Frame>
+  <img className="" src="/images/googlesheet/2.png" alt="googlesheet" />
+</Frame>
 ## Google Sheets Integrations Models
 
 ### Add Data to Sheet
@@ -19,7 +33,15 @@ icon: 'file-spreadsheet'
 Automates the process of adding data into **Google Sheets**. This can be used to populate sheets with form submissions, extracted web data, or analyzed results from other nodes.
 
 #### Example:
+
 Data from a website scraper can be directly added to a Google Sheet for tracking product information or leads.
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
@@ -28,8 +50,21 @@ Data from a website scraper can be directly added to a Google Sheet for tracking
 Fetch and read data from **Google Sheets**, enabling workflows to use this information for other automated tasks like generating reports or updating documents.
 
 #### Example:
+
 Pull sales data from a Google Sheet and use it to generate automatic monthly reports.
 
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
-## **Step 3**  - Run the Node
-<img className="" src="/images/googlesheet/3.png" alt="googlesheet" />
+  </Step>
+   <Step title="Run the Node">
+ Finally, run the node by executing the required commands or scripts. This will activate the selected model, allowing you to either add new data to your Google Sheet or fetch existing data efficiently.
+    <Frame>
+     <img className="" src="/images/googlesheet/3.png" alt="googlesheet" />
+    </Frame>
+  </Step>
+</Steps>

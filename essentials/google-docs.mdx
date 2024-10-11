@@ -1,32 +1,60 @@
 ---
-title: 'Google Docs'
-description: 'The **Google Docs** integration simplifies document creation and management by automating processes such as generating, updating, and sharing Google Docs. Workflows can be set to automatically draft, edit, and distribute documents without manual input, enhancing collaboration and efficiency. Whether it’s drafting contracts, creating reports, or sharing content, this integration ensures real-time updates and seamless teamwork.'
-icon: 'file'
+title: "Google Docs"
+description: "The **Google Docs** integration simplifies document creation and management by automating processes such as generating, updating, and sharing Google Docs. Workflows can be set to automatically draft, edit, and distribute documents without manual input, enhancing collaboration and efficiency. Whether it’s drafting contracts, creating reports, or sharing content, this integration ensures real-time updates and seamless teamwork."
+icon: "file"
 ---
 
-## **Step 1**  - Select Docs Sheet in App
-<img className="" src="/images/googledocs/1.png" alt="googledocs" />
+<Steps>
+  <Step title="Select Google Docs in App">
+    Begin by navigating to the application interface and selecting the "Google Docs" option. This enables access to the models for working with Google Docs files.
 
-## **Step 2**  - Choose Model
-<img className="" src="/images/googledocs/2.png" alt="googledocs" />
+    <Frame>
+     <img className="" src="/images/googledocs/1.png" alt="googledocs" />
+    </Frame>
 
---- 
-
+  </Step>
+  <Step title="Integrate the Google Docs Account">
+ If you log in using your Google account, the app will automatically gain access to your Google Docs, allowing you to manage your documents without further setup. However, if you log in with an email and password (non-Google login), you will need to manually connect your Google account by going to the account settings or integration section. This step grants the necessary permissions to work with your Google Docs.
+    <Frame>
+       <img className="" src="/images/googledocs/2.png" alt="googledocs" />
+    </Frame>
+  </Step>
+  <Step title="Choose Models in Dropdown">
+ From the dropdown menu, choose the appropriate model:
+<Frame>
+ <img className="" src="/images/googledocs/2.png" alt="googledocs" />
+</Frame>
 ## Google Docs Integrations Models
-
 
 ### Add Data to Documents
 
 Allows automated insertion of content into **Google Docs**. This can be used to generate contracts, reports, or proposals based on templates and predefined data from **Google Sheets**.
 
 #### Example:
+
 Automatically populate Google Docs with customer information from Google Forms.
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
 ### Get Documents
 
 Fetch and retrieve **Google Docs** content for use in workflows. This is useful for reading and analyzing documents, such as contracts, and generating summaries or insights.
+
+####Example:
+
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
 ---
 
@@ -35,9 +63,21 @@ Fetch and retrieve **Google Docs** content for use in workflows. This is useful 
 Automates the process of adding comments to **Google Docs** for collaborative workflows where feedback or approvals are needed.
 
 #### Example:
+
 Claude AI can analyze a document and add comments with insights or suggestions.
 
+```
+{
+    "Authorization": "CLAUD_API_KEY",
+    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+}
+```
 
-
-## **Step 3**  - Run the Node
-<img className="" src="/images/googledocs/3.png" alt="googledocs" />
+  </Step>
+   <Step title="Run the Node">
+Finally, execute the node by running the relevant commands or scripts. This will activate the selected model, allowing you to either add new data to your Google Doc or retrieve existing content seamlessly.
+    <Frame>
+    <img className="" src="/images/googledocs/3.png" alt="googledocs" />
+    </Frame>
+  </Step>
+</Steps>
