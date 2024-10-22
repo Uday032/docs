@@ -35,11 +35,20 @@ From the dropdown menu, select the model that fits your scraping task:
 
 Scrape product listings from a competitor’s site to track their prices or availability.
 
+Input:
+
 ```
 {
-    "Authorization": "CLAUD_API_KEY",
-    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+    "websiteURL": "" // the url of the site that you want to scrape,
+    "extractClassName": "" // the className of the url you want to scrape,
+    "onClickClassName: "" // If it contain pagination, the button to move to next cards
 }
+```
+
+Output:
+
+```
+It will extract all the details and provide the output in the markdown format.
 ```
 
 ### Bulk Scrape
@@ -52,10 +61,18 @@ Scrape blog articles or reviews from various websites and compile the data into 
 
 ```
 {
-    "Authorization": "CLAUD_API_KEY",
-    "encrypted_key": "YOUR_ENCRYPTED_KEY"
+    "websiteURL": "" // the url of the site that you want to scrape,
+    "extractClassName": "" // the className of the url you want to scrape,
+    "onClickClassName: "" // If it contain pagination, the button to move to next cards
 }
 ```
+
+Output:
+
+```
+It will extract all the details and provide the output in the markdown format.
+```
+
 ---
 
   </Step>
