@@ -3,7 +3,8 @@
   "name": "Svalync",
   "font": {
     "headings": {
-      "family": "Recoleta"
+      "family": "Inter",
+      "weight": 400
     },
     "body": {
       "family": "Inter",
@@ -20,6 +21,7 @@
       "to": "#FFC0AA"
     }
   },
+  "tabs": [{ "name": "API References", "url": "/developers" }],
   "topbarLinks": [
     {
       "name": "Support",
@@ -28,9 +30,8 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://svalync.com/workflows"
+    "url": "/workflows"
   },
-
   "anchors": [
     {
       "name": "Github",
@@ -38,6 +39,9 @@
       "url": "https://github.com/Uday032/svalync-webapp"
     }
   ],
+  "api": {
+    "baseUrl": "https://svalync.com"
+  },
   "navigation": [
     {
       "group": "Get Started",
@@ -54,8 +58,17 @@
         "essentials/blandai",
         "essentials/website-scrapper"
       ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": ["developers/authentication"]
+    },
+    {
+      "group": "Api References",
+      "pages": ["developers/start-workflow"]
     }
   ],
+
   "footerSocials": {
     "x": "https://x.com/imudayyyy",
     "github": "https://github.com/Uday032/",
