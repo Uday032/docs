@@ -3,50 +3,64 @@ title: "Authentication"
 description: To securely access and interact with Svalync API, authentication is required. Users must generate an API Key, which will be used to authenticate requests.Each workspace has a separate API Key which can be generated in Profile page.
 ---
 
-
 ### Generate API Key
+
 Visit https://www.svalync.com/profile to generate your unique API Key. This key is essential for making authenticated requests to Svalync API. or
 
 To generate an API Key, follow these steps:
 
 <Steps>
- <Step title="Go to Profile">
-   <Frame >
-   <a href="https://www.svalync.com/profile" target="_blank">
-   <img className="" src="/images/developers/api/profile.png" alt="blandai" /></a>
-   </Frame> 
-</Step>
-<Step title="Generate Api Key">
-   <Frame >
-   <img className="" src="/images/developers/api/token.png" alt="blandai" />
-   </Frame> 
-</Step>
+  <Step title="Go to Profile">
+    <Frame>
+      <a href="https://www.svalync.com/profile" target="_blank">
+        <img
+          className=""
+          src="/images/developers/api/profile.png"
+          alt="blandai"
+        />
+      </a>
+    </Frame>
+  </Step>
+  <Step title="Generate Api Key">
+    <Frame>
+      <img className="" src="/images/developers/api/token.png" alt="blandai" />
+    </Frame>
+  </Step>
 </Steps>
 
-## Get the id 
+## Get the Workflow id
+
 Visit https://www.svalync.com/workflows to get your unique workflowId.
 
- <Step title="Generate Api Key">
-   <Frame >
-   <a href="https://www.svalync.com/workflows" target="_blank">
-   <img className="" src="/images/developers/api/workflowid.png" alt="blandai" /></a>
-   </Frame> 
+{" "}
+<Step>
+  <Frame>
+    <a href="https://www.svalync.com/workflows" target="_blank">
+      <img
+        className=""
+        src="/images/developers/api/workflowid.png"
+        alt="blandai"
+      />
+    </a>
+  </Frame>
 </Step>
 
-
-
 ### Using the API Key
-With your API Key, you must include it in the headers of every request to the API. 
+
+With your API Key, you must include it in the headers of every request to the API.
 
 ### Example of Including API Key in Requests
+
 To authenticate your requests, include your API Key in the request headers as an Authorization Bearer token. Below are examples of how to include the API Key in requests using Python, JavaScript, and cURL.
+
 <CodeGroup>
 
-```curl cURL 
+```curl cURL
 curl --request GET \
   --url https://svalync.com/api/workflow/runWorkflow/{id} \
   --header 'x-api-key: <api-key>'
 ```
+
 ```python Python
 import requests
 
@@ -58,12 +72,14 @@ response = requests.request("GET", url, headers=headers)
 
 print(response.text)
 ```
-```javascript JavaScript
-const options = {method: 'GET', headers: {'x-api-key': '<api-key>'}};
 
-fetch('https://svalync.com/api/workflow/runWorkflow/{id}', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+```javascript JavaScript
+const options = { method: "GET", headers: { "x-api-key": "<api-key>" } };
+
+fetch("https://svalync.com/api/workflow/runWorkflow/{id}", options)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
 ```
+
 </CodeGroup>
