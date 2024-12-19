@@ -2,8 +2,9 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Svalync",
   "font": {
+
     "headings": {
-      "family": "Inter",
+      "family": "Inter  ",
       "weight": 400
     },
     "body": {
@@ -11,6 +12,7 @@
       "weight": 400
     }
   },
+
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#FE5B1E",
@@ -48,7 +50,7 @@
       "pages": ["introduction", "services"]
     },
     {
-      "group": "Nodes",
+      "group": "Workflow Nodes",
       "pages": [
         "essentials/claude",
         "essentials/common-utilities",
