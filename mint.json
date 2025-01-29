@@ -62,6 +62,13 @@
       ]
     },
     {
+      "group":  "VoiceAi",
+      "pages": [
+        "voiceai/outbound",
+        "voiceai/inbound"
+      ]
+    },
+    {
       "group": "Core Concepts",
       "pages": ["developers/authentication"]
     },
