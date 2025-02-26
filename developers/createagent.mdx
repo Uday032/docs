@@ -1,0 +1,52 @@
+---
+title: "Create Agent"
+description: Create a new agent for handling specific tasks and interactions within the system.
+api: "POST /agents"
+---
+####
+
+
+### Authorization
+
+
+<ParamField header="authorization" type="string" required>
+ Your API key for authentication.
+</ParamField>
+
+
+
+### Body
+
+
+<ParamField body="name" type="string" required>
+  The name of the agent to be created.
+</ParamField>
+
+<ParamField body="welcomeMessage" type="string" required>
+  The welcome message to be delivered by the agent.
+</ParamField>
+
+<ParamField body="task" type="string" required>
+  The specific task the agent is responsible for.
+</ParamField>
+
+<ParamField body="voice" type="string" required>
+  The voice to be used by the agent for communication.
+</ParamField>
+
+<ParamField body="language" type="string" required>
+  The language the agent will use for communication.
+</ParamField>
+
+<ParamField body="telephonyProvider" type="string" required>
+  The telephony provider to be used for the agent's calls.
+</ParamField>
+
+<ParamField body="callTermination" type="number" required>
+  The conditions under which the call will be terminated in seconds.
+</ParamField>
+
+<ParamField body="hangupMessage" type="string" required>
+  The message to be delivered when the call is terminated.
+</ParamField>
+

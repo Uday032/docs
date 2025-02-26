@@ -1,4 +1,4 @@
-{
+  {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Svalync",
   "font": {
@@ -42,7 +42,7 @@
     }
   ],
   "api": {
-    "baseUrl": "https://svalync.com"
+    "baseUrl": "https://svalync.com/api"
   },
   "navigation": [
     {
@@ -73,8 +73,13 @@
       "pages": ["developers/authentication"]
     },
     {
-      "group": "Api References",
+      "group": "Workflows",
       "pages": ["developers/start-workflow"]
+
+    },
+    {
+      "group": "Calls",
+      "pages": ["developers/createagent","developers/getallagents","developers/getagents" ,"developers/sendcallapi"]
     }
   ],
 

@@ -1,0 +1,79 @@
+---
+title: "Send Call"
+description: Create a script for an AI-driven phone call tailored to a specific purpose and set of actions. Adapt and modify the wording to meet the requirements of the objective.
+api: "POST /voiceai/sendcall"
+---
+####
+
+
+### Authorization
+
+
+<ParamField header="authorization" type="string" required>
+ Your API key for authentication.
+</ParamField>
+<ParamField header="encrypted_key" type="string" >
+ A special key for using a BYOT (Bring Your Own Twilio) account. Only required for sending calls from your own Twilio account.
+</ParamField>
+
+
+### Body
+
+
+<ParamField body="title" type="string" required>
+  The name of the workflow to be started.
+</ParamField>
+
+
+<ParamField body="phone_number" type="string" required>
+  Phone Number
+</ParamField>
+
+
+<ParamField body="voice" type="string" required>
+  The message to be sent to the user.
+</ParamField>
+
+
+<ParamField body="language" type="string" required>
+  The voice to be used for the message.
+</ParamField>
+
+
+<ParamField body="task" type="string" required>
+  The voice to be used for the message.
+</ParamField>
+
+
+<ParamField body="from" type="string" >
+  The voice to be used for the message.
+</ParamField>
+
+
+<ParamField body="model" type="string" >
+  The voice to be used for the message.
+</ParamField>
+
+
+<ParamField body="record" type="string" >
+  The voice to be used for the message.
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="data" type="array">
+  An array of agent objects.
+</ResponseField>
+<ResponseField name="status" type="number">
+  The status code of the response.
+</ResponseField>
+
+
+{/* {
+  "message": "done",
+  "status": "queued",
+  "execution_id": "123e4567-e89b-12d3-a456-426614174000"
+} */}

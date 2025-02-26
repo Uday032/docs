@@ -1,0 +1,30 @@
+---
+title: "All Agents"
+description: Create a new agent for handling specific tasks and interactions within the system.
+api: "GET /agents/getall"
+---
+####
+
+
+### Authorization
+
+
+<ParamField header="authorization" type="string" required>
+ Your API key for authentication.
+</ParamField>
+
+
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="data" type="array">
+  An array of agent objects.
+</ResponseField>
+<ResponseField name="status" type="number">
+  The status code of the response.
+</ResponseField>
+
+
