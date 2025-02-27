@@ -1,0 +1,112 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Svalync",
+  "colors": {
+    "primary": "#FE5B1E",
+    "light": "#FFC0AA",
+    "dark": "#FE5B1E"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
+  "background": {
+    "decoration": "windows"
+  },
+  "logo": {
+    "light": "https://ik.imagekit.io/workflowai/logo.svg?updatedAt=1740681923052",
+    "dark": "https://ik.imagekit.io/workflowai/logo.svg?updatedAt=1740681923052",
+    "href": "https://svalync.com"
+  },
+  "favicon": "/favicon.svg",
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:uday@svalync.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://svalync.com"
+    }
+  },
+  "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Community",
+          "href": "https://external-link.com/blog"
+        },
+        {
+          "anchor": "Youtube",
+          "icon": "YOUTUBE",
+          "href": "https://external-link.com/blog"
+        }
+      ]
+    },
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["Introduction", "Core Concepts", "Pricing"]
+          },
+          {
+            "group": "Workflow Nodes",
+            "pages": [
+              "essentials/claude",
+              "essentials/common-utilities",
+              "essentials/google-sheet",
+              "essentials/google-docs",
+              "essentials/stripe",
+              "essentials/blandai",
+              "essentials/website-scrapper"
+            ]
+          },
+          {
+            "group": "Voice AI",
+            "pages": ["voiceai/outbound", "voiceai/inbound"]
+          },
+          {
+            "group": "Chatbot AI",
+            "pages": ["voiceai/outbound", "voiceai/inbound"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Core Concepts",
+            "pages": ["developers/authentication"]
+          },
+          {
+            "group": "Workflows",
+            "pages": ["developers/start-workflow"]
+          },
+          {
+            "group": "Agent",
+            "pages": [
+              "developers/agents/createagent",
+              "developers/agents/updateagent",
+              "developers/agents/listagents",
+              "developers/agents/getagents"
+            ]
+          },
+          {
+            "group": "Calls",
+            "pages": [
+              "developers/calls/sendcallapi",
+              "developers/calls/specific-call",
+              "developers/calls/list-call"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
