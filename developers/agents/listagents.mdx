@@ -1,0 +1,30 @@
+---
+title: "List Agents"
+description: List all Voice AI agents under your account, along with their names, statuses, and creation dates, using Svalync's API.
+api: "GET /agents/getall"
+---
+####
+
+
+### Authorization
+
+
+<ParamField header="authorization" type="string" required>
+ Your API key for authentication.
+</ParamField>
+
+
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="data" type="array">
+  An array of agent objects.
+</ResponseField>
+<ResponseField name="status" type="number">
+  The status code of the response.
+</ResponseField>
+
+

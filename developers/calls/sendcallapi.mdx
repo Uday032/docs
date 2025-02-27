@@ -1,0 +1,45 @@
+---
+title: "Send Call"
+description: Learn how to initiate outbound phone calls using Svalync Voice AI agents. Start making phone calls using the agent ID and svalync internal phone number.
+api: "POST /voiceai/sendcall"
+---
+####
+
+
+### Authorization
+
+
+<ParamField header="authorization" type="string" required>
+ Your API key for authentication.
+</ParamField>
+
+### Body
+Make a phone call from agent
+<ParamField body="phone_number" type="number" required>
+  The phone number to be called.
+</ParamField>
+
+
+<ParamField body="agentId"  type="number" required>
+ Agent id which will initiate the outbound call
+</ParamField>
+
+
+<ParamField body="from_phone_number" type="string" required value="internal">
+Phone number of the sender default value is **internal**
+</ParamField>
+
+
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="message" type="string">
+  The status of the call, either "done" or "queued".
+</ResponseField>
+<ResponseField name="status" type="number">
+  The status code of the response, either 200 or 400.
+</ResponseField>
+

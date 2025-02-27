@@ -1,0 +1,33 @@
+---
+title: "List Call"
+description: Retrieve a list of AI-driven phone calls tailored to specific purposes and sets of actions.
+api: "GET /voiceai/list"
+---
+####
+
+
+### Authorization
+
+<ParamField header="authorization" type="string" required>
+ Your API key for authentication.
+</ParamField>
+
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="data" type="array">
+  An array of agent objects.
+</ResponseField>
+<ResponseField name="status" type="number">
+  The status code of the response.
+</ResponseField>
+
+
+{/* {
+  "message": "done",
+  "status": "queued",
+  "execution_id": "123e4567-e89b-12d3-a456-426614174000"
+} */}

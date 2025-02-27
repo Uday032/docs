@@ -1,7 +1,7 @@
 ---
-title: "All Agents"
-description: Create a new agent for handling specific tasks and interactions within the system.
-api: "GET /agents/getall"
+title: "Agents"
+description: Retrieve detailed Voice AI agent information, including configuration, status, and tasks, using Bolna APIs.
+api: "GET /agents/get?id={agentId}"
 ---
 ####
 
@@ -13,7 +13,9 @@ api: "GET /agents/getall"
  Your API key for authentication.
 </ParamField>
 
-
+<ParamField body="agentId" type="string" required="true">
+  The unique identifier for the agent being updated.
+</ParamField>
 
 ## Response
 
@@ -26,5 +28,4 @@ api: "GET /agents/getall"
 <ResponseField name="status" type="number">
   The status code of the response.
 </ResponseField>
-
 

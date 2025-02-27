@@ -50,3 +50,14 @@ api: "POST /agents"
   The message to be delivered when the call is terminated.
 </ParamField>
 
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful.
+</ResponseField>
+<ResponseField name="data" type="array">
+  An array of agent objects.
+</ResponseField>
+<ResponseField name="status" type="number">
+  The status code of the response.
+</ResponseField>
