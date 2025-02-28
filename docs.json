@@ -54,7 +54,7 @@
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["Introduction", "core-concepts", "pricing"]
+            "pages": ["introduction", "core-concepts", "pricing"]
           },
           {
             "group": "Workflow Nodes",
