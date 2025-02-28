@@ -1,0 +1,24 @@
+---
+title: "Write Custom Prompt"
+description: "Generate a response based on a custom system and user prompt"
+---
+
+## Configuration
+
+- **Node Type:** action
+
+### Input Fields
+
+| Field Name    | Data Type | Required | Description                          |
+| ------------- | --------- | -------- | ------------------------------------ |
+| System Prompt | Textarea  | True     | The system-level prompt for guidance |
+| User Prompt   | Textarea  | True     | The user's specific input prompt     |
+| Context       | Text      | True     | The context for the custom prompt    |
+
+```json
+{
+  "systemPrompt": "<string>",
+  "userPrompt": "<string>",
+  "userContext": "<string>"
+}
+```

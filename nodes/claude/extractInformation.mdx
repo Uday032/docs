@@ -1,0 +1,51 @@
+---
+title: "Extract Information"
+description: "Extract structured information from user input"
+---
+
+## Configuration
+
+- **Node Type:** action
+
+### Input Fields
+
+| Field Name  | Data Type | Required | Description                           |
+| ----------- | --------- | -------- | ------------------------------------- |
+| User Prompt | Textarea  | True     | Define fields that needs to extracted |
+| Context     | Text      | True     | The context for the extraction        |
+
+```json
+{
+  "userPrompt": "Extract the following details: name<string>, image<url>, jobTitle<string>, dateofBirth<string>",
+  "userContext": "<string>"
+}
+```
+
+### Output Fields
+
+| Field Name            | Data Type | Description                   |
+| --------------------- | --------- | ----------------------------- |
+| Extracted Information | Array     | The structured extracted data |
+
+```json
+[
+  {
+    "name": "David Park",
+    "image": "https://example.com/davidpark.jpg",
+    "jobTitle": "Software Engineer",
+    "dateofBirth": "1990-01-01"
+  },
+  {
+    "name": "Emily Chen",
+    "image": "https://example.com/emilychen.jpg",
+    "jobTitle": "Marketing Manager",
+    "dateofBirth": "1985-06-15"
+  },
+  {
+    "name": "Michael Lee",
+    "image": "https://example.com/michaellee.jpg",
+    "jobTitle": "Data Scientist",
+    "dateofBirth": "1992-03-20"
+  }
+]
+```

@@ -1,0 +1,52 @@
+---
+title: "Analyse Contracts with Docs"
+description: "Analyse contracts using provided documents and context"
+---
+
+This node examines partnership agreements and identifies clear, concise, and actionable risk issues in the contract, providing thorough, unbiased, and confidential analysis to protect the interests of the party seeking assistance.
+
+**Majorly build this to work with Google Doc as the previous node**
+
+## Configuration
+
+- **Node Type:** action
+
+### Input Fields
+
+| Field Name  | Data Type | Required | Description                           |
+| ----------- | --------- | -------- | ------------------------------------- |
+| User Prompt | Textarea  | True     | The prompt for analyzing the contract |
+| Context     | Text      | True     | The context for contract analysis     |
+
+```json
+{
+  "userPrompt": "<string>",
+  "userContext": "<string>"
+}
+```
+
+### Output Fields
+
+| Field Name | Data Type | Required | Description                   |
+| ---------- | --------- | -------- | ----------------------------- |
+| candidates | Array     | True     | An array of candidate objects |
+
+**Candidate Object**
+
+| Field Name       | Data Type | Required | Description                                  |
+| ---------------- | --------- | -------- | -------------------------------------------- |
+| startIndex       | String    | True     | The start index of Google Doc                |
+| endIndex         | String    | True     | The end index of Google Doc                  |
+| risk             | String    | True     | Risks associated with the analyzed statement |
+| newUpdateContent | String    | True     | Gist of the new updated content              |
+
+```json
+[
+  {
+    "startIndex": "<string>",
+    "endIndex": "<string>",
+    "risk": "<string>",
+    "newUpdateContent": "<string>"
+  }
+]
+```
