@@ -66,7 +66,7 @@
                   "nodes/claude/writeSEOOptimzedBlog",
                   "nodes/claude/extractInformation",
                   "nodes/claude/anaylzeContracts",
-                  "nodes/claude/createTemplateFrocs",
+                  "nodes/claude/createTemplateFromDocs",
                   "nodes/claude/customPrompt"
                 ]
               },
