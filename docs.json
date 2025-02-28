@@ -54,7 +54,18 @@
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["introduction", "core-concepts", "pricing"]
+            "pages": [
+              "introduction",
+              {
+                "group": "Core Concepts",
+                "pages": [
+                  "core-concepts/workflows",
+                  "core-concepts/voice-ai",
+                  "core-concepts/chatbot-ai"
+                ]
+              },
+              "pricing"
+            ]
           },
           {
             "group": "Workflow Nodes",

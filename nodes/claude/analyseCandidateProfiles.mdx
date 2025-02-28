@@ -1,7 +1,54 @@
 ---
 title: "Analyse Candidate Profiles"
-description: "**Claude AI** is an advanced natural language processing (NLP) tool integrated with **Svalync** to enhance text-based workflows. It efficiently processes and analyzes large amounts of text, making it ideal for tasks like drafting documents, generating summaries, and reviewing contracts. By automating text handling, Claude AI streamlines workflows, such as generating invoices or creating detailed reports, without requiring manual intervention, thus improving productivity and accuracy in document-based operations."
-icon: "brain-circuit"
+description: "Analyse Candidate Profiles through Claude"
 ---
 
-asdfa
+## Configuration
+
+- **Node Type:** action
+
+### Input Fields
+
+| Field Name    | Data Type | Required | Description                        |
+| ------------- | --------- | -------- | ---------------------------------- |
+| System Prompt | Textarea  | True     | The system prompt for the analysis |
+| User Prompt   | Textarea  | True     | The user prompt for the analysis   |
+| User Context  | Text      | True     | The context for the analysis       |
+
+```json
+{
+  "systemPrompt": "<string>"
+  "userPrompt": "<string>"
+  "userContext": "<string>"
+}
+```
+
+### Output Fields
+
+| Field Name | Data Type | Required | Description                   |
+| ---------- | --------- | -------- | ----------------------------- |
+| candidates | Array     | True     | An array of candidate objects |
+
+**Candidate Object**
+
+| Field Name           | Data Type | Required | Description                                 |
+| -------------------- | --------- | -------- | ------------------------------------------- |
+| name                 | String    | True     | The name of the candidate                   |
+| description          | String    | True     | A brief description of the candidate        |
+| pastExperience       | String    | True     | The past experience of the candidate        |
+| jobFitLabel          | String    | True     | The job fit label of the candidate          |
+| personKnowledgeLabel | String    | True     | The person knowledge label of the candidate |
+| reasoning            | String    | True     | The reasoning behind the analysis           |
+
+```json
+[
+  {
+    "name": "<string>",
+    "description": "<string>",
+    "pastExperience": "<string>",
+    "jobFitLabel": "<string>",
+    "personKnowledgeLabel": "<string>",
+    "reasoning": "<string>"
+  }
+]
+```
