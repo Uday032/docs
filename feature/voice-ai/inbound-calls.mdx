@@ -1,0 +1,191 @@
+---
+title: "Inbound Calls"
+description: "Handle incoming voice calls with AI agents"
+---
+
+# Inbound Calls
+
+The Inbound Calls node enables you to handle incoming calls using AI voice agents.
+
+## Overview
+
+This node allows you to:
+
+- Handle incoming calls
+- Route calls to agents
+- Process IVR menus
+- Manage call queues
+- Track call metrics
+
+## Configuration
+
+| Parameter        | Type   | Description                         |
+| ---------------- | ------ | ----------------------------------- |
+| Phone Number     | String | Inbound phone number                |
+| Agent Assignment | Object | Agent routing rules                 |
+| IVR Config       | Object | Interactive Voice Response settings |
+| Queue Settings   | Object | Call queue configuration            |
+| Business Hours   | Object | Operating hours settings            |
+
+## Example Usage
+
+### Basic Inbound Setup
+
+```json
+{
+  "phone_number": "+1234567890",
+  "agent_assignment": {
+    "type": "round_robin",
+    "agents": ["agent_123", "agent_456"]
+  },
+  "recording": true
+}
+```
+
+### Advanced Inbound Configuration
+
+```json
+{
+  "phone_number": "+1234567890",
+  "agent_assignment": {
+    "type": "skill_based",
+    "rules": [
+      {
+        "skill": "sales",
+        "agents": ["agent_123", "agent_456"],
+        "priority": 1
+      },
+      {
+        "skill": "support",
+        "agents": ["agent_789", "agent_012"],
+        "priority": 2
+      }
+    ]
+  },
+  "ivr_config": {
+    "greeting": "Welcome to our service",
+    "menu": [
+      {
+        "option": "1",
+        "text": "For sales, press 1",
+        "action": "route_to_sales"
+      },
+      {
+        "option": "2",
+        "text": "For support, press 2",
+        "action": "route_to_support"
+      }
+    ]
+  },
+  "queue_settings": {
+    "max_size": 10,
+    "max_wait_time": 300,
+    "music_on_hold": true,
+    "announcements": {
+      "interval": 60,
+      "text": "Thank you for waiting. Your call is important to us."
+    }
+  },
+  "business_hours": {
+    "timezone": "America/New_York",
+    "schedule": {
+      "monday": ["09:00-17:00"],
+      "tuesday": ["09:00-17:00"],
+      "wednesday": ["09:00-17:00"],
+      "thursday": ["09:00-17:00"],
+      "friday": ["09:00-17:00"]
+    },
+    "holidays": ["2024-12-25", "2024-01-01"]
+  }
+}
+```
+
+## Call Routing
+
+### Routing Strategies
+
+```json
+{
+  "routing_strategies": {
+    "round_robin": {
+      "enabled": true,
+      "reset_interval": "daily"
+    },
+    "skill_based": {
+      "enabled": true,
+      "skills": ["sales", "support", "billing"]
+    },
+    "load_balanced": {
+      "enabled": true,
+      "max_concurrent_calls": 5
+    }
+  }
+}
+```
+
+## Queue Management
+
+### Queue Configuration
+
+```json
+{
+  "queue": {
+    "priority_levels": {
+      "high": {
+        "max_wait_time": 120,
+        "callback_offered": true
+      },
+      "normal": {
+        "max_wait_time": 300,
+        "callback_offered": true
+      },
+      "low": {
+        "max_wait_time": 600,
+        "callback_offered": true
+      }
+    },
+    "overflow_handling": {
+      "max_queue_size": 20,
+      "action": "offer_callback"
+    }
+  }
+}
+```
+
+## Business Hours
+
+### Schedule Configuration
+
+```json
+{
+  "business_hours": {
+    "timezone": "UTC",
+    "schedules": [
+      {
+        "name": "weekday",
+        "hours": ["09:00-17:00"],
+        "days": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+      },
+      {
+        "name": "weekend",
+        "hours": ["10:00-14:00"],
+        "days": ["saturday"]
+      }
+    ],
+    "after_hours": {
+      "voicemail": true,
+      "message": "We are currently closed. Please leave a message."
+    }
+  }
+}
+```
+
+## Error Handling
+
+Common error scenarios:
+
+- Queue full
+- No agents available
+- Invalid routing rules
+- Business hours violation
+- System overload

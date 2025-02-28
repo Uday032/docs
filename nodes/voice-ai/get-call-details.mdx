@@ -1,0 +1,136 @@
+---
+title: "Get Call Details"
+description: "Retrieve detailed information about voice calls"
+---
+
+# Get Call Details
+
+The Get Call Details node allows you to retrieve comprehensive information about specific voice calls.
+
+## Overview
+
+This node enables you to:
+
+- Get call status and duration
+- Access conversation transcripts
+- Retrieve call recordings
+- View call analytics
+- Get response data
+
+## Configuration
+
+| Parameter          | Type    | Description                                |
+| ------------------ | ------- | ------------------------------------------ |
+| Call ID            | String  | ID of the call to retrieve                 |
+| Include Transcript | Boolean | Whether to include conversation transcript |
+| Include Recording  | Boolean | Whether to include call recording URL      |
+| Include Analytics  | Boolean | Whether to include call analytics          |
+
+## Example Usage
+
+### Basic Call Details
+
+```json
+{
+  "call_id": "call_abc123",
+  "include_transcript": true
+}
+```
+
+### Full Call Information
+
+```json
+{
+  "call_id": "call_abc123",
+  "include_transcript": true,
+  "include_recording": true,
+  "include_analytics": true
+}
+```
+
+## Response Format
+
+```json
+{
+  "call": {
+    "id": "call_abc123",
+    "status": "completed",
+    "duration": 125,
+    "start_time": "2024-01-01T12:00:00Z",
+    "end_time": "2024-01-01T12:02:05Z",
+    "phone_number": "+1234567890",
+    "direction": "outbound",
+    "cost": "0.50",
+    "transcript": {
+      "segments": [
+        {
+          "speaker": "ai",
+          "text": "Hello, this is AI calling.",
+          "timestamp": "2024-01-01T12:00:05Z"
+        },
+        {
+          "speaker": "human",
+          "text": "Hi, yes I can hear you.",
+          "timestamp": "2024-01-01T12:00:08Z"
+        }
+      ]
+    },
+    "analytics": {
+      "sentiment": {
+        "positive": 0.8,
+        "neutral": 0.2,
+        "negative": 0.0
+      },
+      "engagement": 0.9,
+      "talk_ratio": {
+        "ai": 0.4,
+        "human": 0.6
+      }
+    },
+    "recording_url": "https://api.example.com/recordings/call_abc123.mp3"
+  }
+}
+```
+
+## Available Data
+
+### Basic Information
+
+- Call ID
+- Status
+- Duration
+- Start/End times
+- Phone number
+- Direction
+- Cost
+
+### Transcript Data
+
+- Conversation segments
+- Speaker identification
+- Timestamps
+- Text content
+
+### Analytics
+
+- Sentiment analysis
+- Engagement metrics
+- Talk ratio
+- Response patterns
+
+### Recording
+
+- Audio file URL
+- Format
+- Duration
+- Quality
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid Call ID
+- Call not found
+- Insufficient permissions
+- Recording unavailable
+- Analytics processing failed

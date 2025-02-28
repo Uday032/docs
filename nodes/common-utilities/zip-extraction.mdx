@@ -1,0 +1,42 @@
+---
+title: "Zip Extraction"
+description: "Extract contents from zip files"
+---
+
+# Zip Extraction
+
+The Zip Extraction node allows you to extract contents from zip files in your workflow.
+
+## Overview
+
+This utility node provides functionality to:
+
+- Extract all contents from a zip file
+- Select specific files to extract
+- Handle password-protected zip files
+
+## Configuration
+
+| Parameter   | Type              | Description                               |
+| ----------- | ----------------- | ----------------------------------------- |
+| Input File  | File              | The zip file to extract                   |
+| Output Path | String            | Directory where files should be extracted |
+| Password    | String (Optional) | Password if the zip file is protected     |
+
+## Output
+
+The node outputs:
+
+- List of extracted file paths
+- Success/failure status
+- Any error messages if extraction fails
+
+## Example Usage
+
+```json
+{
+  "input_file": "example.zip",
+  "output_path": "./extracted",
+  "password": "" // Optional
+}
+```

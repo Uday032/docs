@@ -1,0 +1,47 @@
+---
+title: "Combine Responses"
+description: "Merge multiple responses into a single output"
+---
+
+# Combine Responses
+
+The Combine Responses node allows you to merge multiple responses or data streams into a single unified output.
+
+## Overview
+
+This utility node helps:
+
+- Combine multiple API responses
+- Merge different data formats
+- Concatenate text responses
+- Aggregate results
+
+## Configuration
+
+| Parameter | Type   | Description                           |
+| --------- | ------ | ------------------------------------- |
+| Inputs    | Array  | Array of responses to combine         |
+| Format    | String | Output format (json/text/array)       |
+| Separator | String | Optional separator for text combining |
+
+## Output
+
+The node provides:
+
+- Combined response in specified format
+- Success/failure status
+- Error messages if combination fails
+
+## Example Usage
+
+```json
+{
+  "inputs": [
+    { "response": "First response" },
+    { "response": "Second response" },
+    { "data": ["array", "items"] }
+  ],
+  "format": "json",
+  "separator": "\n"
+}
+```

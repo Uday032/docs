@@ -1,0 +1,155 @@
+---
+title: "YouTube Overview"
+description: "Overview of YouTube integration capabilities"
+---
+
+# YouTube Integration Overview
+
+Learn about the YouTube integration capabilities and how to interact with YouTube's API.
+
+## Features
+
+Our YouTube integration provides:
+
+- Video data retrieval
+- Channel information
+- Playlist management
+- Comment handling
+- Analytics access
+
+## Available Operations
+
+### Videos
+
+- Get video details
+- Search videos
+- Analyze video metrics
+- Download video data
+
+### Channels
+
+- Get channel information
+- List channel videos
+- Analyze channel stats
+- Track subscribers
+
+### Playlists
+
+- Create playlists
+- Manage playlist items
+- Get playlist details
+- Update playlists
+
+## Authentication
+
+To use the YouTube integration:
+
+1. Create a Google Cloud Project
+2. Enable YouTube Data API
+3. Generate API credentials
+4. Configure OAuth2 (if needed)
+
+```json
+{
+  "auth": {
+    "api_key": "YOUR_API_KEY",
+    "oauth2": {
+      "client_id": "YOUR_CLIENT_ID",
+      "client_secret": "YOUR_CLIENT_SECRET"
+    }
+  }
+}
+```
+
+## Example Usage
+
+### Get Video Details
+
+```json
+{
+  "operation": "get_video",
+  "video_id": "dQw4w9WgXcQ",
+  "parts": ["snippet", "statistics", "contentDetails"]
+}
+```
+
+### Search Videos
+
+```json
+{
+  "operation": "search_videos",
+  "query": "programming tutorials",
+  "max_results": 50,
+  "order": "viewCount",
+  "published_after": "2024-01-01T00:00:00Z"
+}
+```
+
+## API Quotas
+
+YouTube API quota limits:
+
+- Daily quota allocation
+- Cost per operation
+- Quota monitoring
+- Rate limiting
+
+```json
+{
+  "quota": {
+    "daily_limit": 10000,
+    "monitoring": {
+      "enabled": true,
+      "threshold": 8000,
+      "notification_url": "https://api.example.com/quota-alert"
+    }
+  }
+}
+```
+
+## Data Types
+
+### Video Resource
+
+```json
+{
+  "video": {
+    "id": "string",
+    "snippet": {
+      "title": "string",
+      "description": "string",
+      "publishedAt": "datetime",
+      "thumbnails": {
+        "default": {
+          "url": "string",
+          "width": 120,
+          "height": 90
+        }
+      }
+    },
+    "statistics": {
+      "viewCount": "number",
+      "likeCount": "number",
+      "commentCount": "number"
+    }
+  }
+}
+```
+
+## Error Handling
+
+Common API errors:
+
+- Quota exceeded
+- Invalid credentials
+- Resource not found
+- Permission denied
+- Rate limiting
+
+## Best Practices
+
+1. Cache responses when possible
+2. Monitor quota usage
+3. Handle rate limiting
+4. Use batch requests
+5. Implement error retry logic

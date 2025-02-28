@@ -1,0 +1,164 @@
+---
+title: "Get YouTube Videos"
+description: "Retrieve videos from YouTube using various criteria"
+---
+
+# Get YouTube Videos
+
+The Get YouTube Videos node allows you to retrieve videos from YouTube based on different search criteria and filters.
+
+## Overview
+
+This node enables you to:
+
+- Search for videos
+- Get channel videos
+- Retrieve playlist videos
+- Filter by criteria
+- Get video details
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| Search Type     | String  | Type of video search (search/channel/playlist) |
+| Query           | String  | Search query or resource ID                    |
+| Filters         | Object  | Search filters and criteria                    |
+| Max Results     | Number  | Maximum number of results to return            |
+| Include Details | Boolean | Whether to include full video details          |
+
+## Example Usage
+
+### Basic Video Search
+
+```json
+{
+  "search_type": "search",
+  "query": "programming tutorials",
+  "max_results": 50,
+  "include_details": true
+}
+```
+
+### Channel Videos
+
+```json
+{
+  "search_type": "channel",
+  "channel_id": "UC_x5XG1OV2P6uZZ5FSM9Ttw",
+  "filters": {
+    "order": "date",
+    "published_after": "2024-01-01T00:00:00Z",
+    "published_before": "2024-12-31T23:59:59Z"
+  },
+  "max_results": 100
+}
+```
+
+### Playlist Videos
+
+```json
+{
+  "search_type": "playlist",
+  "playlist_id": "PLCx5faAVGx4G",
+  "max_results": 50,
+  "include_details": true
+}
+```
+
+## Search Filters
+
+### Date Filters
+
+```json
+{
+  "filters": {
+    "published_after": "2024-01-01T00:00:00Z",
+    "published_before": "2024-12-31T23:59:59Z"
+  }
+}
+```
+
+### Content Filters
+
+```json
+{
+  "filters": {
+    "duration": "long",
+    "definition": "high",
+    "caption": true,
+    "license": "creativeCommon",
+    "type": "video"
+  }
+}
+```
+
+### Order Options
+
+```json
+{
+  "filters": {
+    "order": "relevance", // date, rating, viewCount, title
+    "safe_search": "moderate",
+    "region_code": "US",
+    "relevance_language": "en"
+  }
+}
+```
+
+## Response Format
+
+```json
+{
+  "items": [
+    {
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "string"
+      },
+      "snippet": {
+        "publishedAt": "datetime",
+        "channelId": "string",
+        "title": "string",
+        "description": "string",
+        "thumbnails": {
+          "default": {
+            "url": "string",
+            "width": 120,
+            "height": 90
+          }
+        },
+        "channelTitle": "string",
+        "tags": ["string"]
+      },
+      "statistics": {
+        "viewCount": "number",
+        "likeCount": "number",
+        "commentCount": "number"
+      },
+      "contentDetails": {
+        "duration": "string",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": true
+      }
+    }
+  ],
+  "pageInfo": {
+    "totalResults": "number",
+    "resultsPerPage": "number"
+  },
+  "nextPageToken": "string"
+}
+```
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid search parameters
+- Quota exceeded
+- Private videos
+- Deleted content
+- Region restrictions

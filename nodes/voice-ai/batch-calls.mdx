@@ -1,0 +1,148 @@
+---
+title: "Batch Calls"
+description: "Make multiple AI-powered voice calls simultaneously"
+---
+
+# Batch Calls
+
+The Batch Calls node enables you to initiate multiple AI-powered voice calls in a single request.
+
+## Overview
+
+This node allows you to:
+
+- Make multiple calls simultaneously
+- Use different scripts per call
+- Track batch progress
+- Handle bulk responses
+- Manage call priorities
+
+## Configuration
+
+| Parameter    | Type   | Description                     |
+| ------------ | ------ | ------------------------------- |
+| Calls        | Array  | List of calls to make           |
+| Concurrency  | Number | Maximum concurrent calls        |
+| Retry Config | Object | Retry settings for failed calls |
+| Callback URL | String | Webhook URL for batch events    |
+
+## Example Usage
+
+### Basic Batch Call
+
+```json
+{
+  "calls": [
+    {
+      "phone_number": "+1234567890",
+      "script": {
+        "text": "Hello, this is a test call."
+      }
+    },
+    {
+      "phone_number": "+0987654321",
+      "script": {
+        "text": "Hi, this is another test call."
+      }
+    }
+  ],
+  "concurrency": 2
+}
+```
+
+### Advanced Batch with Different Scripts
+
+```json
+{
+  "calls": [
+    {
+      "phone_number": "+1234567890",
+      "voice_id": "voice_female_1",
+      "script": {
+        "type": "sales_call",
+        "steps": [
+          {
+            "text": "Hello, I'm calling about our new product."
+          }
+        ]
+      }
+    },
+    {
+      "phone_number": "+0987654321",
+      "voice_id": "voice_male_1",
+      "script": {
+        "type": "support_call",
+        "steps": [
+          {
+            "text": "Hi, I'm calling to follow up on your support ticket."
+          }
+        ]
+      }
+    }
+  ],
+  "concurrency": 5,
+  "retry_config": {
+    "max_attempts": 3,
+    "delay": 300
+  }
+}
+```
+
+## Batch Status Response
+
+```json
+{
+  "batch_id": "batch_xyz789",
+  "total_calls": 2,
+  "completed_calls": 1,
+  "failed_calls": 0,
+  "in_progress": 1,
+  "calls": [
+    {
+      "id": "call_abc123",
+      "status": "completed",
+      "phone_number": "+1234567890"
+    },
+    {
+      "id": "call_def456",
+      "status": "in_progress",
+      "phone_number": "+0987654321"
+    }
+  ]
+}
+```
+
+## Retry Configuration
+
+Configure retry behavior for failed calls:
+
+```json
+{
+  "retry_config": {
+    "max_attempts": 3,
+    "delay": 300,
+    "backoff_multiplier": 2,
+    "retry_on": ["busy", "no_answer", "failed"]
+  }
+}
+```
+
+## Batch Events
+
+Events emitted during batch processing:
+
+- `batch.started`
+- `batch.call_completed`
+- `batch.call_failed`
+- `batch.completed`
+- `batch.failed`
+
+## Error Handling
+
+Common batch processing errors:
+
+- Invalid phone numbers
+- Script validation errors
+- Concurrency limits
+- Rate limiting
+- System capacity

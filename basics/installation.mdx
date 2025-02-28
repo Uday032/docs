@@ -1,0 +1,145 @@
+---
+title: "Stripe Installation"
+description: "How to install and configure Stripe integration"
+---
+
+# Installing Stripe Integration
+
+Learn how to install and configure the Stripe integration in your workflow environment.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- A Stripe account (test or production)
+- API keys from your Stripe Dashboard
+- Webhook endpoint configuration capability
+- SSL enabled for your endpoints
+
+## Installation Steps
+
+### 1. Get API Keys
+
+1. Log in to your [Stripe Dashboard](https://dashboard.stripe.com)
+2. Navigate to Developers → API keys
+3. Copy your publishable and secret keys
+4. Store them securely in your environment
+
+```bash
+# Example environment variables
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+```
+
+### 2. Configure Webhooks
+
+1. Go to Developers → Webhooks in your Stripe Dashboard
+2. Add an endpoint URL
+3. Select events to monitor
+4. Save your webhook signing secret
+
+```json
+{
+  "webhook_endpoint": {
+    "url": "https://your-domain.com/stripe/webhook",
+    "secret": "whsec_..."
+  }
+}
+```
+
+### 3. Install Dependencies
+
+Add the required dependencies to your project:
+
+```json
+{
+  "dependencies": {
+    "@stripe/stripe-js": "^1.54.0",
+    "@stripe/stripe-node": "^12.0.0"
+  }
+}
+```
+
+### 4. Initialize Configuration
+
+Set up your configuration file:
+
+```json
+{
+  "stripe": {
+    "apiVersion": "2023-10-16",
+    "publishableKey": "pk_test_...",
+    "secretKey": "sk_test_...",
+    "webhookSecret": "whsec_...",
+    "environment": "test"
+  }
+}
+```
+
+## Environment Setup
+
+### Development Environment
+
+```json
+{
+  "stripe": {
+    "environment": "test",
+    "apiKey": "sk_test_..."
+  }
+}
+```
+
+### Production Environment
+
+```json
+{
+  "stripe": {
+    "environment": "production",
+    "apiKey": "sk_live_..."
+  }
+}
+```
+
+## Security Best Practices
+
+1. Never expose secret keys in client-side code
+2. Use environment variables for sensitive data
+3. Implement proper key rotation
+4. Use webhook signatures for verification
+5. Follow PCI compliance guidelines
+
+## Testing the Installation
+
+1. Make a test API call:
+
+```json
+{
+  "test": {
+    "type": "stripe.createPaymentIntent",
+    "params": {
+      "amount": 1000,
+      "currency": "usd"
+    }
+  }
+}
+```
+
+2. Verify webhook reception:
+
+```json
+{
+  "test": {
+    "type": "stripe.webhook",
+    "event": "payment_intent.succeeded"
+  }
+}
+```
+
+## Troubleshooting
+
+Common issues and solutions:
+
+- API key errors: Verify key permissions
+- Webhook failures: Check endpoint URL and signature
+- Authentication errors: Confirm API version
+- Network issues: Check SSL configuration

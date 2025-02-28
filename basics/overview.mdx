@@ -1,0 +1,122 @@
+---
+title: "Stripe Overview"
+description: "Overview of Stripe integration capabilities"
+---
+
+# Stripe Integration Overview
+
+Learn how to integrate Stripe payment processing capabilities into your workflows.
+
+## Features
+
+Our Stripe integration provides:
+
+- Payment processing
+- Subscription management
+- Invoice handling
+- Customer management
+- Refund processing
+- Webhook handling
+
+## Available Operations
+
+### Payments
+
+- Create payment intents
+- Process payments
+- Handle refunds
+- Manage disputes
+
+### Customers
+
+- Create customers
+- Update customer information
+- Manage payment methods
+- Track customer history
+
+### Subscriptions
+
+- Create subscription plans
+- Manage recurring billing
+- Handle subscription changes
+- Process cancellations
+
+### Products & Prices
+
+- Create products
+- Set up pricing plans
+- Manage inventory
+- Handle discounts
+
+## Authentication
+
+To use the Stripe integration:
+
+1. Create a Stripe account
+2. Get your API keys from the Stripe Dashboard
+3. Configure your webhook endpoints
+4. Set up required credentials
+
+```json
+{
+  "api_key": "sk_test_...",
+  "webhook_secret": "whsec_...",
+  "environment": "test" // or "production"
+}
+```
+
+## Webhook Events
+
+Common webhook events you can handle:
+
+- `payment_intent.succeeded`
+- `payment_intent.failed`
+- `customer.subscription.created`
+- `customer.subscription.updated`
+- `invoice.paid`
+- `invoice.payment_failed`
+
+## Error Handling
+
+The integration provides detailed error handling for:
+
+- Card declines
+- Authentication failures
+- Invalid requests
+- Rate limiting
+- Network issues
+
+## Best Practices
+
+1. Always use test mode first
+2. Implement proper error handling
+3. Store customer IDs securely
+4. Use webhooks for async operations
+5. Follow PCI compliance guidelines
+
+## Example Workflow
+
+```json
+{
+  "steps": [
+    {
+      "type": "stripe.createCustomer",
+      "params": {
+        "email": "customer@example.com",
+        "source": "tok_visa"
+      }
+    },
+    {
+      "type": "stripe.createSubscription",
+      "params": {
+        "customer": "{{steps.createCustomer.id}}",
+        "items": [
+          {
+            "price": "price_H5ggYwtDq4fbrJ"
+          }
+        ]
+      }
+    }
+  ]
+}
+```

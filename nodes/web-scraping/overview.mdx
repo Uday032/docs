@@ -1,0 +1,138 @@
+---
+title: "Web Scraping Overview"
+description: "Introduction to web scraping capabilities"
+---
+
+# Web Scraping Overview
+
+Learn about the web scraping capabilities and how to extract data from websites effectively.
+
+## Features
+
+Our web scraping nodes provide:
+
+- Automated data extraction
+- Dynamic content handling
+- Rate limiting and politeness
+- Proxy support
+- Data parsing and cleaning
+
+## Available Nodes
+
+### Extract Content
+
+- Basic HTML extraction
+- Dynamic JavaScript content
+- Form submission
+- Authentication handling
+
+### Bulk Operations
+
+- Multiple URL processing
+- Concurrent scraping
+- Queue management
+- Error handling
+
+### Data Processing
+
+- Content parsing
+- Data cleaning
+- Format conversion
+- Validation
+
+## Best Practices
+
+1. Respect robots.txt
+2. Implement rate limiting
+3. Handle errors gracefully
+4. Use appropriate headers
+5. Cache when possible
+
+## Example Usage
+
+### Basic Scraping
+
+```json
+{
+  "url": "https://example.com",
+  "selectors": {
+    "title": "h1",
+    "content": ".main-content",
+    "links": "a[href]"
+  }
+}
+```
+
+### Advanced Configuration
+
+```json
+{
+  "url": "https://example.com",
+  "config": {
+    "wait_for": ".dynamic-content",
+    "timeout": 5000,
+    "proxy": {
+      "enabled": true,
+      "rotation": true
+    },
+    "headers": {
+      "User-Agent": "Custom Bot 1.0",
+      "Accept-Language": "en-US"
+    }
+  }
+}
+```
+
+## Rate Limiting
+
+Configure scraping speeds:
+
+```json
+{
+  "rate_limit": {
+    "requests_per_second": 2,
+    "concurrent_requests": 5,
+    "delay_between_requests": 500
+  }
+}
+```
+
+## Error Handling
+
+Common scenarios:
+
+- Network timeouts
+- Rate limiting
+- Blocked requests
+- Invalid selectors
+- Parse errors
+
+## Data Validation
+
+Validate extracted data:
+
+```json
+{
+  "validation": {
+    "required_fields": ["title", "price"],
+    "format": {
+      "price": "number",
+      "date": "ISO8601"
+    },
+    "constraints": {
+      "title": {
+        "min_length": 5,
+        "max_length": 200
+      }
+    }
+  }
+}
+```
+
+## Security Considerations
+
+1. Handle sensitive data appropriately
+2. Respect website terms of service
+3. Implement proper authentication
+4. Use secure connections
+5. Monitor for blocking/detection

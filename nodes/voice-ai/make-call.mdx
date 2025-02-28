@@ -1,0 +1,141 @@
+---
+title: "Make Call"
+description: "Initiate AI-powered voice calls"
+---
+
+# Make Call
+
+The Make Call node enables you to initiate AI-powered voice calls programmatically.
+
+## Overview
+
+This node allows you to:
+
+- Initiate outbound calls
+- Configure AI voice parameters
+- Set call scripts and flows
+- Handle call responses
+- Monitor call progress
+
+## Configuration
+
+| Parameter    | Type    | Description                       |
+| ------------ | ------- | --------------------------------- |
+| Phone Number | String  | Target phone number to call       |
+| Voice ID     | String  | ID of the AI voice to use         |
+| Script       | Object  | Call script and conversation flow |
+| Callback URL | String  | Webhook URL for call events       |
+| Recording    | Boolean | Whether to record the call        |
+
+## Call Script Structure
+
+The script object defines the conversation flow:
+
+```json
+{
+  "script": {
+    "greeting": {
+      "text": "Hello, this is AI calling. How are you today?",
+      "responses": {
+        "positive": {
+          "pattern": ["good", "fine", "great"],
+          "reply": "I'm glad to hear that!"
+        },
+        "negative": {
+          "pattern": ["bad", "not good", "terrible"],
+          "reply": "I'm sorry to hear that."
+        }
+      }
+    },
+    "fallback": {
+      "text": "I apologize, I didn't catch that. Could you please repeat?"
+    }
+  }
+}
+```
+
+## Example Usage
+
+### Basic Call
+
+```json
+{
+  "phone_number": "+1234567890",
+  "voice_id": "voice_default",
+  "script": {
+    "text": "Hello, this is a test call from AI."
+  }
+}
+```
+
+### Advanced Call with Flow
+
+```json
+{
+  "phone_number": "+1234567890",
+  "voice_id": "voice_female_1",
+  "script": {
+    "steps": [
+      {
+        "type": "greeting",
+        "text": "Hello, this is Sarah from AI Company."
+      },
+      {
+        "type": "question",
+        "text": "Are you interested in our services?",
+        "responses": {
+          "yes": {
+            "next": "details"
+          },
+          "no": {
+            "next": "goodbye"
+          }
+        }
+      }
+    ]
+  },
+  "recording": true,
+  "callback_url": "https://your-domain.com/call-events"
+}
+```
+
+## Voice Options
+
+Available voice configurations:
+
+```json
+{
+  "voices": {
+    "default": {
+      "gender": "female",
+      "accent": "neutral",
+      "speed": 1.0
+    },
+    "professional": {
+      "gender": "male",
+      "accent": "business",
+      "speed": 0.9
+    }
+  }
+}
+```
+
+## Call Events
+
+The node emits various events during the call:
+
+- `call.initiated`
+- `call.connected`
+- `call.in_progress`
+- `call.completed`
+- `call.failed`
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid phone number
+- Voice service unavailable
+- Script validation errors
+- Connection failures
+- Response timeout

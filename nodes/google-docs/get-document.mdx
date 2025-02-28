@@ -1,0 +1,115 @@
+---
+title: "Get Document"
+description: "Retrieve content from Google Docs documents"
+---
+
+# Get Document
+
+The Get Document node allows you to retrieve content and metadata from Google Docs documents.
+
+## Overview
+
+This node enables you to:
+
+- Retrieve document content
+- Get document structure
+- Extract text and formatting
+- Access document metadata
+- Get revision history
+
+## Configuration
+
+| Parameter       | Type    | Description                                |
+| --------------- | ------- | ------------------------------------------ |
+| Document ID     | String  | The ID of the Google Doc                   |
+| Include Content | Boolean | Whether to include document content        |
+| Include Styles  | Boolean | Whether to include formatting information  |
+| Suggest Mode    | String  | View mode (PREVIEW_SUGGESTIONS/SUGGESTING) |
+
+## Authentication
+
+This node requires:
+
+- Google Cloud Project
+- Google Docs API enabled
+- Service account or OAuth2 credentials
+- Read access to the document
+
+## Output
+
+The node returns:
+
+- Document content
+- Document metadata
+- Formatting information
+- Success/failure status
+- Error messages if operation fails
+
+## Example Usage
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "include_content": true,
+  "include_styles": true,
+  "suggest_mode": "PREVIEW_SUGGESTIONS"
+}
+```
+
+## Response Format
+
+```json
+{
+  "title": "Document Title",
+  "body": {
+    "content": [
+      {
+        "paragraph": {
+          "elements": [
+            {
+              "textRun": {
+                "content": "Sample text",
+                "style": {
+                  "bold": true,
+                  "fontSize": { "magnitude": 12, "unit": "PT" }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "title": "Document Title",
+    "createdTime": "2024-01-01T00:00:00.000Z",
+    "modifiedTime": "2024-01-02T00:00:00.000Z"
+  }
+}
+```
+
+## Filtering Content
+
+You can specify what content to retrieve:
+
+### Headers Only
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "filter": {
+    "types": ["HEADING"]
+  }
+}
+```
+
+### Tables Only
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "filter": {
+    "types": ["TABLE"]
+  }
+}
+```

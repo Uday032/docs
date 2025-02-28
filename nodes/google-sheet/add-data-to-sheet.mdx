@@ -1,0 +1,62 @@
+---
+title: "Add Data to Sheet"
+description: "Append or insert data into Google Sheets"
+---
+
+# Add Data to Sheet
+
+The Add Data to Sheet node allows you to append or insert data into Google Sheets documents.
+
+## Overview
+
+This node enables you to:
+
+- Append rows to existing sheets
+- Insert data at specific locations
+- Add multiple rows at once
+- Handle different data types
+- Format cells while adding data
+
+## Configuration
+
+| Parameter          | Type   | Description                               |
+| ------------------ | ------ | ----------------------------------------- |
+| Spreadsheet ID     | String | The ID of the Google Sheet                |
+| Sheet Name         | String | Name of the target sheet                  |
+| Values             | Array  | Data to be added                          |
+| Insert Location    | String | Where to add data (append/specific range) |
+| Value Input Option | String | How to interpret input (RAW/USER_ENTERED) |
+
+## Authentication
+
+This node requires:
+
+- Google Cloud Project
+- Google Sheets API enabled
+- Service account or OAuth2 credentials
+- Appropriate sharing permissions
+
+## Output
+
+The node returns:
+
+- Number of rows added
+- Updated range
+- Success/failure status
+- Error messages if operation fails
+
+## Example Usage
+
+```json
+{
+  "spreadsheet_id": "1234567890abcdef",
+  "sheet_name": "Sheet1",
+  "values": [
+    ["Name", "Email", "Score"],
+    ["John Doe", "john@example.com", 95],
+    ["Jane Smith", "jane@example.com", 88]
+  ],
+  "insert_location": "append",
+  "value_input_option": "USER_ENTERED"
+}
+```

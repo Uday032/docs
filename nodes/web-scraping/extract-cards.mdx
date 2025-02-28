@@ -1,0 +1,153 @@
+---
+title: "Extract Cards"
+description: "Extract card-style elements from web pages"
+---
+
+# Extract Cards
+
+The Extract Cards node helps you extract repeated card-style elements from web pages.
+
+## Overview
+
+This node enables you to:
+
+- Extract repeated elements
+- Parse card structures
+- Handle dynamic loading
+- Process grid layouts
+- Extract media content
+
+## Configuration
+
+| Parameter     | Type   | Description                         |
+| ------------- | ------ | ----------------------------------- |
+| URL           | String | Target webpage URL                  |
+| Card Selector | String | CSS selector for card elements      |
+| Fields        | Object | Mapping of card fields to selectors |
+| Pagination    | Object | Pagination configuration            |
+
+## Example Usage
+
+### Basic Card Extraction
+
+```json
+{
+  "url": "https://example.com/products",
+  "card_selector": ".product-card",
+  "fields": {
+    "title": ".card-title",
+    "price": ".price",
+    "image": "img.product-image",
+    "description": ".description"
+  }
+}
+```
+
+### Advanced Configuration
+
+```json
+{
+  "url": "https://example.com/products",
+  "card_selector": ".product-card",
+  "fields": {
+    "title": {
+      "selector": ".card-title",
+      "attribute": "text",
+      "transform": "trim"
+    },
+    "price": {
+      "selector": ".price",
+      "attribute": "text",
+      "transform": "number"
+    },
+    "image": {
+      "selector": "img.product-image",
+      "attribute": "src"
+    },
+    "rating": {
+      "selector": ".rating",
+      "attribute": "data-rating"
+    }
+  },
+  "pagination": {
+    "enabled": true,
+    "next_button": ".pagination .next",
+    "max_pages": 5
+  }
+}
+```
+
+## Field Types
+
+### Text Content
+
+```json
+{
+  "field": {
+    "selector": ".text-content",
+    "attribute": "text",
+    "transform": ["trim", "lowercase"]
+  }
+}
+```
+
+### Images
+
+```json
+{
+  "field": {
+    "selector": "img",
+    "attributes": ["src", "alt"],
+    "download": true
+  }
+}
+```
+
+### Links
+
+```json
+{
+  "field": {
+    "selector": "a",
+    "attributes": ["href", "title"],
+    "follow": true
+  }
+}
+```
+
+## Data Processing
+
+### Transformations
+
+```json
+{
+  "transformations": {
+    "price": ["remove_currency", "to_number"],
+    "description": ["trim", "remove_html"]
+  }
+}
+```
+
+## Validation Rules
+
+```json
+{
+  "validation": {
+    "required": ["title", "price"],
+    "types": {
+      "price": "number",
+      "rating": "float"
+    }
+  }
+}
+```
+
+## Error Handling
+
+Common issues and solutions:
+
+- Missing elements
+- Invalid selectors
+- Dynamic content
+- Rate limiting
+- Network errors

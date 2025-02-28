@@ -47,33 +47,105 @@
         }
       ]
     },
+
     "tabs": [
       {
         "tab": "Documentation",
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["Introduction", "Core Concepts", "Pricing"]
+            "pages": ["Introduction", "core-concepts", "pricing"]
           },
           {
             "group": "Workflow Nodes",
             "pages": [
-              "essentials/claude",
-              "essentials/common-utilities",
-              "essentials/google-sheet",
-              "essentials/google-docs",
-              "essentials/stripe",
-              "essentials/blandai",
-              "essentials/website-scrapper"
+              {
+                "group": "Claude",
+                "pages": [
+                  "nodes/claude/analyseCandidateProfiles",
+                  "nodes/claude/writeSEOOptimzedBlog",
+                  "nodes/claude/extractInformation",
+                  "nodes/claude/anaylzeContracts",
+                  "nodes/claude/createTemplateFrocs",
+                  "nodes/claude/customPrompt"
+                ]
+              },
+              {
+                "group": "Common Utilities",
+                "pages": [
+                  "nodes/common-utilities/zip-extraction",
+                  "nodes/common-utilities/competitors-website-keywords-analysis",
+                  "nodes/common-utilities/keyword-analysis",
+                  "nodes/common-utilities/combine-responses",
+                  "nodes/common-utilities/create-pdf",
+                  "nodes/common-utilities/extract-text-from-docx",
+                  "nodes/common-utilities/get-links-from-rss",
+                  "nodes/common-utilities/send-mail"
+                ]
+              },
+              {
+                "group": "Google Sheet",
+                "pages": [
+                  "nodes/google-sheet/add-data-to-sheet",
+                  "nodes/google-sheet/get-sheet",
+                  "nodes/google-sheet/update-sheet"
+                ]
+              },
+              {
+                "group": "Google Docs",
+                "pages": [
+                  "nodes/google-docs/add-data-to-document",
+                  "nodes/google-docs/get-document",
+                  "nodes/google-docs/add-comments"
+                ]
+              },
+              {
+                "group": "Stripe",
+                "pages": ["basics/overview", "basics/installation"]
+              },
+              {
+                "group": "Voice AI",
+                "pages": [
+                  "nodes/voice-ai/make-call",
+                  "nodes/voice-ai/get-call-details",
+                  "nodes/voice-ai/batch-calls",
+                  "nodes/voice-ai/get-batch-call-details",
+                  "nodes/voice-ai/get-call"
+                ]
+              },
+              {
+                "group": "Web Scraping",
+                "pages": [
+                  "nodes/web-scraping/overview",
+                  "nodes/web-scraping/setup",
+                  "nodes/web-scraping/extract-cards",
+                  "nodes/web-scraping/bulk-scrape",
+                  "nodes/web-scraping/scrape-content-from-links"
+                ]
+              },
+              {
+                "group": "YouTube",
+                "pages": [
+                  "nodes/youtube/overview",
+                  "nodes/youtube/get-youtube-videos"
+                ]
+              }
             ]
           },
           {
             "group": "Voice AI",
-            "pages": ["voiceai/outbound", "voiceai/inbound"]
+            "pages": [
+              "feature/voice-ai/create-agent",
+              "feature/voice-ai/send-call",
+              "feature/voice-ai/inbound-calls"
+            ]
           },
           {
             "group": "Chatbot AI",
-            "pages": ["voiceai/outbound", "voiceai/inbound"]
+            "pages": [
+              "feature/chatbot-ai/create-chatbot",
+              "feature/chatbot-ai/chat-transcripts"
+            ]
           }
         ]
       },

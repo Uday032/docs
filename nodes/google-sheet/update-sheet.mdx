@@ -1,0 +1,84 @@
+---
+title: "Update Sheet"
+description: "Update existing data in Google Sheets"
+---
+
+# Update Sheet
+
+The Update Sheet node allows you to modify existing data in Google Sheets documents.
+
+## Overview
+
+This node enables you to:
+
+- Update specific cells or ranges
+- Modify multiple ranges at once
+- Update formatting and formulas
+- Clear cell contents
+- Batch update operations
+
+## Configuration
+
+| Parameter          | Type    | Description                               |
+| ------------------ | ------- | ----------------------------------------- |
+| Spreadsheet ID     | String  | The ID of the Google Sheet                |
+| Range              | String  | Range to update (e.g., 'Sheet1!A1:D10')   |
+| Values             | Array   | New values to update                      |
+| Value Input Option | String  | How to interpret input (RAW/USER_ENTERED) |
+| Include Format     | Boolean | Whether to update cell formatting         |
+
+## Authentication
+
+This node requires:
+
+- Google Cloud Project
+- Google Sheets API enabled
+- Service account or OAuth2 credentials
+- Write access to the spreadsheet
+
+## Output
+
+The node returns:
+
+- Number of cells updated
+- Updated range
+- Success/failure status
+- Error messages if operation fails
+
+## Example Usage
+
+```json
+{
+  "spreadsheet_id": "1234567890abcdef",
+  "range": "Sheet1!B2:C5",
+  "values": [
+    ["Updated1", 100],
+    ["Updated2", 200],
+    ["Updated3", 300]
+  ],
+  "value_input_option": "USER_ENTERED",
+  "include_format": false
+}
+```
+
+## Batch Update Example
+
+```json
+{
+  "spreadsheet_id": "1234567890abcdef",
+  "requests": [
+    {
+      "range": "Sheet1!B2:C5",
+      "values": [["Data1", "Data2"]],
+      "fields": "userEnteredValue"
+    },
+    {
+      "range": "Sheet1!D2:D5",
+      "format": {
+        "backgroundColor": { "red": 1, "green": 0, "blue": 0 }
+      },
+      "fields": "userEnteredFormat.backgroundColor"
+    }
+  ]
+}
+```

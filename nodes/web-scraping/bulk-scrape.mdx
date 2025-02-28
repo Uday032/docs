@@ -1,0 +1,168 @@
+---
+title: "Bulk Scrape"
+description: "Scrape multiple URLs simultaneously"
+---
+
+# Bulk Scrape
+
+The Bulk Scrape node enables you to scrape multiple URLs concurrently while managing resources efficiently.
+
+## Overview
+
+This node allows you to:
+
+- Scrape multiple URLs
+- Manage concurrency
+- Handle rate limiting
+- Process results in batches
+- Export data in bulk
+
+## Configuration
+
+| Parameter   | Type          | Description                 |
+| ----------- | ------------- | --------------------------- |
+| URLs        | Array[String] | List of URLs to scrape      |
+| Concurrency | Number        | Maximum concurrent requests |
+| Rate Limit  | Object        | Rate limiting settings      |
+| Selectors   | Object        | Data extraction selectors   |
+| Export      | Object        | Export configuration        |
+
+## Example Usage
+
+### Basic Bulk Scrape
+
+```json
+{
+  "urls": [
+    "https://example.com/page1",
+    "https://example.com/page2",
+    "https://example.com/page3"
+  ],
+  "concurrency": 3,
+  "selectors": {
+    "title": "h1",
+    "content": ".main-content"
+  }
+}
+```
+
+### Advanced Configuration
+
+```json
+{
+  "urls": ["https://example.com/page1", "https://example.com/page2"],
+  "concurrency": 2,
+  "rate_limit": {
+    "requests_per_second": 1,
+    "delay_between_requests": 1000
+  },
+  "selectors": {
+    "title": {
+      "selector": "h1",
+      "type": "text"
+    },
+    "images": {
+      "selector": "img",
+      "type": "attribute",
+      "attribute": "src"
+    }
+  },
+  "export": {
+    "format": "json",
+    "filename": "scrape_results.json"
+  }
+}
+```
+
+## Queue Management
+
+```json
+{
+  "queue": {
+    "max_size": 1000,
+    "retry_failed": true,
+    "max_retries": 3,
+    "priority": {
+      "enabled": true,
+      "rules": [
+        {
+          "pattern": "*.important.com",
+          "priority": 1
+        }
+      ]
+    }
+  }
+}
+```
+
+## Error Handling
+
+### Retry Configuration
+
+```json
+{
+  "retry": {
+    "max_attempts": 3,
+    "codes": [429, 503],
+    "delay": {
+      "initial": 1000,
+      "multiplier": 2,
+      "max": 10000
+    }
+  }
+}
+```
+
+## Export Formats
+
+### JSON Export
+
+```json
+{
+  "export": {
+    "format": "json",
+    "pretty": true,
+    "filename": "results.json"
+  }
+}
+```
+
+### CSV Export
+
+```json
+{
+  "export": {
+    "format": "csv",
+    "headers": true,
+    "delimiter": ",",
+    "filename": "results.csv"
+  }
+}
+```
+
+## Progress Tracking
+
+```json
+{
+  "progress": {
+    "enabled": true,
+    "update_interval": 1000,
+    "callbacks": {
+      "onProgress": "https://api.example.com/progress",
+      "onComplete": "https://api.example.com/complete"
+    }
+  }
+}
+```
+
+## Resource Management
+
+```json
+{
+  "resources": {
+    "max_memory": "1GB",
+    "max_cpu": 0.8,
+    "cleanup_interval": 5000
+  }
+}
+```

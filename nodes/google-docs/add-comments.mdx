@@ -1,0 +1,133 @@
+---
+title: "Add Comments"
+description: "Add comments and suggestions to Google Docs documents"
+---
+
+# Add Comments
+
+The Add Comments node allows you to add comments and suggestions to Google Docs documents.
+
+## Overview
+
+This node enables you to:
+
+- Add comments to specific text
+- Create suggestion mode edits
+- Reply to existing comments
+- Resolve comments
+- Tag users in comments
+
+## Configuration
+
+| Parameter       | Type          | Description                                     |
+| --------------- | ------------- | ----------------------------------------------- |
+| Document ID     | String        | The ID of the Google Doc                        |
+| Comment         | Object        | Comment content and location                    |
+| Suggestion Mode | Boolean       | Whether to make suggestions instead of comments |
+| Tag Users       | Array[String] | Users to tag in the comment                     |
+
+## Authentication
+
+This node requires:
+
+- Google Cloud Project
+- Google Docs API enabled
+- Service account or OAuth2 credentials
+- Comment access to the document
+
+## Output
+
+The node returns:
+
+- Comment ID
+- Created timestamp
+- Author information
+- Success/failure status
+- Error messages if operation fails
+
+## Example Usage
+
+### Adding a Simple Comment
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "comment": {
+    "content": "This needs revision",
+    "location": {
+      "index": 150,
+      "length": 25
+    }
+  }
+}
+```
+
+### Adding a Comment with Tags
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "comment": {
+    "content": "Please review this section",
+    "location": {
+      "index": 200,
+      "length": 50
+    }
+  },
+  "tag_users": ["user@example.com", "reviewer@example.com"]
+}
+```
+
+### Making a Suggestion
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "comment": {
+    "content": "Suggested change: improve clarity",
+    "suggestion": {
+      "insertText": "clearer explanation",
+      "deleteText": "current text"
+    },
+    "location": {
+      "index": 300,
+      "length": 11
+    }
+  },
+  "suggestion_mode": true
+}
+```
+
+## Comment Types
+
+### Text Comment
+
+```json
+{
+  "type": "text",
+  "content": "Regular comment"
+}
+```
+
+### Suggestion Comment
+
+```json
+{
+  "type": "suggestion",
+  "content": "Suggested change",
+  "changes": {
+    "from": "original text",
+    "to": "suggested text"
+  }
+}
+```
+
+### Reply Comment
+
+```json
+{
+  "type": "reply",
+  "content": "Reply to previous comment",
+  "parent_id": "comment123"
+}
+```

@@ -1,0 +1,59 @@
+---
+title: "Send Mail"
+description: "Send emails through SMTP or email service providers"
+---
+
+# Send Mail
+
+The Send Mail node allows you to send emails through SMTP servers or email service providers.
+
+## Overview
+
+This node provides functionality to:
+
+- Send HTML and plain text emails
+- Add attachments
+- Use templates
+- Support CC and BCC
+- Track email delivery
+
+## Configuration
+
+| Parameter   | Type          | Description                 |
+| ----------- | ------------- | --------------------------- |
+| To          | Array[String] | Recipient email addresses   |
+| Subject     | String        | Email subject line          |
+| Body        | String        | Email content (HTML/Text)   |
+| From        | String        | Sender email address        |
+| CC          | Array[String] | CC recipients (optional)    |
+| BCC         | Array[String] | BCC recipients (optional)   |
+| Attachments | Array[Object] | File attachments (optional) |
+
+## Output
+
+The node provides:
+
+- Delivery status
+- Message ID
+- Timestamp
+- Error messages if sending fails
+- Delivery receipts (if supported)
+
+## Example Usage
+
+```json
+{
+  "to": ["recipient@example.com"],
+  "subject": "Test Email",
+  "body": "<h1>Hello</h1><p>This is a test email.</p>",
+  "from": "sender@yourdomain.com",
+  "cc": ["cc@example.com"],
+  "bcc": [],
+  "attachments": [
+    {
+      "filename": "document.pdf",
+      "path": "./files/document.pdf"
+    }
+  ]
+}
+```

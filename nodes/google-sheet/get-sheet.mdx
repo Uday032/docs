@@ -1,0 +1,72 @@
+---
+title: "Get Sheet"
+description: "Retrieve data from Google Sheets"
+---
+
+# Get Sheet
+
+The Get Sheet node allows you to retrieve data from Google Sheets documents.
+
+## Overview
+
+This node enables you to:
+
+- Read entire sheets
+- Get specific ranges
+- Retrieve formatted or raw values
+- Access multiple ranges at once
+- Get sheet metadata
+
+## Configuration
+
+| Parameter           | Type    | Description                                          |
+| ------------------- | ------- | ---------------------------------------------------- |
+| Spreadsheet ID      | String  | The ID of the Google Sheet                           |
+| Range               | String  | Range to read (e.g., 'Sheet1!A1:D10')                |
+| Include Headers     | Boolean | Whether to include header row                        |
+| Value Render Option | String  | How to render values (FORMATTED/UNFORMATTED)         |
+| Date Time Option    | String  | How to render dates (SERIAL_NUMBER/FORMATTED_STRING) |
+
+## Authentication
+
+This node requires:
+
+- Google Cloud Project
+- Google Sheets API enabled
+- Service account or OAuth2 credentials
+- Read access to the spreadsheet
+
+## Output
+
+The node returns:
+
+- Retrieved data as array
+- Range information
+- Sheet metadata
+- Error messages if operation fails
+
+## Example Usage
+
+```json
+{
+  "spreadsheet_id": "1234567890abcdef",
+  "range": "Sheet1!A1:D10",
+  "include_headers": true,
+  "value_render_option": "FORMATTED_VALUE",
+  "date_time_option": "FORMATTED_STRING"
+}
+```
+
+## Response Format
+
+```json
+{
+  "values": [
+    ["Header1", "Header2", "Header3"],
+    ["Value1", "Value2", "Value3"]
+    // ... more rows
+  ],
+  "range": "Sheet1!A1:D10",
+  "majorDimension": "ROWS"
+}
+```

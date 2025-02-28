@@ -1,0 +1,51 @@
+---
+title: "Get Links from RSS"
+description: "Extract links and content from RSS feeds"
+---
+
+# Get Links from RSS
+
+The Get Links from RSS node enables you to extract links and content from RSS feeds.
+
+## Overview
+
+This node helps you:
+
+- Parse RSS feed URLs
+- Extract article links
+- Get feed metadata
+- Filter content by date
+- Handle multiple feed formats
+
+## Configuration
+
+| Parameter       | Type    | Description                      |
+| --------------- | ------- | -------------------------------- |
+| Feed URL        | String  | The RSS feed URL to process      |
+| Max Items       | Number  | Maximum number of items to fetch |
+| Date Filter     | Object  | Optional date range filter       |
+| Include Content | Boolean | Whether to include full content  |
+
+## Output
+
+The node returns:
+
+- List of extracted links
+- Article metadata
+- Publication dates
+- Feed information
+- Error messages if any
+
+## Example Usage
+
+```json
+{
+  "feed_url": "https://example.com/feed.xml",
+  "max_items": 10,
+  "date_filter": {
+    "start": "2024-01-01",
+    "end": "2024-12-31"
+  },
+  "include_content": true
+}
+```

@@ -1,0 +1,152 @@
+---
+title: "Get Batch Call Details"
+description: "Retrieve details for multiple calls in a batch"
+---
+
+# Get Batch Call Details
+
+The Get Batch Call Details node allows you to retrieve information about multiple calls in a batch operation.
+
+## Overview
+
+This node enables you to:
+
+- Get status of all calls in a batch
+- Access batch analytics
+- Download batch reports
+- Track batch progress
+- Get aggregated metrics
+
+## Configuration
+
+| Parameter           | Type    | Description                         |
+| ------------------- | ------- | ----------------------------------- |
+| Batch ID            | String  | ID of the batch to retrieve         |
+| Include Analytics   | Boolean | Whether to include analytics        |
+| Include Transcripts | Boolean | Whether to include call transcripts |
+| Filter              | Object  | Filter criteria for calls           |
+
+## Example Usage
+
+### Basic Batch Details
+
+```json
+{
+  "batch_id": "batch_xyz789",
+  "include_analytics": true
+}
+```
+
+### Filtered Batch Details
+
+```json
+{
+  "batch_id": "batch_xyz789",
+  "include_analytics": true,
+  "include_transcripts": true,
+  "filter": {
+    "status": ["completed", "failed"],
+    "duration": {
+      "min": 30,
+      "max": 300
+    }
+  }
+}
+```
+
+## Response Format
+
+```json
+{
+  "batch": {
+    "id": "batch_xyz789",
+    "status": "completed",
+    "created_at": "2024-01-01T12:00:00Z",
+    "completed_at": "2024-01-01T12:30:00Z",
+    "statistics": {
+      "total_calls": 100,
+      "completed": 95,
+      "failed": 3,
+      "in_progress": 2,
+      "average_duration": 120,
+      "total_cost": "50.00"
+    },
+    "calls": [
+      {
+        "id": "call_abc123",
+        "status": "completed",
+        "duration": 125,
+        "cost": "0.50",
+        "analytics": {
+          "sentiment": {
+            "positive": 0.8,
+            "neutral": 0.2
+          }
+        }
+      }
+    ],
+    "analytics": {
+      "success_rate": 0.95,
+      "average_sentiment": {
+        "positive": 0.7,
+        "neutral": 0.2,
+        "negative": 0.1
+      },
+      "common_responses": [
+        {
+          "text": "Yes, I'm interested",
+          "count": 45
+        }
+      ]
+    }
+  }
+}
+```
+
+## Available Filters
+
+Filter batch calls by:
+
+```json
+{
+  "filter": {
+    "status": ["completed", "failed"],
+    "duration": {
+      "min": 30,
+      "max": 300
+    },
+    "cost": {
+      "min": "0.10",
+      "max": "1.00"
+    },
+    "sentiment": {
+      "min_positive": 0.7
+    },
+    "date_range": {
+      "start": "2024-01-01T00:00:00Z",
+      "end": "2024-01-02T00:00:00Z"
+    }
+  }
+}
+```
+
+## Batch Analytics
+
+Available analytics metrics:
+
+- Success rate
+- Average duration
+- Cost statistics
+- Sentiment analysis
+- Response patterns
+- Engagement metrics
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid Batch ID
+- Batch not found
+- Invalid filter criteria
+- Analytics unavailable
+- Rate limiting

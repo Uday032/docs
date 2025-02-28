@@ -1,0 +1,184 @@
+---
+title: "Create Chatbot"
+description: "Create and configure AI-powered chatbots"
+---
+
+# Create Chatbot
+
+The Create Chatbot node enables you to create and configure AI-powered chatbots for various use cases.
+
+## Overview
+
+This node allows you to:
+
+- Create chatbot agents
+- Configure conversation flows
+- Set up knowledge bases
+- Define response patterns
+- Manage bot personalities
+
+## Configuration
+
+| Parameter       | Type   | Description                      |
+| --------------- | ------ | -------------------------------- |
+| Bot Name        | String | Name of the chatbot              |
+| Personality     | Object | Bot personality settings         |
+| Knowledge Base  | Object | Information sources and training |
+| Response Config | Object | Response configuration           |
+| Language        | String | Primary language for the bot     |
+
+## Example Usage
+
+### Basic Chatbot Creation
+
+```json
+{
+  "bot_name": "Support Assistant",
+  "personality": {
+    "tone": "professional",
+    "formality": "medium"
+  },
+  "language": "en-US"
+}
+```
+
+### Advanced Chatbot Configuration
+
+```json
+{
+  "bot_name": "Sales Bot",
+  "personality": {
+    "tone": "friendly",
+    "formality": "casual",
+    "empathy": "high",
+    "humor": "moderate"
+  },
+  "knowledge_base": {
+    "sources": [
+      {
+        "type": "document",
+        "url": "https://docs.example.com/products",
+        "update_frequency": "daily"
+      },
+      {
+        "type": "faq",
+        "content": [
+          {
+            "question": "What are your pricing plans?",
+            "answer": "We offer three plans: Basic, Pro, and Enterprise."
+          }
+        ]
+      }
+    ],
+    "custom_responses": {
+      "greeting": ["Hi!", "Hello!", "Welcome!"],
+      "farewell": ["Goodbye!", "Have a great day!"]
+    }
+  },
+  "response_config": {
+    "max_length": 200,
+    "response_time": {
+      "min": 1,
+      "max": 3
+    },
+    "follow_up_questions": true
+  },
+  "language": "en-US",
+  "fallback": {
+    "max_attempts": 3,
+    "message": "I'll connect you with a human agent."
+  }
+}
+```
+
+## Personality Configuration
+
+Define bot personality:
+
+```json
+{
+  "personality": {
+    "tone": {
+      "type": "string",
+      "enum": ["professional", "friendly", "casual", "formal"],
+      "default": "professional"
+    },
+    "traits": {
+      "empathy": 0.8,
+      "humor": 0.4,
+      "patience": 0.9
+    },
+    "voice": {
+      "style": "helpful",
+      "communication": "clear"
+    }
+  }
+}
+```
+
+## Knowledge Base
+
+Configure information sources:
+
+```json
+{
+  "knowledge_base": {
+    "documents": [
+      {
+        "type": "markdown",
+        "content": "# Product Information...",
+        "tags": ["products", "features"]
+      }
+    ],
+    "apis": [
+      {
+        "endpoint": "https://api.example.com/products",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {{token}}"
+        }
+      }
+    ],
+    "embeddings": {
+      "model": "text-embedding-ada-002",
+      "dimension": 1536
+    }
+  }
+}
+```
+
+## Response Patterns
+
+Define response behaviors:
+
+```json
+{
+  "response_patterns": {
+    "clarification": {
+      "enabled": true,
+      "threshold": 0.7,
+      "templates": [
+        "Could you please clarify what you mean by {topic}?",
+        "I'm not sure I understand. Can you rephrase that?"
+      ]
+    },
+    "confirmation": {
+      "enabled": true,
+      "templates": [
+        "Just to confirm, you want to {action}?",
+        "Let me make sure I understand correctly..."
+      ]
+    }
+  }
+}
+```
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid configuration
+- Missing knowledge base
+- Language not supported
+- Training failures
+- Resource limits exceeded

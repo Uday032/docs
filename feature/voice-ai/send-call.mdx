@@ -1,0 +1,163 @@
+---
+title: "Send Call"
+description: "Initiate outbound voice calls using AI agents"
+---
+
+# Send Call
+
+The Send Call node enables you to initiate outbound calls using configured AI voice agents.
+
+## Overview
+
+This node allows you to:
+
+- Initiate outbound calls
+- Use configured voice agents
+- Execute conversation flows
+- Handle call responses
+- Monitor call progress
+
+## Configuration
+
+| Parameter       | Type    | Description                  |
+| --------------- | ------- | ---------------------------- |
+| Agent ID        | String  | ID of the voice agent to use |
+| Phone Number    | String  | Target phone number          |
+| Call Parameters | Object  | Call-specific settings       |
+| Callback URL    | String  | Webhook for call events      |
+| Recording       | Boolean | Enable call recording        |
+
+## Example Usage
+
+### Basic Call
+
+```json
+{
+  "agent_id": "agent_123abc",
+  "phone_number": "+1234567890",
+  "call_parameters": {
+    "priority": "normal",
+    "retry_attempts": 1
+  }
+}
+```
+
+### Advanced Call Configuration
+
+```json
+{
+  "agent_id": "agent_123abc",
+  "phone_number": "+1234567890",
+  "call_parameters": {
+    "priority": "high",
+    "retry_attempts": 3,
+    "retry_interval": 300,
+    "max_duration": 600,
+    "scheduled_time": "2024-03-01T10:00:00Z",
+    "custom_variables": {
+      "customer_name": "John Doe",
+      "account_type": "premium"
+    }
+  },
+  "callback_url": "https://api.example.com/call-events",
+  "recording": true,
+  "transcription": true
+}
+```
+
+## Call Parameters
+
+### Priority Levels
+
+```json
+{
+  "priority": {
+    "type": "string",
+    "enum": ["low", "normal", "high", "urgent"],
+    "default": "normal"
+  }
+}
+```
+
+### Retry Settings
+
+```json
+{
+  "retry_config": {
+    "attempts": 3,
+    "interval": 300,
+    "conditions": ["no-answer", "busy", "failed"],
+    "max_total_attempts": 5
+  }
+}
+```
+
+## Call Events
+
+Events emitted during the call:
+
+- `call.queued`
+- `call.initiated`
+- `call.ringing`
+- `call.connected`
+- `call.in_progress`
+- `call.completed`
+- `call.failed`
+
+## Response Handling
+
+Configure response handlers:
+
+```json
+{
+  "response_handlers": {
+    "positive": {
+      "patterns": ["yes", "sure", "okay"],
+      "action": "proceed_flow"
+    },
+    "negative": {
+      "patterns": ["no", "not interested", "busy"],
+      "action": "end_call"
+    },
+    "transfer": {
+      "patterns": ["speak to human", "representative"],
+      "action": "transfer_call",
+      "transfer_number": "+1987654321"
+    }
+  }
+}
+```
+
+## Call Analytics
+
+Available analytics:
+
+```json
+{
+  "analytics": {
+    "duration": "number",
+    "sentiment_scores": {
+      "positive": "number",
+      "neutral": "number",
+      "negative": "number"
+    },
+    "speech_metrics": {
+      "clarity": "number",
+      "pace": "number",
+      "engagement": "number"
+    },
+    "outcome": "string",
+    "conversion_status": "boolean"
+  }
+}
+```
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid phone number
+- Agent not available
+- Network issues
+- Call rejected
+- Timeout errors

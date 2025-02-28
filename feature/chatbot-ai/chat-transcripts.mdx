@@ -1,0 +1,186 @@
+---
+title: "Chat Transcripts"
+description: "Manage and analyze chatbot conversation transcripts"
+---
+
+# Chat Transcripts
+
+The Chat Transcripts node enables you to retrieve, analyze, and manage chatbot conversation transcripts.
+
+## Overview
+
+This node allows you to:
+
+- Retrieve chat transcripts
+- Analyze conversations
+- Export transcript data
+- Generate insights
+- Monitor chat quality
+
+## Configuration
+
+| Parameter         | Type    | Description                          |
+| ----------------- | ------- | ------------------------------------ |
+| Chat ID           | String  | ID of the chat session               |
+| Include Analytics | Boolean | Include conversation analytics       |
+| Format            | String  | Output format (JSON/CSV/TXT)         |
+| Time Range        | Object  | Time period for transcript retrieval |
+| Filters           | Object  | Filtering criteria                   |
+
+## Example Usage
+
+### Basic Transcript Retrieval
+
+```json
+{
+  "chat_id": "chat_123abc",
+  "include_analytics": true,
+  "format": "json"
+}
+```
+
+### Advanced Transcript Analysis
+
+```json
+{
+  "chat_id": "chat_123abc",
+  "include_analytics": true,
+  "format": "json",
+  "time_range": {
+    "start": "2024-01-01T00:00:00Z",
+    "end": "2024-01-31T23:59:59Z"
+  },
+  "filters": {
+    "sentiment": ["positive", "negative"],
+    "duration": {
+      "min": 60,
+      "max": 3600
+    },
+    "outcome": ["resolved", "escalated"]
+  },
+  "analytics": {
+    "include_sentiment": true,
+    "include_topics": true,
+    "include_metrics": true
+  }
+}
+```
+
+## Transcript Format
+
+### JSON Format
+
+```json
+{
+  "transcript": {
+    "chat_id": "chat_123abc",
+    "start_time": "2024-01-01T10:00:00Z",
+    "end_time": "2024-01-01T10:15:00Z",
+    "participants": {
+      "bot": "Support Bot",
+      "user": "User123"
+    },
+    "messages": [
+      {
+        "timestamp": "2024-01-01T10:00:00Z",
+        "sender": "bot",
+        "message": "Hello! How can I help you today?",
+        "type": "text",
+        "sentiment": "neutral"
+      },
+      {
+        "timestamp": "2024-01-01T10:00:15Z",
+        "sender": "user",
+        "message": "I need help with my account",
+        "type": "text",
+        "sentiment": "neutral"
+      }
+    ]
+  }
+}
+```
+
+## Analytics
+
+### Conversation Metrics
+
+```json
+{
+  "analytics": {
+    "duration": 900,
+    "message_count": {
+      "total": 10,
+      "bot": 5,
+      "user": 5
+    },
+    "response_times": {
+      "average": 2.5,
+      "max": 5.0,
+      "min": 1.0
+    },
+    "sentiment_analysis": {
+      "overall": "positive",
+      "breakdown": {
+        "positive": 0.6,
+        "neutral": 0.3,
+        "negative": 0.1
+      }
+    },
+    "topic_analysis": {
+      "main_topics": [
+        {
+          "topic": "account_issues",
+          "confidence": 0.85
+        }
+      ]
+    }
+  }
+}
+```
+
+## Export Options
+
+### Format Configuration
+
+```json
+{
+  "export": {
+    "format": "csv",
+    "options": {
+      "include_headers": true,
+      "delimiter": ",",
+      "timestamp_format": "ISO8601",
+      "fields": ["timestamp", "sender", "message", "sentiment"]
+    }
+  }
+}
+```
+
+## Filtering Options
+
+### Available Filters
+
+```json
+{
+  "filters": {
+    "sentiment": ["positive", "negative", "neutral"],
+    "duration": {
+      "min": 0,
+      "max": 3600
+    },
+    "outcome": ["resolved", "escalated", "abandoned"],
+    "contains_keywords": ["account", "billing", "support"],
+    "participant_type": ["user", "bot", "agent"]
+  }
+}
+```
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid chat ID
+- Transcript not found
+- Invalid date range
+- Format conversion error
+- Analytics processing failed

@@ -1,0 +1,45 @@
+---
+title: "Keyword Analysis"
+description: "Analyze text content for keyword optimization"
+---
+
+# Keyword Analysis
+
+The Keyword Analysis node helps analyze text content to identify and optimize keywords for better SEO performance.
+
+## Overview
+
+This node provides:
+
+- Keyword density analysis
+- Related keyword suggestions
+- Content optimization recommendations
+- SEO score calculation
+
+## Configuration
+
+| Parameter       | Type          | Description                      |
+| --------------- | ------------- | -------------------------------- |
+| Content         | String        | The text content to analyze      |
+| Target Keywords | Array[String] | Primary keywords to focus on     |
+| Language        | String        | Content language (default: 'en') |
+
+## Output
+
+The analysis returns:
+
+- Keyword density metrics
+- Keyword placement analysis
+- Content optimization suggestions
+- SEO score (0-100)
+- Related keyword opportunities
+
+## Example Usage
+
+```json
+{
+  "content": "Your article or webpage content here...",
+  "target_keywords": ["main keyword", "secondary keyword"],
+  "language": "en"
+}
+```

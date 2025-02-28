@@ -1,0 +1,160 @@
+---
+title: "Create Voice Agent"
+description: "Create and configure AI-powered voice agents"
+---
+
+# Create Voice Agent
+
+The Create Voice Agent node allows you to create and configure AI-powered voice agents for handling calls.
+
+## Overview
+
+This node enables you to:
+
+- Create voice agents
+- Configure voice parameters
+- Set up conversation flows
+- Define agent behaviors
+- Manage agent profiles
+
+## Configuration
+
+| Parameter         | Type   | Description                     |
+| ----------------- | ------ | ------------------------------- |
+| Agent Name        | String | Name of the voice agent         |
+| Voice Config      | Object | Voice configuration settings    |
+| Conversation Flow | Object | Dialogue and response patterns  |
+| Language          | String | Primary language for the agent  |
+| Fallback Settings | Object | Fallback behavior configuration |
+
+## Example Usage
+
+### Basic Agent Creation
+
+```json
+{
+  "agent_name": "Customer Service Bot",
+  "voice_config": {
+    "voice_id": "female_1",
+    "speaking_rate": 1.0,
+    "pitch": 0
+  },
+  "language": "en-US"
+}
+```
+
+### Advanced Agent Configuration
+
+```json
+{
+  "agent_name": "Sales Assistant",
+  "voice_config": {
+    "voice_id": "male_2",
+    "speaking_rate": 0.9,
+    "pitch": -2,
+    "accent": "neutral"
+  },
+  "conversation_flow": {
+    "greeting": {
+      "text": "Hello, I'm your sales assistant. How can I help you today?",
+      "responses": {
+        "pricing": {
+          "patterns": ["price", "cost", "how much"],
+          "handler": "pricing_flow"
+        },
+        "product_info": {
+          "patterns": ["tell me about", "what is", "features"],
+          "handler": "product_info_flow"
+        }
+      }
+    },
+    "fallback": {
+      "text": "I apologize, I didn't quite understand. Could you rephrase that?"
+    }
+  },
+  "language": "en-US",
+  "fallback_settings": {
+    "max_retries": 3,
+    "transfer_to_human": true,
+    "transfer_message": "Let me connect you with a human agent."
+  }
+}
+```
+
+## Voice Configuration
+
+Available voice settings:
+
+```json
+{
+  "voice_config": {
+    "voice_id": "string",
+    "speaking_rate": "number (0.5-2.0)",
+    "pitch": "number (-20 to 20)",
+    "volume_gain_db": "number (-6 to 6)",
+    "accent": "string",
+    "gender": "string"
+  }
+}
+```
+
+## Conversation Flow
+
+Define conversation patterns:
+
+```json
+{
+  "conversation_flow": {
+    "states": {
+      "greeting": {
+        "type": "message",
+        "text": "Hello, how can I help?",
+        "next": "main_menu"
+      },
+      "main_menu": {
+        "type": "choice",
+        "options": [
+          {
+            "text": "Sales",
+            "next": "sales_flow"
+          },
+          {
+            "text": "Support",
+            "next": "support_flow"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+## Natural Language Understanding
+
+Configure NLU settings:
+
+```json
+{
+  "nlu_config": {
+    "intent_detection": {
+      "enabled": true,
+      "confidence_threshold": 0.7
+    },
+    "entity_recognition": {
+      "enabled": true,
+      "types": ["product", "service", "location"]
+    },
+    "sentiment_analysis": true
+  }
+}
+```
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid voice configuration
+- Missing required flows
+- Language not supported
+- Invalid conversation structure
+- Resource limits exceeded

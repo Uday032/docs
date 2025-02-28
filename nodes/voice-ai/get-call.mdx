@@ -1,0 +1,137 @@
+---
+title: "Get Call"
+description: "Retrieve details for a single voice call"
+---
+
+# Get Call
+
+The Get Call node allows you to retrieve detailed information about a single voice call.
+
+## Overview
+
+This node enables you to:
+
+- Get call status
+- Access call transcript
+- Retrieve recording
+- View call metrics
+- Get interaction details
+
+## Configuration
+
+| Parameter          | Type    | Description                      |
+| ------------------ | ------- | -------------------------------- |
+| Call ID            | String  | ID of the call to retrieve       |
+| Include Recording  | Boolean | Whether to include recording URL |
+| Include Transcript | Boolean | Whether to include transcript    |
+| Include Analytics  | Boolean | Whether to include analytics     |
+
+## Example Usage
+
+### Basic Call Retrieval
+
+```json
+{
+  "call_id": "call_abc123"
+}
+```
+
+### Detailed Call Information
+
+```json
+{
+  "call_id": "call_abc123",
+  "include_recording": true,
+  "include_transcript": true,
+  "include_analytics": true
+}
+```
+
+## Response Format
+
+```json
+{
+  "call": {
+    "id": "call_abc123",
+    "status": "completed",
+    "phone_number": "+1234567890",
+    "direction": "outbound",
+    "start_time": "2024-01-01T12:00:00Z",
+    "end_time": "2024-01-01T12:02:05Z",
+    "duration": 125,
+    "cost": "0.50",
+    "recording_url": "https://api.example.com/recordings/call_abc123.mp3",
+    "transcript": {
+      "segments": [
+        {
+          "speaker": "ai",
+          "text": "Hello, this is AI calling.",
+          "timestamp": "2024-01-01T12:00:05Z",
+          "confidence": 0.98
+        },
+        {
+          "speaker": "human",
+          "text": "Yes, I can hear you clearly.",
+          "timestamp": "2024-01-01T12:00:08Z",
+          "confidence": 0.95
+        }
+      ]
+    },
+    "analytics": {
+      "sentiment": {
+        "overall": "positive",
+        "scores": {
+          "positive": 0.8,
+          "neutral": 0.2,
+          "negative": 0.0
+        }
+      },
+      "engagement": {
+        "score": 0.9,
+        "metrics": {
+          "response_time": 1.2,
+          "interruptions": 0
+        }
+      },
+      "voice_metrics": {
+        "pace": 1.0,
+        "volume": 0.7,
+        "clarity": 0.95
+      }
+    }
+  }
+}
+```
+
+## Call States
+
+Possible call states:
+
+- `queued`
+- `ringing`
+- `in-progress`
+- `completed`
+- `failed`
+- `busy`
+- `no-answer`
+- `canceled`
+
+## Analytics Metrics
+
+Available call analytics:
+
+- Sentiment analysis
+- Voice metrics
+- Engagement scores
+- Response patterns
+- Call quality metrics
+
+## Error Handling
+
+Common error scenarios:
+
+- Invalid Call ID
+- Call not found
+- Recording expired
+- Analytics processing failed
+- Permission denied

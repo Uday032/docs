@@ -1,0 +1,144 @@
+---
+title: "Scrape Content from Links"
+description: "Extract content from a list of links recursively"
+---
+
+# Scrape Content from Links
+
+The Scrape Content from Links node allows you to extract content from a list of links and follow them recursively if needed.
+
+## Overview
+
+This node enables you to:
+
+- Extract content from links
+- Follow nested links
+- Set crawl depth
+- Filter content
+- Handle pagination
+
+## Configuration
+
+| Parameter         | Type          | Description                      |
+| ----------------- | ------------- | -------------------------------- |
+| Start URLs        | Array[String] | Initial URLs to scrape           |
+| Link Selector     | String        | CSS selector for finding links   |
+| Content Selectors | Object        | Selectors for content extraction |
+| Max Depth         | Number        | Maximum crawl depth              |
+| Follow Rules      | Object        | Rules for following links        |
+
+## Example Usage
+
+### Basic Link Scraping
+
+```json
+{
+  "start_urls": ["https://example.com/blog"],
+  "link_selector": "a.article-link",
+  "content_selectors": {
+    "title": "h1.article-title",
+    "content": "div.article-content",
+    "date": "span.publish-date"
+  }
+}
+```
+
+### Advanced Configuration
+
+```json
+{
+  "start_urls": ["https://example.com/blog"],
+  "link_selector": "a.article-link",
+  "content_selectors": {
+    "title": {
+      "selector": "h1.article-title",
+      "type": "text"
+    },
+    "content": {
+      "selector": "div.article-content",
+      "type": "html"
+    },
+    "author": {
+      "selector": ".author-info",
+      "nested": {
+        "name": ".author-name",
+        "bio": ".author-bio"
+      }
+    }
+  },
+  "max_depth": 2,
+  "follow_rules": {
+    "patterns": ["*/blog/*", "*/article/*"],
+    "exclude": ["*/tag/*", "*/category/*"]
+  }
+}
+```
+
+## Link Following Rules
+
+### Pattern Matching
+
+```json
+{
+  "follow_rules": {
+    "patterns": ["*/blog/*", "*/article/*"],
+    "exclude": ["*/archive/*", "*/author/*"],
+    "regex": {
+      "include": ["^/blog/\\d{4}/\\d{2}/"],
+      "exclude": ["\\?(page|sort)="]
+    }
+  }
+}
+```
+
+## Content Extraction
+
+### Nested Content
+
+```json
+{
+  "content_selectors": {
+    "article": {
+      "selector": "article",
+      "nested": {
+        "title": "h1",
+        "metadata": {
+          "selector": ".meta",
+          "nested": {
+            "author": ".author",
+            "date": ".date",
+            "tags": {
+              "selector": ".tags li",
+              "multiple": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Data Processing
+
+### Content Transformations
+
+```json
+{
+  "transformations": {
+    "title": ["trim", "normalize"],
+    "date": "to_iso_date",
+    "content": ["remove_html", "clean_whitespace"]
+  }
+}
+```
+
+## Error Handling
+
+Common issues and solutions:
+
+- Broken links
+- Invalid content structure
+- Rate limiting
+- Depth limits
+- Circular references

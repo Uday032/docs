@@ -1,0 +1,109 @@
+---
+title: "Add Data to Document"
+description: "Insert or append content to Google Docs documents"
+---
+
+# Add Data to Document
+
+The Add Data to Document node allows you to insert or append content to Google Docs documents.
+
+## Overview
+
+This node enables you to:
+
+- Insert text at specific locations
+- Add formatted content
+- Insert images and tables
+- Apply text styling
+- Add headers and footers
+
+## Configuration
+
+| Parameter       | Type   | Description                            |
+| --------------- | ------ | -------------------------------------- |
+| Document ID     | String | The ID of the Google Doc               |
+| Content         | Object | Content to be added                    |
+| Insert Location | String | Where to add content (START/END/INDEX) |
+| Format Options  | Object | Styling and formatting options         |
+
+## Authentication
+
+This node requires:
+
+- Google Cloud Project
+- Google Docs API enabled
+- Service account or OAuth2 credentials
+- Write access to the document
+
+## Output
+
+The node returns:
+
+- Updated document ID
+- Insert position
+- Success/failure status
+- Error messages if operation fails
+
+## Example Usage
+
+```json
+{
+  "document_id": "1234567890abcdef",
+  "content": {
+    "text": "New content to be added",
+    "style": {
+      "bold": true,
+      "fontSize": 12,
+      "foregroundColor": {
+        "color": { "rgbColor": { "red": 0.1, "green": 0.1, "blue": 0.1 } }
+      }
+    }
+  },
+  "insert_location": "END",
+  "format_options": {
+    "preserveFormatting": true
+  }
+}
+```
+
+## Content Types
+
+You can add various types of content:
+
+### Text
+
+```json
+{
+  "text": "Simple text content"
+}
+```
+
+### Formatted Paragraph
+
+```json
+{
+  "paragraph": {
+    "text": "Formatted paragraph",
+    "style": {
+      "alignment": "CENTER",
+      "lineSpacing": 1.5
+    }
+  }
+}
+```
+
+### Table
+
+```json
+{
+  "table": {
+    "rows": 3,
+    "columns": 2,
+    "data": [
+      ["Header 1", "Header 2"],
+      ["Row 1 Col 1", "Row 1 Col 2"],
+      ["Row 2 Col 1", "Row 2 Col 2"]
+    ]
+  }
+}
+```
