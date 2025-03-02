@@ -1,47 +1,44 @@
 ---
 title: "Combine Responses"
-description: "Merge multiple responses into a single output"
+description: "Combine two responses into one"
 ---
-
-# Combine Responses
-
-The Combine Responses node allows you to merge multiple responses or data streams into a single unified output.
-
-## Overview
-
-This utility node helps:
-
-- Combine multiple API responses
-- Merge different data formats
-- Concatenate text responses
-- Aggregate results
 
 ## Configuration
 
-| Parameter | Type   | Description                           |
-| --------- | ------ | ------------------------------------- |
-| Inputs    | Array  | Array of responses to combine         |
-| Format    | String | Output format (json/text/array)       |
-| Separator | String | Optional separator for text combining |
+- **Node Type:** action
 
-## Output
+### Input Fields
 
-The node provides:
-
-- Combined response in specified format
-- Success/failure status
-- Error messages if combination fails
-
-## Example Usage
+| Field Name      | Data Type | Required | Description     |
+| --------------- | --------- | -------- | --------------- |
+| Common Variable | Text      | True     | Common variable |
+| Response 1      | Array     | True     | First response  |
+| Response 2      | Array     | True     | Second response |
 
 ```json
 {
-  "inputs": [
-    { "response": "First response" },
-    { "response": "Second response" },
-    { "data": ["array", "items"] }
+  "commonVariable": "phoneNumber",
+  "response1": [
+    { "phoneNumber": "123456789", "name": "John Doe" },
+    { "phoneNumber": "987654321", "name": "Mark Doe" }
   ],
-  "format": "json",
-  "separator": "\n"
+  "response2": [
+    { "phoneNumber": "123456789", "position": "Manager" },
+    { "phoneNumber": "2378264298", "position": "Director" }
+  ]
 }
+```
+
+### Output Fields
+
+| Field Name | Data Type | Required | Description       |
+| ---------- | --------- | -------- | ----------------- |
+|            | Array     | True     | Combined response |
+
+```json
+[
+  { "phoneNumber": "123456789", "name": "John Doe", "position": "Manager" },
+  { "phoneNumber": "987654321", "name": "Mark Doe" },
+  { "phoneNumber": "2378264298", "position": "Director" }
+]
 ```

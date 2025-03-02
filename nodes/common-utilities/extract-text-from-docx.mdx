@@ -1,48 +1,28 @@
 ---
-title: "Extract Text from DOCX"
-description: "Extract text content from Microsoft Word documents"
+title: "Extract Text from Docx"
+description: "Extract text from a DOCX document"
 ---
-
-# Extract Text from DOCX
-
-The Extract Text from DOCX node allows you to extract text content from Microsoft Word (.docx) files.
-
-## Overview
-
-This node provides functionality to:
-
-- Extract plain text from DOCX files
-- Preserve formatting (optional)
-- Extract headers and footers
-- Handle tables and lists
-- Extract metadata
 
 ## Configuration
 
-| Parameter       | Type    | Description                         |
-| --------------- | ------- | ----------------------------------- |
-| Input File      | File    | The DOCX file to process            |
-| Preserve Format | Boolean | Whether to preserve text formatting |
-| Include Headers | Boolean | Extract headers and footers         |
-| Extract Tables  | Boolean | Whether to process tables           |
+- **Node Type:** action
 
-## Output
+### Input Fields
 
-The node provides:
-
-- Extracted text content
-- Document structure (optional)
-- Metadata information
-- Success/failure status
-- Any error messages
-
-## Example Usage
+| Field Name    | Data Type | Required | Description        |
+| ------------- | --------- | -------- | ------------------ |
+| Document Link | Text      | True     | The DOCX file Link |
 
 ```json
-{
-  "input_file": "document.docx",
-  "preserve_format": true,
-  "include_headers": true,
-  "extract_tables": true
-}
+{ "documentLink": "<document link>" },
+```
+
+### Output Fields
+
+| Field Name     | Data Type | Required | Description    |
+| -------------- | --------- | -------- | -------------- |
+| Extracted Text | Text      | True     | Extracted text |
+
+```json
+{ "text": "<extracted text>" },
 ```
