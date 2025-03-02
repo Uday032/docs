@@ -1,45 +1,40 @@
 ---
 title: "Competitors Website Keywords Analysis"
-description: "Analyze keywords from competitor websites"
+description: "Recommend keywords from the competitor websites"
 ---
 
-# Competitors Website Keywords Analysis
-
-This node helps analyze keywords and content from competitor websites to gain insights into their SEO strategy.
-
-## Overview
-
-The Competitors Website Keywords Analysis node:
-
-- Scrapes competitor websites
-- Extracts keywords and meta information
-- Analyzes keyword density and relevance
-- Provides competitive insights
+This utility is designed to analyze keywords from competitor websites and make recommendations based on the findings.
 
 ## Configuration
 
-| Parameter      | Type          | Description                                |
-| -------------- | ------------- | ------------------------------------------ |
-| Website URLs   | Array[String] | List of competitor website URLs to analyze |
-| Depth          | Number        | How deep to crawl (1-5)                    |
-| Focus Keywords | Array[String] | Optional specific keywords to focus on     |
+- **Node Type:** action
 
-## Output
+### Input Fields
 
-The analysis provides:
-
-- Most common keywords and phrases
-- Meta tag analysis
-- Content structure insights
-- SEO recommendations
-- Comparative metrics
-
-## Example Usage
+| Field Name           | Data Type | Required | Description                   |
+| -------------------- | --------- | -------- | ----------------------------- |
+| Competitors Websites | Textarea  | True     | URLs of competitors' websites |
+| Keyword Type         | Text      | True     | Type of keywords to analyze   |
 
 ```json
 {
-  "website_urls": ["https://competitor1.com", "https://competitor2.com"],
-  "depth": 2,
-  "focus_keywords": ["relevant", "terms", "industry"]
+  "competitorsWebsites": "['website url 1', 'website url 2', 'website url 3']",
+  "keywordType": "long tail keywords"
 }
+```
+
+### Output Fields
+
+| Field Name | Data Type | Required | Description                    |
+| ---------- | --------- | -------- | ------------------------------ |
+|            | Array     | True     | An array of extracted keywords |
+
+```json
+[
+  "recommended keywords 1",
+  "recommended keywords 2",
+  "recommended keywords 3",
+  "recommended keywords 4",
+  "recommended keywords 5"
+]
 ```
