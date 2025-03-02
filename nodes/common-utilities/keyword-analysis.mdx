@@ -1,45 +1,58 @@
 ---
 title: "Keyword Analysis"
-description: "Analyze text content for keyword optimization"
+description: "Analyze keyword complexity"
 ---
 
-# Keyword Analysis
-
-The Keyword Analysis node helps analyze text content to identify and optimize keywords for better SEO performance.
-
-## Overview
-
-This node provides:
-
-- Keyword density analysis
-- Related keyword suggestions
-- Content optimization recommendations
-- SEO score calculation
+This node analyzes the complexity of keywords, including factors such as high traffic and low, medium competition, outputting only 10 keywords and supporting only English.
 
 ## Configuration
 
-| Parameter       | Type          | Description                      |
-| --------------- | ------------- | -------------------------------- |
-| Content         | String        | The text content to analyze      |
-| Target Keywords | Array[String] | Primary keywords to focus on     |
-| Language        | String        | Content language (default: 'en') |
+- **Node Type:** action
+- **Keyword Language Support:** English
 
-## Output
+### Input Fields
 
-The analysis returns:
+| Field Name | Data Type | Required | Description         |
+| ---------- | --------- | -------- | ------------------- |
+| Keywords   | Text      | True     | Keywords to analyze |
 
-- Keyword density metrics
-- Keyword placement analysis
-- Content optimization suggestions
-- SEO score (0-100)
-- Related keyword opportunities
+```json
+[
+  "recommended keywords 1",
+  "recommended keywords 2",
+  "recommended keywords 3",
+  "recommended keywords 4",
+  "recommended keywords 5"
+]
+```
 
-## Example Usage
+### Output Fields
+
+| Field Name | Data Type | Required | Description                       |
+| ---------- | --------- | -------- | --------------------------------- |
+| Keywords   | Array     | True     | An array of with their complexity |
 
 ```json
 {
-  "content": "Your article or webpage content here...",
-  "target_keywords": ["main keyword", "secondary keyword"],
-  "language": "en"
+  "keywords": [
+    {
+      "keyword": "recommended keywords 1"
+      "difficulty": "MEIDUM",
+      "searchVolume": "4.3k",
+    },
+    {
+      "keyword": "recommended keywords 2"
+      "difficulty": "LOW",
+      "searchVolume": "10.3k",
+    },
+    {
+      "keyword": "recommended keywords 3"
+      "difficulty": "LOW",
+      "searchVolume": "44.3k",
+    }
+  ],
+  "usage_tokens": {
+    "totalTokens": "42"
+  }
 }
 ```
