@@ -1,32 +1,228 @@
 ---
 title: "Start Workflow"
 description:
-api: "GET /workflow/runWorkflow/{id}"
+api: "POST /workflow/runWorkflow?id={id}"
 ---
 
 ### Authorization
 
 <ParamField header="x-api-key" type="string" required="true">
-  x api Key for the user initiating the flow.
+  Your API Key
 </ParamField>
 
-### Body
+### Params
 
 <ParamField body="id" type="string" required="true">
   The workflow id for the user initiating the flow. [Click
   here](/developers/authentication) to know how to get workflow id.
 </ParamField>
 
+### Payload
 
-<ResponseField name="workflows" type="array[]">
+The payload is dynamic and depends on the first node of the workflow. For instance, if the first node involves voice AI and Get Call Action, the payload should include the necessary input values for these actions.
+
+<ParamField body="callId" type="string" required="true">
+  The unique identifier of the call
+</ParamField>
+
+### Response
+
+<ResponseField name="response" type="array">
   <Expandable title="properties">
-    <ResponseField name="full_name" type="string">
-      The full name of the user
+    <ResponseField name="nodeId" type="string">
+      The unique identifier for the workflow node.
     </ResponseField>
 
-    <ResponseField name="is_over_21" type="boolean">
-      Whether the user is over 21 years old
+    <ResponseField name="input" type="object">
+      <Expandable title="properties">
+        <ResponseField name="name" type="string">
+          The name of the app or service.
+        </ResponseField>
+
+        <ResponseField name="imageURL" type="string">
+          The URL of the image associated with the app or service.
+        </ResponseField>
+
+        <ResponseField name="description" type="string">
+          A brief description of the app or service.
+        </ResponseField>
+
+        <ResponseField name="loading" type="boolean">
+          Indicates whether the app or service is currently loading.
+        </ResponseField>
+
+        <ResponseField name="isConnected" type="boolean">
+          Indicates whether the app or service is connected.
+        </ResponseField>
+
+        <ResponseField name="actions" type="array[]">
+          <Expandable title="properties">
+            <ResponseField name="option" type="object">
+              <Expandable title="properties">
+                <ResponseField name="label" type="string">
+                  The label for the action option.
+                </ResponseField>
+
+                <ResponseField name="value" type="string">
+                  The value associated with the action option.
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+
+            <ResponseField name="inputs" type="array[]">
+              <Expandable title="properties">
+                <ResponseField name="type" type="string">
+                  The type of input (e.g., text, select).
+                </ResponseField>
+
+                <ResponseField name="required" type="boolean">
+                  Indicates whether the input is required.
+                </ResponseField>
+
+                <ResponseField name="name" type="string">
+                  The name of the input field.
+                </ResponseField>
+
+                <ResponseField name="label" type="string">
+                  The label for the input field.
+                </ResponseField>
+
+                <ResponseField name="defaultValue" type="string">
+                  The default value for the input field.
+                </ResponseField>
+
+                <ResponseField name="value" type="string">
+                  The current value of the input field.
+                </ResponseField>
+
+                <ResponseField name="options" type="array[]" optional="true">
+                  <Expandable title="properties">
+                    <ResponseField name="label" type="string">
+                      The label for the select option.
+                    </ResponseField>
+
+                    <ResponseField name="value" type="string">
+                      The value associated with the select option.
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+
+            <ResponseField name="responses" type="object">
+              The responses when you ran test when creating the workflow
+              <Expandable title="properties">
+                <ResponseField name="batch_id" type="string">
+                  The ID of the batch call or action.
+                </ResponseField>
+
+                <ResponseField name="isTestMode" type="boolean">
+                  Indicates whether the action is in test mode.
+                </ResponseField>
+
+                <ResponseField name="state" type="string">
+                  The current state of the action.
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+
+            <ResponseField name="action" type="string">
+              The type of action being performed.
+            </ResponseField>
+
+            <ResponseField name="type" type="string">
+              The type of the action (e.g., action).
+            </ResponseField>
+
+            <ResponseField name="msg" type="string">
+              A message providing additional information about the action.
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+
+        <ResponseField name="actionEntityAction" type="string">
+          The action being performed by the entity.
+        </ResponseField>
+      </Expandable>
     </ResponseField>
+
+    <ResponseField name="response" type="object">
+      The final Response when you run the workflow
+      <Expandable title="properties">
+        <ResponseField name="batch_id" type="string">
+          The ID of the batch call or action.
+        </ResponseField>
+
+        <ResponseField name="state" type="string">
+          The current state of the action.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
   </Expandable>
 </ResponseField>
 
+<CodeBlock
+  tabs={{
+    cURL: `curl --request GET \
+  --url https://api.ultravox.ai/api/calls \
+  --header 'X-API-Key: YOUR_API_KEY_HERE'`,
+    Python: `import requests
+headers = {
+    "X-API-Key": "YOUR_API_KEY_HERE"
+}
+response = requests.get("https://api.ultravox.ai/api/calls", headers=headers)
+print(response.json())`,
+    JavaScript: `fetch("https://api.ultravox.ai/api/calls", {
+  method: "GET",
+  headers: {
+    "X-API-Key": "YOUR_API_KEY_HERE"
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data));`,
+    PHP: `<?php
+$curl = curl_init();
+curl_setopt_array($curl, [
+    CURLOPT_URL => "https://api.ultravox.ai/api/calls",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => ["X-API-Key: YOUR_API_KEY_HERE"]
+]);
+$response = curl_exec($curl);
+curl_close($curl);
+echo $response;
+?>`,
+    Go: `package main
+import (
+    "fmt"
+    "net/http"
+    "io/ioutil"
+)
+func main() {
+    client := &http.Client{}
+    req, _ := http.NewRequest("GET", "https://api.ultravox.ai/api/calls", nil)
+    req.Header.Set("X-API-Key", "YOUR_API_KEY_HERE")
+    resp, _ := client.Do(req)
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+}`,
+    Java: `import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+public class Main {
+    public static void main(String[] args) throws Exception {
+        URL url = new URL("https://api.ultravox.ai/api/calls");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("X-API-Key", "YOUR_API_KEY_HERE");
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            System.out.println(inputLine);
+        }
+        in.close();
+    }
+}`,
+  }}
+/>
