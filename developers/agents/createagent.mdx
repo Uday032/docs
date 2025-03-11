@@ -1,53 +1,61 @@
 ---
 title: "Create Agent"
-description: Create a new agent for handling specific tasks and interactions within the system.
+description: Create a new agent for handling specific tasks and interactions within the system for Voice AI.
 api: "POST /agents"
 ---
-####
 
+####
 
 ### Authorization
 
-
-<ParamField header="authorization" type="string" required>
- Your API key for authentication.
+<ParamField header="x-api-key" type="string" required="true">
+  Your API Key
 </ParamField>
 
-
-
 ### Body
-
 
 <ParamField body="name" type="string" required>
   The name of the agent to be created.
 </ParamField>
 
-<ParamField body="welcomeMessage" type="string" required>
+<ParamField body="welcomeMessage" type="string">
   The welcome message to be delivered by the agent.
 </ParamField>
 
 <ParamField body="task" type="string" required>
-  The specific task the agent is responsible for.
+  The task or purpose of the agent, stored as long text.
 </ParamField>
 
 <ParamField body="voice" type="string" required>
-  The voice to be used by the agent for communication.
+  The voice setting for the agent.
 </ParamField>
 
 <ParamField body="language" type="string" required>
-  The language the agent will use for communication.
+  The language in which the agent communicates.
 </ParamField>
 
-<ParamField body="telephonyProvider" type="string" required>
-  The telephony provider to be used for the agent's calls.
+<ParamField body="telephonyProvider" type="string" optional>
+  The telephony provider used for handling calls, defaulting to "twilio".
 </ParamField>
 
-<ParamField body="callTermination" type="number" required>
-  The conditions under which the call will be terminated in seconds.
+<ParamField body="callTermination" type="integer" optional>
+  The duration or condition under which the call terminates, if applicable.
 </ParamField>
 
-<ParamField body="hangupMessage" type="string" required>
-  The message to be delivered when the call is terminated.
+<ParamField body="hangupMessage" type="string" optional>
+  The message delivered when the agent hangs up.
+</ParamField>
+
+<ParamField body="apiTool" type="json" optional>
+  The API tool configuration for the agent, if applicable.
+</ParamField>
+
+<ParamField body="knowledgeBase" type="string" optional>
+  The knowledge base reference for the agent, if applicable.
+</ParamField>
+
+<ParamField body="workflow" type="string" optional>
+  The workflow to run after call is ended. Here the value will be workflow id.
 </ParamField>
 
 ## Response
@@ -55,9 +63,42 @@ api: "POST /agents"
 <ResponseField name="success" type="boolean">
   Indicates if the request was successful.
 </ResponseField>
-<ResponseField name="data" type="array">
-  An array of agent objects.
-</ResponseField>
-<ResponseField name="status" type="number">
-  The status code of the response.
+<ResponseField name="data" type="object">
+  The created agent object containing all the input fields.
+  <ResponseField name="id" type="string">
+    Unique identifier for the created agent.
+  </ResponseField>
+  <ResponseField name="name" type="string">
+    The name assigned to the agent.
+  </ResponseField>
+  <ResponseField name="welcomeMessage" type="string">
+    The message the agent speaks when a call is connected.
+  </ResponseField>
+  <ResponseField name="task" type="string">
+    The purpose or function of the agent.
+  </ResponseField>
+  <ResponseField name="voice" type="string">
+    The voice setting configured for the agent.
+  </ResponseField>
+  <ResponseField name="language" type="string">
+    The language the agent uses for communication.
+  </ResponseField>
+  <ResponseField name="telephonyProvider" type="string">
+    The provider used for handling incoming and outgoing calls.
+  </ResponseField>
+  <ResponseField name="callTermination" type="integer">
+    The condition or duration that triggers call termination.
+  </ResponseField>
+  <ResponseField name="hangupMessage" type="string">
+    The message played when the agent initiates a call hangup.
+  </ResponseField>
+  <ResponseField name="apiTool" type="json">
+    Configuration details for the API tool integrated with the agent.
+  </ResponseField>
+  <ResponseField name="knowledgeBase" type="string">
+    Reference to the knowledge base associated with the agent.
+  </ResponseField>
+  <ResponseField name="workflow" type="string">
+    The workflow process triggered after a call is completed.
+  </ResponseField>
 </ResponseField>
