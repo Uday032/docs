@@ -1,13 +1,16 @@
 ---
 title: "Start Workflow"
-api: "POST /workflow/runWorkflow?id={id}"
+api: "POST /workflow/runWorkflow"
 ---
 
-
+## Authorization
+<ParamField header="x-api-key" type="string" required>
+  Your Api Key
+</ParamField>
 
 ### Params
 
-<ParamField body="id" type="string" required="true">
+<ParamField query="id" type="string" required="true">
   The workflow id for the user initiating the flow. [Click
   here](/developers/authentication) to know how to get workflow id.
 </ParamField>

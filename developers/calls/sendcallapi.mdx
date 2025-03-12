@@ -5,7 +5,10 @@ api: "POST /voiceai/sendcall"
 ---
 ####
 
-
+## Authorization
+<ParamField header="x-api-key" type="string" required>
+  Your Api Key
+</ParamField>
 
 ### Body
 Make a phone call from agent
@@ -26,14 +29,28 @@ Phone number of the sender default value is **internal**
 
 
 ## Response
-
-<ResponseField name="success" type="boolean">
-  Indicates if the request was successful.
+<ResponseField name="response" type="array">
+  <Expandable title="properties">
+    <ResponseField name="agent" type="string">
+      ID of the agent handling the call.
+    </ResponseField>
+    <ResponseField name="userId" type="string">
+      The user identifier associated with the call.
+    </ResponseField>
+    <ResponseField name="phoneNumber" type="string">
+      The phone number associated with the call.
+    </ResponseField>
+    <ResponseField name="fromPhoneNumber" type="string">
+      The originating phone number of the call.
+    </ResponseField>
+    <ResponseField name="currentDateTime" type="string">
+      The timestamp representing the current date and time.
+    </ResponseField>
+    <ResponseField name="callDirection" type="string">
+      The direction of the call (e.g., INBOUND or OUTBOUND).
+    </ResponseField>
+    <ResponseField name="userData" type="object">
+      Additional user data associated with the call.
+    </ResponseField>
+  </Expandable>
 </ResponseField>
-<ResponseField name="message" type="string">
-  The status of the call, either "done" or "queued".
-</ResponseField>
-<ResponseField name="status" type="number">
-  The status code of the response, either 200 or 400.
-</ResponseField>
-
