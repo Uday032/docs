@@ -6,11 +6,7 @@ api: "POST /agents"
 
 ####
 
-### Authorization
 
-<ParamField header="x-api-key" type="string" required="true">
-  Your API Key
-</ParamField>
 
 ### Body
 
@@ -18,7 +14,7 @@ api: "POST /agents"
   The name of the agent to be created.
 </ParamField>
 
-<ParamField body="welcomeMessage" type="string">
+ <ParamField body="welcomeMessage" type="string">
   The welcome message to be delivered by the agent.
 </ParamField>
 
@@ -59,12 +55,14 @@ api: "POST /agents"
 </ParamField>
 
 ## Response
-
+<ResponseField name="response" type="array">
+ <Expandable title="properties">
 <ResponseField name="success" type="boolean">
   Indicates if the request was successful.
 </ResponseField>
 <ResponseField name="data" type="object">
   The created agent object containing all the input fields.
+<Expandable title="properties">
   <ResponseField name="id" type="string">
     Unique identifier for the created agent.
   </ResponseField>
@@ -101,4 +99,8 @@ api: "POST /agents"
   <ResponseField name="workflow" type="string">
     The workflow process triggered after a call is completed.
   </ResponseField>
+ </Expandable>
+</ResponseField> 
+
+  </Expandable>
 </ResponseField>

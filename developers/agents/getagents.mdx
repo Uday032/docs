@@ -1,6 +1,6 @@
 ---
 title: "Agents"
-description: Retrieve detailed Voice AI agent information, including configuration, status, and tasks, using Bolna APIs.
+description: Retrieve detailed Voice AI agent information, including configuration, status, and tasks, using Svalync's API.
 api: "GET /agents/get?id={agentId}"
 ---
 ####
@@ -9,8 +9,8 @@ api: "GET /agents/get?id={agentId}"
 ### Authorization
 
 
-<ParamField header="authorization" type="string" required>
- Your API key for authentication.
+<ParamField header="x-api-key" type="string" required="true">
+  Your API Key
 </ParamField>
 
 <ParamField body="agentId" type="string" required="true">

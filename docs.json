@@ -33,6 +33,18 @@
       "href": "https://svalync.com"
     }
   },
+  "api": {
+    "mdx": {
+      "server": "https://svalync.com/api",
+      "auth": {
+        "method": "key",
+        "name": "x-api-key"
+      }
+    },
+    "playground": {
+      "display": "interactive"
+    }
+  },
   "navigation": {
     "global": {
       "anchors": [
