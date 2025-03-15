@@ -6,22 +6,106 @@ api: "GET /voiceai/list"
 ####
 
 
+## Authorization
+<ParamField header="x-api-key" type="string" required>
+  Your Api Key
+</ParamField>
+
 
 ## Response
-
-<ResponseField name="success" type="boolean">
-  Indicates if the request was successful.
+<ResponseField name="response" type="array">
+  <Expandable title="properties">
+    <ResponseField name="success" type="boolean">
+      Indicates if the request was successful.
+    </ResponseField>
+    <ResponseField name="data" type="array">
+      The created agent object containing all the input fields.
+      <Expandable title="properties">
+        <ResponseField name="id" type="string">
+          Unique identifier for the created agent.
+        </ResponseField>
+        <ResponseField name="agentId" type="string">
+          The identifier for the agent handling the call.
+        </ResponseField>
+        <ResponseField name="pathways" type="string">
+          Pathways information if applicable.
+        </ResponseField>
+        <ResponseField name="callDuration" type="integer">
+          The duration of the call in seconds.
+        </ResponseField>
+        <ResponseField name="call_id" type="string">
+          The unique identifier for the call.
+        </ResponseField>
+        <ResponseField name="batch_id" type="string">
+          The batch ID associated with the call.
+        </ResponseField>
+        <ResponseField name="callType" type="string">
+          The type of call made.
+        </ResponseField>
+        <ResponseField name="userId" type="string">
+          The user identifier associated with the call.
+        </ResponseField>
+        <ResponseField name="to_phone_number" type="string">
+          The recipient phone number of the call.
+        </ResponseField>
+        <ResponseField name="from_phone_number" type="string">
+          The originating phone number of the call.
+        </ResponseField>
+        <ResponseField name="tokens_consumed" type="integer">
+          The number of tokens consumed during the call.
+        </ResponseField>
+        <ResponseField name="status" type="string">
+          The current status of the call.
+        </ResponseField>
+        <ResponseField name="transcripts" type="string">
+          The transcript of the call conversation.
+        </ResponseField>
+        <ResponseField name="summary" type="string">
+          A summarized text of the call interaction.
+        </ResponseField>
+        <ResponseField name="startedAt" type="string">
+          The timestamp when the call started.
+        </ResponseField>
+        <ResponseField name="endedAt" type="string">
+          The timestamp when the call ended.
+        </ResponseField>
+        <ResponseField name="endedBy" type="string">
+          Identifier of who ended the call.
+        </ResponseField>
+        <ResponseField name="userData" type="object">
+          Additional user data associated with the call.
+          <Expandable title="properties">
+            <ResponseField name="var" type="string">
+              User data variable.
+            </ResponseField>
+            <ResponseField name="name" type="string">
+              The name of the user.
+            </ResponseField>
+            <ResponseField name="var2" type="string">
+              Another user data variable.
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+        <ResponseField name="createdAt" type="string">
+          The timestamp when the call was created.
+        </ResponseField>
+        <ResponseField name="updatedAt" type="string">
+          The timestamp when the call was last updated.
+        </ResponseField>
+        <ResponseField name="isTestMode" type="boolean">
+          Indicates whether the call was in test mode.
+        </ResponseField>
+        <ResponseField name="agent" type="object">
+          Details of the agent handling the call.
+          <Expandable title="properties">
+            <ResponseField name="name" type="string">
+              The name of the agent handling the call.
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
 </ResponseField>
-<ResponseField name="data" type="array">
-  An array of agent objects.
-</ResponseField>
-<ResponseField name="status" type="number">
-  The status code of the response.
-</ResponseField>
 
 
-{/* {
-  "message": "done",
-  "status": "queued",
-  "execution_id": "123e4567-e89b-12d3-a456-426614174000"
-} */}

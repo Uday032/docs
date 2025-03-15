@@ -35,11 +35,8 @@
   },
   "api": {
     "mdx": {
-      "server": "https://svalync.com/api",
-      "auth": {
-        "method": "key",
-        "name": "x-api-key"
-      }
+      "server": "https://svalync.com/api"
+     
     },
     "playground": {
       "display": "interactive"

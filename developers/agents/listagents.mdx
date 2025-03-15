@@ -4,18 +4,73 @@ description: List all Voice AI agents under your account, along with their names
 api: "GET /agents/getall"
 ---
 ####
-
+## Authorization
+<ParamField header="x-api-key" type="string" required>
+  Your Api Key
+</ParamField>
 
 ## Response
-
+<ResponseField name="response" type="array">
+ <Expandable title="properties">
 <ResponseField name="success" type="boolean">
   Indicates if the request was successful.
+  
 </ResponseField>
 <ResponseField name="data" type="array">
-  An array of agent objects.
-</ResponseField>
-<ResponseField name="status" type="number">
-  The status code of the response.
+  The created agent object containing all the input fields.
+<Expandable title="properties">
+  <ResponseField name="id" type="string">
+    Unique identifier for the created agent.
+  </ResponseField>
+  <ResponseField name="name" type="string">
+    The name assigned to the agent.
+  </ResponseField>
+  <ResponseField name="welcomeMessage" type="string">
+    The message the agent speaks when a call is connected.
+  </ResponseField>
+  <ResponseField name="task" type="string">
+    The purpose or function of the agent.
+  </ResponseField>
+  <ResponseField name="voice" type="string">
+    The voice setting configured for the agent.
+  </ResponseField>
+  <ResponseField name="language" type="string">
+    The language the agent uses for communication.
+  </ResponseField>
+  <ResponseField name="telephonyProvider" type="12333">
+    The provider used for handling incoming and outgoing calls.
+  </ResponseField>
+  <ResponseField name="callTermination" type="integer">
+    The condition or duration that triggers call termination.
+  </ResponseField>
+  <ResponseField name="hangupMessage" type="string">
+    The message played when the agent initiates a call hangup.
+  </ResponseField>
+  <ResponseField name="apiTool" type="json">
+    Configuration details for the API tool integrated with the agent.
+  </ResponseField>
+  <ResponseField name="knowledgeBase" type="string">
+    Reference to the knowledge base associated with the agent.
+  </ResponseField>
+  <ResponseField name="workflow" type="string">
+    The workflow process triggered after a call is completed.
+  </ResponseField>
+  <ResponseField name="userId" type="string">
+    The unique identifier for the user associated with the agent.
+  </ResponseField>
+  <ResponseField name="inboundPhoneNumber" type="number">
+    The phone number used for inbound calls to the agent.
+  </ResponseField>
+  <ResponseField name="createdAt" type="number">
+    The timestamp indicating when the agent was created.
+  </ResponseField>
+  <ResponseField name="updatedAt" type="number">
+    The timestamp indicating when the agent was last updated.
+  </ResponseField>
+ </Expandable>
+</ResponseField> 
+
+  </Expandable>
 </ResponseField>
 
 
