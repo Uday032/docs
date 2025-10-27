@@ -1,0 +1,82 @@
+---
+title: "Get List of Records"
+description: "Fetch list of records from attio"
+---
+
+Learn about the Get a List of Attio Records integration capabilities and how to retrieve multiple records from a specific object in your Attio CRM.
+This node fetches a paginated list of records (e.g., people, companies) from Attio, perfect for syncing data, reporting, or feeding into other workflow actions like analysis or notifications.
+
+## Features
+
+Our Get a List of Attio Records integration provides:
+
+- Support for standard and custom Attio objects
+- Optional filtering and sorting (via advanced config)
+- Pagination handling for large datasets
+- Up to 500 records per call, with offset support
+
+## Available Operations
+
+List Records
+- Query and retrieve records for a given object.
+
+Key Capabilities:
+
+- Filters by attributes (e.g., name, email)
+- Sorts by fields like created_at or custom attributes
+- Integrates with workflows for real-time data pulls
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| objectId | Select  | Choose the Attio object type. Options load dynamically from your workspace. |
+
+
+
+#### Options for objectId:
+
+- people: Individual contacts
+- companies: Business entities
+- deals: Sales opportunities (if enabled)
+- Custom objects appear if defined in your Attio workspace
+
+## Example Usage
+
+### Fetch Recent People Records
+
+```json
+{
+ "objectId": "people"
+}
+```
+
+## Response Format
+
+```json
+{
+  "data": [
+    {
+      "id": {
+        "workspace_id": "string",
+        "object_id": "string",
+        "record_id": "string"
+      },
+      "created_at": "string (ISO 8601)",
+      "web_url": "string",
+      "values": {
+        "attribute_id": "value or array"
+      }
+    }
+  ]
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid object: 404 "Object not found"
+- Auth failed: 401 "Invalid API key"
+- Rate limit: 429 "Too many requests—retry in 60s"
+- Empty results: Returns empty array

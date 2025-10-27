@@ -1,0 +1,89 @@
+---
+title: "Get Company Profiles"
+description: "Fetch detailed company data from LinkedIn URLs."
+---
+
+Learn about the LinkedIn Company Profiles integration capabilities and how to fetch detailed company data from LinkedIn URLs.
+This node retrieves key information about LinkedIn company pages, ideal for market research, competitor analysis, or partnership scouting.
+
+## Features
+
+Our LinkedIn Company Profiles integration provides:
+
+- Company overview, industry, size, and location data
+- Employee count and growth trends
+- Bulk processing via comma-separated URLs
+- Standard mode for core details
+
+## Available Operations
+
+Get Company Profile Details:
+Extract structured data for one or more LinkedIn companies.
+Key Capabilities:
+
+Includes founding year, specialties, and follower count
+Supports up to 20 companies per request
+No email or advanced enrichment (focus on public data)
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| CompanyUrls    | String  | Enter LinkedIn company URLs separated by commas. |
+| CompanyProfileMode    | Select  | Standard company profile fetch (only option available). |
+
+
+
+#### Options for profileMode:
+
+COMPANY: Full company details including overview and metrics.
+
+## Example Usage
+
+### Fetch Company Details
+
+```json
+{
+  "companyUrls": "https://www.linkedin.com/company/xai, https://www.linkedin.com/company/openai",
+  "companyProfileMode": "COMPANY"
+}
+```
+### Fetch Profiles with Emails
+
+```json
+{
+  "profileUrls": "https://www.linkedin.com/in/john-doe",
+  "profileMode": "PROFILE_WITH_EMAIL"
+}
+```
+
+## Response Format
+
+```json
+{
+  "company": {
+    "url": "string",
+    "name": "string",
+    "description": "string",
+    "industry": "string",
+    "companySize": "string (e.g., 10,001+ employees)",
+    "headquarters": {
+      "city": "string",
+      "country": "string"
+    },
+    "foundedYear": "number",
+    "specialties": ["string"],
+    "employeeCount": "number",
+    "followers": "number"
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid URL: 400 "Not a valid company page"
+- Company private/deleted: "Resource unavailable"
+- Rate limit: 429—pause for 30s
+- Network issues: Retry up to 3 times

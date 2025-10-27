@@ -1,0 +1,80 @@
+---
+title: "Update Records"
+description: "Update Attio Record"
+---
+
+Learn about the Update Attio Record integration capabilities and how to modify attributes for an existing record in your Attio CRM.
+This node patches specific fields on a record by ID—ideal for post-lead updates, status changes, or syncing external data.
+
+## Features
+
+Our Update Attio Record integration provides:
+
+- Targeted attribute updates without overwriting others
+- Support for appending to arrays (e.g., add tags)
+- Audit trail via Attio's history
+- Partial updates for efficiency
+
+## Available Operations
+
+Update Record by ID
+- Modify values on an existing record.
+
+Key Capabilities:
+
+- Updates text, dates, links, multiselects
+- Handles object-specific fields
+- Returns updated record snapshot
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| objectId | Select  | Choose the Attio object type. Options load dynamically from your workspace. |
+| update_recordId | String  | The UUID of the record to update. |
+
+
+#### Options for objectId:
+
+- people: Individual contacts
+- companies: Business entities
+- deals: Sales opportunities (if enabled)
+- Custom objects appear if defined in your Attio workspace
+
+## Example Usage
+
+### Update Lead Status
+
+```json
+{
+  "objectId": "people",
+  "update_recordId": "bf071e1f-6035-429d-b874-d83ea64ea13b",
+  "data": {
+    "values": {
+      "lead_status": "qualified",
+      "last_contacted": "2025-10-27"
+    }
+  }
+}
+```
+
+## Response Format
+
+```json
+{
+  "data": {
+    "id": { ... },
+    "created_at": "2022-11-21T13:22:49Z",
+    "web_url": "https://app.attio.com/...",
+    "values": { ... }  // Updated fields included
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Not found: 404 "Record doesn't exist"
+- Invalid data: 422 "Type mismatch for attribute"
+- Permission: 403 "Read-only field"

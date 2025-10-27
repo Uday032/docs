@@ -1,0 +1,115 @@
+---
+title: "Get Post"
+description: "Fetch detailed post data from LinkedIn URLs."
+---
+
+Learn about the LinkedIn Posts integration capabilities and how to search and retrieve recent posts from LinkedIn.
+This node searches for posts based on queries, authors, and time ranges—great for content inspiration, trend monitoring, or social listening.
+
+## Features
+
+Our LinkedIn Posts integration provides:
+
+- Keyword-based post search with filters
+- Reaction and comment fetching (optional)
+- Sorting by relevance or date
+- Time-bound results (24h, week, month)
+
+## Available Operations
+
+Search Posts: 
+- Discover and fetch posts matching your criteria.
+
+Key Capabilities:
+
+- Filter by author companies
+- Limit results and nested data (reactions/comments)
+- Up to 50 posts per search, with 5 reactions/comments each
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| searchQueries    | String  | Enter search terms separated by commas. |
+| timeRange    | Select  | Filter posts by recency. |
+| sortBy    | Select  | Order results by relevance or date. |
+| authorsCompanies    | String  | Company names for author filtering, comma-separated. |
+| maxPosts    | String  | Maximum number of posts to return. |
+| getReactions    | Select  | Include reaction data? |
+| maxReactions    | String  | Max reactions per post. |
+| getComments    | Select  | Include comment data? |
+| maxComments    | String  | Max comments per post. |
+
+
+
+
+#### Options:
+
+- timeRange: 24h, week, month
+- sortBy: relevance, date
+- getReactions/getComments: true, false
+
+## Best Practices
+
+- Use specific queries for better relevance
+- Paginate large results with multiple runs
+- Analyze reactions for engagement insights
+- Schedule weekly runs for trends
+- Export to CSV for reporting
+
+## Example Usage
+
+### Basic Post Search
+
+```json
+{
+  "searchQueries": "AI automation",
+  "timeRange": "week",
+  "sortBy": "relevance",
+  "authorsCompanies": "xai, openai",
+  "maxPosts": "10",
+  "getReactions": "true",
+  "maxReactions": "5",
+  "getComments": "false",
+  "maxComments": "0"
+}
+```
+
+## Response Format
+
+```json
+{
+  "post": {
+    "id": "string",
+    "text": "string",
+    "author": {
+      "name": "string",
+      "company": "string"
+    },
+    "timestamp": "datetime",
+    "reactions": [
+      {
+        "type": "LIKE",
+        "count": "number",
+        "users": ["string"]
+      }
+    ],
+    "comments": [
+      {
+        "text": "string",
+        "author": "string",
+        "timestamp": "datetime"
+      }
+    ]
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- No results: Empty array
+- Invalid query: 400 "Refine search terms"
+- Over limit: Truncates at maxPosts
+- Blocked keywords: "Content restricted"

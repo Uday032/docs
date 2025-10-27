@@ -1,0 +1,78 @@
+---
+title: "Send Message"
+description: "Fetch detailed company data from LinkedIn URLs."
+---
+
+Learn about the LinkedIn Company Profiles integration capabilities and how to fetch detailed company data from LinkedIn URLs.
+This node retrieves key information about LinkedIn company pages, ideal for market research, competitor analysis, or partnership scouting.
+
+## Features
+
+Our Send Message integration provides:
+
+- Message broadcasting to channels
+- Support for text, formatted, and attachment-based messages
+- Channel selection and dynamic targeting
+- Response handling for confirmations and errors
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| Channel    | Select  | Specifies the target channel or recipient for the message. Options are populated dynamically from connected accounts. |
+| Message    | String  | The core content of the message. |
+
+
+
+#### Options for profileMode:
+
+COMPANY: Full company details including overview and metrics.
+
+## Example Usage
+
+### Send Message
+
+```json
+{
+  "channel": "#general",
+  "message": "Workflow completed successfully! Check the dashboard for details."
+}
+```
+
+## Response Format
+
+```json
+{
+  "channel": "string",
+  "message": "string",
+  "format": "string",
+  "attachments": [
+    {
+      "url": "string",
+      "type": "string",
+      "name": "string"
+    }
+  ],
+  "embeds": {
+    "title": "string",
+    "description": "string",
+    "fields": [
+      {
+        "name": "string",
+        "value": "string",
+        "inline": "boolean"
+      }
+    ]
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid URL: 400 "Not a valid company page"
+- Company private/deleted: "Resource unavailable"
+- Rate limit: 429—pause for 30s
+- Network issues: Retry up to 3 times

@@ -1,0 +1,97 @@
+---
+title: "Add Values"
+description: "Add Values to Attio Record Integration"
+---
+
+Learn about the Add Values to Attio Record integration capabilities and how to create new records or add attributes to existing ones in your Attio CRM.
+This node creates a new record or enriches an existing one with attribute values—great for inbound lead capture or data imports.
+
+## Features
+
+Our Add Values to Attio Record integration provides:
+
+- Create new records with initial attributes
+- Upsert logic (create if not exists via matching)
+- Support for arrays (e.g., multiselect, tags)
+- Dynamic data from previous workflow nodes
+
+## Available Operations
+
+Add Record Values
+- Create or update a record based on provided data.
+
+Key Capabilities:
+
+- Retrieves all values (text, arrays, links)
+- Handles text, numbers, links, and custom types
+- Returns new/updated record ID
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| objectId | Select  | Choose the Attio object type. Options load dynamically from your workspace. |
+| key | String  | The key and value pair to add to the record. |
+
+  <Frame>
+    <img src="/images/attio/update-record.png" alt="update record" />
+  </Frame>
+
+You can dynamically define attribute IDs (keys) and their corresponding values to add to the record.
+```json
+{
+  "first_name": "Jane",
+  "last_name": "Smith",
+  "email": "jane@example.com",
+  "company": "Acme Inc."
+}
+```
+
+
+#### Options for objectId:
+
+- people: Individual contacts
+- companies: Business entities
+- deals: Sales opportunities (if enabled)
+- Custom objects appear if defined in your Attio workspace
+
+## Example Usage
+
+### Create New Person
+
+```json
+{
+  "objectId": "people",
+  "data": {
+    "values": {
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane@example.com",
+      "company": "Acme Inc."
+    }
+  }
+}
+```
+
+## Response Format
+
+```json
+{
+  "data": {
+    "id": { ... },
+    "created_at": "string",
+    "web_url": "string",
+    "values": {
+      "attribute_id": "value or array"
+    }
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Duplicate conflict: 409 "Record exists—use update"
+- Invalid attribute: 400 "Unknown field"
+- Missing required: 422 "Provide matching_attribute"

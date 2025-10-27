@@ -36,7 +36,6 @@
   "api": {
     "mdx": {
       "server": "https://svalync.com/api"
-     
     },
     "playground": {
       "display": "interactive"
@@ -148,6 +147,29 @@
                 "pages": [
                   "nodes/youtube/overview",
                   "nodes/youtube/get-youtube-videos"
+                ]
+              },
+              {
+                "group": "LinkedIn",
+                "pages": [
+                  "nodes/linkedin/get-post",
+                  "nodes/linkedin/get-post-by-member",
+                  "nodes/linkedin/get-member-profile",
+                  "nodes/linkedin/get-company-profile",
+                  "nodes/linkedin/get-profile-by-search"
+                ]
+              },
+              {
+                "group": "Slack",
+                "pages": ["nodes/slack/send-message"]
+              },
+              {
+                "group": "Attio",
+                "pages": [
+                  "nodes/attio/get-list-of-records",
+                  "nodes/attio/get-records",
+                  "nodes/attio/add-values",
+                  "nodes/attio/update-records"
                 ]
               }
             ]

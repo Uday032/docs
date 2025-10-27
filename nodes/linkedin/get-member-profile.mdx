@@ -1,0 +1,101 @@
+---
+title: "Get Member Profiles"
+description: "Fetch detailed profile data from LinkedIn URLs."
+---
+
+Learn about the LinkedIn Member Profiles integration capabilities and how to fetch detailed profile data from LinkedIn URLs.
+This node allows you to retrieve comprehensive information about individual LinkedIn members by providing their profile URLs. It's perfect for lead generation, talent scouting, or networking automation.
+
+## Features
+Our LinkedIn Member Profiles integration provides:
+
+Profile data extraction from multiple URLs at once
+Basic and enriched profile details (with optional email finding)
+Support for comma-separated URL inputs for bulk processing
+Privacy-compliant data handling
+
+Available Operations
+Get Member Profile Details
+Fetch profile information for one or more LinkedIn members.
+Key Capabilities:
+
+Extract name, job title, experience, education, skills, and contact info
+Optional email discovery for outreach
+Handles up to 50 profiles per request (rate-limited by LinkedIn)
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| ProfileUrls    | String  | Enter LinkedIn profile URLs separated by commas. |
+| ProfileMode    | Select  | Choose the level of detail: without or with email search. |
+
+#### Options for profileMode:
+
+PROFILE_WITHOUT_EMAIL : Basic profile data (name, title, experience, etc.)
+PROFILE_WITH_EMAIL : Full profile plus attempted email discovery (may require additional credits)
+
+## Example Usage
+
+### Fetch Basic Profile
+
+```json
+{
+  "profileUrls": "https://www.linkedin.com/in/elonmusk, https://www.linkedin.com/in/satyanadella",
+  "profileMode": "PROFILE_WITHOUT_EMAIL"
+}
+```
+### Fetch Profiles with Emails
+
+```json
+{
+  "profileUrls": "https://www.linkedin.com/in/john-doe",
+  "profileMode": "PROFILE_WITH_EMAIL"
+}
+```
+
+## Response Format
+
+```json
+{
+  "profile": {
+    "url": "string",
+    "fullName": "string",
+    "headline": "string",
+    "location": "string",
+    "currentPosition": {
+      "title": "string",
+      "company": "string",
+      "duration": "string"
+    },
+    "experience": [
+      {
+        "title": "string",
+        "company": "string",
+        "startDate": "YYYY-MM",
+        "endDate": "YYYY-MM"
+      }
+    ],
+    "education": [
+      {
+        "school": "string",
+        "degree": "string",
+        "field": "string"
+      }
+    ],
+    "skills": ["string"],
+    "email": "string (optional)"
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid URL: Returns 400 with "Invalid LinkedIn URL"
+- Profile not found: Skips and logs "Profile inaccessible"
+- Rate limit exceeded: 429 error—retry after 60s
+- Email not found: Returns null for email field
+- Permission denied: Check API access in dashboard
+

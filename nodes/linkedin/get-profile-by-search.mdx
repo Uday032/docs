@@ -1,0 +1,85 @@
+---
+title: "Get Profile by Search"
+description: "Fetch linkedin profile data by search"
+---
+
+Learn about the LinkedIn Profiles By Search integration capabilities and how to discover profiles matching search criteria.
+This node performs advanced people searches on LinkedIn—ideal for recruiting, sales prospecting, or networking.
+
+## Features
+
+Our LinkedIn Posts By Member integration provides:
+
+- Multi-filter searches (name, location, company, title)
+- Profile modes from basic to full (with email)
+- Boolean-like filtering via inputs
+- Up to 25 results per search
+
+## Available Operations
+
+Search Profiles
+- Find members based on demographics and job details.
+
+Key Capabilities:
+
+- Exact title matching
+- Current/past company filters
+- Location-based narrowing
+
+## Configuration
+
+| Parameter          | Type | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| profileMode        | Select | Detail level. |
+| maxItems           | String | Max profiles to return.|
+| firstName          | String | Target first name. |
+| lastName           | Select | Target last name. |
+| locations          | String | Comma-separated locations.  |
+| currentCompanyUrls | String | Current employer URLs. |
+| pastCompanyUrls    | String | Past employer URLs. |
+| currentJobTitle    | String | Exact job title. |
+
+
+#### Options for profileMode:
+
+- BASIC_PROFILE: Core info only
+- FULL_PROFILE: Experience, education, skills
+- FULL_PROFILE_WITH_EMAIL: Above + email hunt
+
+## Example Usage
+
+### Monitor Company Posts
+
+```json
+{
+  "profileMode": "FULL_PROFILE",
+  "maxItems": "10",
+  "firstName": "Alex",
+  "lastName": "Chen",
+  "locations": "Seattle, Austin",
+  "currentJobTitle": "Senior Developer"
+}
+```
+
+## Response Format
+
+```json
+{
+  "profile": {
+    "fullName": "string",
+    "headline": "string",
+    "location": "string",
+    "currentTitle": "string",
+    "experience": [...],
+    "email": "string (if mode allows)"
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- No matches: Empty array
+- Broad search: "Narrow filters for results"
+- Invalid title: Exact match fails gracefully

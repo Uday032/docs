@@ -1,0 +1,81 @@
+---
+title: "Get Records"
+description: "Fetch records from attio"
+---
+
+Learn about the Get a Single Attio Record integration capabilities and how to retrieve details for a specific record by ID from your Attio CRM.
+This node pulls complete data for one record (e.g., a person or company), ideal for lookups, updates, or detailed analysis in workflows.
+
+## Features
+
+Our Get a Single Attio Record integration provides:
+
+- Full attribute access including custom fields
+- Web URL for quick Attio app access
+- Handles any object type in your workspace
+- Includes timestamps and metadata
+
+## Available Operations
+
+Get Record by ID
+- Fetch a single record's details.
+
+Key Capabilities:
+
+- Retrieves all values (text, arrays, links)
+- Supports people, companies, and custom objects
+- Up to 1MB response size
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| objectId | Select  | Choose the Attio object type. Options load dynamically from your workspace. |
+| get_recordId | String  | The unique UUID of the record to fetch. |
+
+
+
+#### Options for objectId:
+
+- people: Individual contacts
+- companies: Business entities
+- deals: Sales opportunities (if enabled)
+- Custom objects appear if defined in your Attio workspace
+
+## Example Usage
+
+### Retrieve a Person Record
+
+```json
+{
+  "objectId": "people",
+  "get_recordId": "bf071e1f-6035-429d-b874-d83ea64ea13b"
+}
+```
+
+## Response Format
+
+```json
+{
+  "data": {
+    "id": {
+      "workspace_id": "string",
+      "object_id": "string",
+      "record_id": "string"
+    },
+    "created_at": "string (ISO 8601)",
+    "web_url": "string",
+    "values": {
+      "attribute_id": "value or array"
+    }
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Record not found: 404 "Record ID invalid"
+- Wrong object: 400 "Mismatch between object and ID"
+- Auth: 401 "Re-authenticate"

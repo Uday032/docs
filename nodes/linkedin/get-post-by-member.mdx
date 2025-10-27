@@ -1,0 +1,93 @@
+---
+title: "Get Post by Member"
+description: "Fetch linkedin post data by member or customer" 
+---
+
+Learn about the LinkedIn Posts By Company or Member integration capabilities and how to fetch posts from specific profiles or companies.
+This node pulls recent activity from targeted LinkedIn entities—useful for monitoring key influencers or brand mentions.
+
+## Features
+
+Our LinkedIn Posts By Member integration provides:
+
+- URL-based post retrieval for companies/members
+- Time-range filtering
+- Optional reactions and comments
+- Configurable limits for efficiency
+
+## Available Operations
+
+Get Posts by Entity
+- Retrieve posts from one or more company/member URLs.
+
+Key Capabilities:
+
+- Covers last 24h to month
+- Up to 20 posts per entity
+- Nested data control
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| companyOrMemberUrls | String  | Enter search terms separated by commas. |
+| timeRange    | Select  | Filter posts by recency. |
+| maxPosts    | String  | Maximum number of posts to return. |
+| getReactions    | Select  | Include reaction data? |
+| maxReactions    | String  | Max reactions per post. |
+| getComments    | Select  | Include comment data? |
+| maxComments    | String  | Max comments per post. |
+
+
+
+
+#### Options:
+
+- timeRange: 24h, week, month
+- getReactions/getComments: true, false
+
+## Best Practices
+
+- Mix company/member URLs for broad monitoring
+- Set low max for quick scans
+- Alert on high-engagement posts
+- Archive for compliance
+
+## Example Usage
+
+### Monitor Company Posts
+
+```json
+{
+  "companyOrMemberUrls": "https://www.linkedin.com/company/svalync",
+  "timeRange": "week",
+  "maxPosts": "5",
+  "getReactions": "true",
+  "maxReactions": "3",
+  "getComments": "true",
+  "maxComments": "2"
+}
+```
+
+## Response Format
+
+```json
+{
+  "post": {
+    "id": "string",
+    "entityUrl": "string",
+    "text": "string",
+    "timestamp": "datetime",
+    "reactions": [...],
+    "comments": [...]
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid URL: Skip with warning
+- No posts: Empty for that entity
+- Limit hit: Partial results
