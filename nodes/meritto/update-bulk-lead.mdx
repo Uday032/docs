@@ -1,0 +1,68 @@
+---
+title: "Update Bulk Lead"
+description: "update bulk lead Details in Meritto"
+---
+
+The Bulk Update Lead Details node updates multiple leads in one call, specified as a JSON array of objects. Efficient for mass edits like status changes or contact corrections.
+
+## Features
+
+Our Bulk Update Lead Details integration provides:
+
+- Atomic updates (all or none)
+- Up to 50 leads per call
+- Field-specific changes
+
+## Available Operations
+
+Leads
+
+- Bulk partial updates by ID array
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| leadObjects | String  | JSON array of update objects: `[{"leadId":"id","name":"new name",...}, ...]`. |
+
+## Best Practices
+
+- Fetch current details first with Get Lead to merge changes.
+- Use conditionals for optional fields to avoid null overwrites.
+- For bulk updates, prefer Bulk Update node.
+- Log changes in a separate audit workflow.
+- Re-verify contacts after updates for accuracy.
+
+## Example Usage
+
+
+```json
+{
+  "leadObjects": "[{\"leadId\":\"lead_123\",\"email\":\"new1@example.com\"},{\"leadId\":\"lead_456\",\"email\":\"new2@example.com\"}]"
+}
+}
+```
+
+## Response Format
+Empty array on success.
+```json
+{
+  "content": []
+}
+```
+## API Quotas
+
+```json
+{
+  "quota": {
+    "rate_limit": 60
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400: Invalid JSON or missing IDs.
+- 207 Multi-Status: Partial failures detailed.

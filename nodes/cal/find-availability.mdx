@@ -1,0 +1,86 @@
+---
+title: "Find an Availability"
+description: "Learn about the Find an Availability integration capabilities and how to check open time slots for your Cal.com scheduling events."
+---
+
+This node queries your calendar to find available time slots within a specified date range for a selected event. Perfect for lead qualification, AI-driven scheduling, or dynamic booking suggestions in workflows.
+
+## Features
+
+Our Find an Availability integration provides:
+
+- Real-time calendar availability checks
+- Support for multiple time zones
+- Custom date ranges (up to 90 days)
+- Returns free slots with start/end times
+- Works with Cal.com, Calendly (via API), or custom schedulers
+
+## Available Operations
+
+Check Availability
+- Search for open time slots in an event’s schedule.
+
+Key Capabilities:
+
+- Respects event duration, buffer times, and working hours
+- Filters out booked or blocked periods
+- Returns up to 50 available slots per query
+- ISO 8601 datetime format for precision
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| eventId | Select  | Choose the Cal event. Options load dynamically from your workspace. |
+| startTime | Datetime  | Beginning of the search window (ISO 8601). |
+| endTime | Datetime  | End of the search window (ISO 8601). |
+| timeZone | Select  | Time zone for the search and results. |
+
+## Best Practices
+
+- Use Find Availability before Book Appointment to avoid conflicts
+- Narrow the time window (e.g., next 3 days) for faster results
+- Cache results for 5–10 mins to reduce API calls
+- Combine with AI: “Suggest 3 best times” based on urgency
+- Show user-friendly times in local zone using timeZone
+
+## Example Usage
+
+### Find Available Time Slots
+
+```json
+{
+  "eventId": "30min-demo",
+  "startTime": "2025-11-03T00:00:00Z",
+  "endTime": "2025-11-07T23:59:59Z",
+  "timeZone": "America/New_York"
+}
+```
+
+## Response Format
+
+```json
+{
+  "availability": [
+    {
+      "start": "2025-11-04T14:00:00-05:00",
+      "end": "2025-11-04T14:30:00-05:00"
+    },
+    {
+      "start": "2025-11-05T10:00:00-05:00",
+      "end": "2025-11-05T10:30:00-05:00"
+    }
+  ],
+  "total_slots": 2
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Event not found: 404 "Invalid eventId"
+- Invalid time range: 400 "endTime must be after startTime"
+- No slots: Returns empty array (availability: [])
+- Auth failed: 401 "Reconnect your calendar"
+- Rate limit: 429 "Retry in 60s"

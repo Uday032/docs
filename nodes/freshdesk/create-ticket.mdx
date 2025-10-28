@@ -1,0 +1,84 @@
+---
+title: "Create Ticket"
+description: "Learn how to automatically create support tickets in Freshdesk from forms, AI agents, emails, or any workflow."
+---
+
+This node submits a new ticket with subject, description, requester email, and CCs—ideal for self-service portals, chatbots, or internal tools.
+
+## Features
+
+Our Create Ticket in Freshdesk integration provides:
+
+- Auto-creates or matches existing contacts by email
+- Supports CC emails for transparency
+- Sets default priority/status (customizable)
+- Returns ticket ID and public URL
+- Triggers Freshdesk automations (e.g., assign to agent)
+
+## Available Operations
+
+Create New Ticket
+- Submit a ticket with full control over core fields.
+Key Capabilities:
+
+- HTML or plain text description
+- CC up to 10 emails
+- Auto-detects spam and applies rules
+- Supports file attachments (future node)
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| **subject** | String | Ticket title. |
+| **description** | String |Full issue details (HTML supported). |
+| **email** | String | Requester’s email (creates contact if new). |
+| **ccemails** | String | Comma-separated CC emails. |
+
+
+## Best Practices
+
+- Always validate availability before booking
+- Use Find → Filter → Book chain in workflows
+- Send confirmation via email/SMS after booking
+- Add to CRM (e.g., Attio, HubSpot) post-booking
+- Use webhooks to trigger follow-ups (e.g., prep email 1h before)
+
+## Example Usage
+
+### Create Support Ticket from Form
+
+```json
+{
+  "subject": "Payment Failed",
+  "description": "Transaction ID: TXN789\nAmount: $99\nError: Card declined",
+  "email": "customer@shop.com",
+  "ccemails": "billing@shop.com, alerts@team.com"
+}
+```
+
+## Response Format
+
+```json
+{
+  "id": 100123,
+  "ticket_number": "100123",
+  "subject": "Payment Failed",
+  "status": 2,
+  "status_name": "Open",
+  "priority": 2,
+  "priority_name": "Medium",
+  "requester_id": 987654321,
+  "public_url": "https://acme.freshdesk.com/a/tickets/100123",
+  "created_at": "2025-10-28T14:20:00Z"
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Slot taken: 409 — "Time no longer available"
+- Invalid email/phone: 400 — "Validation failed"
+- Event disabled: 403 — "Booking not allowed"
+- Auth error: 401 — "Invalid API key or token"

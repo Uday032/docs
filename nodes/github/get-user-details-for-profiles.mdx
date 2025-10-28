@@ -1,0 +1,104 @@
+---
+title: "Get User Details For Profiles"
+description: " Fetch detailed information for multiple GitHub users."
+---
+
+The Get User Details For Github Profiles node retrieves detailed information for multiple GitHub users, with an option to include their latest commit activity. Useful for bulk user analysis, team profiling, or event-driven workflows.
+
+## Features
+
+Our Get User Details For Github Profiles integration provides:
+
+- Bulk user profile fetching
+- Latest commit extraction (optional)
+- Comma-separated input for multiple users
+- Enhanced details like events for activity tracking
+
+## Available Operations
+
+Users
+
+- Get details for multiple users
+- Fetch latest public commit via events
+- Batch processing for efficiency
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| githubProfiles | String  | Comma-separated GitHub usernames. |
+| selectFetchtype | Select  | Choose fetch mode. |
+
+### Options for selectFetchtype:
+
+- `FETCH_LATEST_COMMIT: Include latest commit details`.
+- `FETCH_WITHOUT_COMMIT: Basic profiles only`.
+
+## Best Practices
+
+- Limit to 10-20 users per call to avoid timeouts.
+- Use without commit for high-volume scans.
+- Parse events for PushEvent only; ignore others.
+- Retry on rate limit with exponential backoff.
+
+## Example Usage
+
+### Fetch details for two users with latest commits
+
+```json
+{
+  "githubProfiles": "octocat,defunkt",
+  "selectFetchtype": "FETCH_LATEST_COMMIT"
+}
+```
+
+## Response Format
+
+```json
+[
+  {
+    "user": {
+      "login": "octocat",
+      "id": 1,
+      "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
+      "public_repos": 8,
+      "followers": 20,
+      // ... other user fields
+    },
+    "latest_commit": {
+      "sha": "abc123",
+      "message": "Update README.md",
+      "url": "https://api.github.com/repos/octocat/repo/commits/abc123",
+      "author": {
+        "name": "The Octocat",
+        "email": "octocat@users.noreply.github.com"
+      },
+      "committer": {
+        "date": "2025-10-28T10:00:00Z"
+      }
+    }
+  }
+]
+```
+## API Quotas
+GitHub API rate limits:
+
+- Per user: Counts toward general rate limit.
+- Events endpoint: Secondary rate limit (30/min unauth).
+
+```json
+{
+  "quota": {
+    "limit": 5000,
+    "secondary_limit": 30
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 404: One or more users not found.
+- 403: Access denied for events.
+- 422: Empty or invalid usernames.

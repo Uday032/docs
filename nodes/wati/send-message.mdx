@@ -1,0 +1,111 @@
+---
+title: "Send Template Message"
+description: "Learn about the Send Template Message integration capabilities and how to dispatch pre-approved WhatsApp template messages using a custom API endpoint."
+---
+
+This node sends a WhatsApp template message via a user-provided API endpoint. It’s ideal for high-volume, policy-compliant outreach (e.g., order confirmations, appointment reminders) using Meta-approved templates and dynamic parameters.
+
+## Features
+
+Our Send Template Message integration provides:
+
+- Full control over the target API (supports any WhatsApp Cloud API or third-party provider)
+- Dynamic parameter injection in JSON format
+- Template + broadcast name for precise targeting
+- Works with any compliant WhatsApp Business API endpoint
+- Supports multiple languages and components (header, body, buttons)
+
+## Available Operations
+
+Send Template Message
+- Dispatch a pre-approved template to a WhatsApp number.
+
+Key Capabilities:
+
+- Sends only Meta-approved templates (required for 24-hour window bypass)
+- Replaces placeholders with custom values (e.g., `{{1}}`, `{{2}}`)
+- Supports header (image/video), body, footer, and button components
+- Returns delivery status and message ID
+
+## Configuration
+
+| Parameter         | Type | Required | Description |
+|-------------------|------|----------|-------------|
+| **apiEndpoint**   | String | Yes      | Full URL of the WhatsApp messaging API (e.g., `https://graph.facebook.com/v20.0/PHONE_ID/messages`). |
+| **whatsappNumber**| String | Yes      | Recipient phone number in international format (e.g., `15551234567`). |
+| **templateName**  | String | Yes      | Exact name of the approved template (case-sensitive). |
+| **broadcastName** | String | Yes      | Name of the broadcast/campaign (for tracking). |
+| **customParams**  | String | Yes      | JSON string of template parameters (e.g., `{"1": "John", "2": "12345"}`). |
+
+> **Note**: `customParams` must match the template structure. Use numbered keys (`"1"`, `"2"`) for body variables.
+
+
+## Best Practices
+
+- Use only Meta-approved templates — unapproved ones will be rejected
+- Validate whatsappNumber format: no +, no spaces, international format
+- Match customParams exactly to template structure (order and count)
+- Use broadcastName consistently for campaign-level analytics
+- Log message_id from response to track delivery, read receipts
+- Test with a single known number before bulk sends
+- Monitor WhatsApp Business Manager for template quality score
+
+## Example Usage
+
+### Send Order Confirmation Template
+
+```json
+{
+  "apiEndpoint": "https://graph.facebook.com/v20.0/123456789012345/messages",
+  "whatsappNumber": "15551234567",
+  "templateName": "order_confirmation",
+  "broadcastName": "black_friday_2025",
+  "customParams": "{\"1\": \"John Doe\", \"2\": \"ORD-7890\", \"3\": \"Oct 30, 2025\"}"
+}
+```
+### Send Appointment Reminder (with Button)
+
+```json
+{
+  "apiEndpoint": "https://graph.facebook.com/v20.0/123456789012345/messages",
+  "whatsappNumber": "919876543210",
+  "templateName": "appointment_reminder",
+  "broadcastName": "weekly_reminders",
+  "customParams": "{\"1\": \"Dr. Smith\", \"2\": \"Nov 1, 2025\", \"3\": \"10:00 AM\"}"
+}
+```
+## Response Format
+
+```json
+{
+  "message_id": "wamid.HBgLM...xyz",
+  "status": "sent",
+  "to": "15551234567",
+  "template": "order_confirmation",
+  "broadcast": "black_friday_2025",
+  "timestamp": "2025-10-28T10:30:00Z"
+}
+```
+
+## Limits
+
+```json
+{
+  "quota": {
+    "daily_limit": 100,
+    "monitoring": {
+      "enabled": true,
+      "threshold": 80,
+      "notification_email": "alerts@yourteam.com"
+    }
+  }
+}
+```
+
+## Error Handling
+Common error scenarios:
+
+- 400 "Template name incorrect or not approved
+- customParams has wrong number of values
+- 401 Token expired or lacks scope
+- Rate limit: 429 "Too many bookings"

@@ -1,0 +1,87 @@
+---
+title: "Create Lead"
+description: "Create a new lead in Meritto"
+---
+
+The Create Lead Details node allows you to add a new lead to your Meritto CRM system with essential contact information. This is the starting point for capturing potential students or customers in education workflows, triggering automated follow-ups, or integrating with forms and ads. Once created, the lead receives a unique ID for further tracking.
+
+## Features
+
+Our Create Lead Details integration provides:
+
+- Instant lead creation with validation
+- Automatic email and mobile verification hooks
+- Integration with downstream workflows (e.g., notifications, scoring)
+- Support for international dial codes
+- Audit logging for compliance
+
+## Available Operations
+
+Leads
+
+- Create a new lead record
+- Validate required fields on submission
+- Return lead ID for immediate use
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| name | String  | Full name of the lead (e.g., first and last). Max 100 characters. |
+| email | String  | Valid email address for communication and verification. |
+| country_dial_code | String  | International dial code (e.g., +1 for US, +91 for India). |
+| mobile | String  | Mobile number without dial code (10-15 digits). |
+
+## Best Practices
+
+- Validate inputs client-side to avoid 400 errors.
+- Use unique identifiers (e.g., from forms) to prevent duplicates.
+- Chain with "Send Welcome Email" node post-creation.
+- For bulk: Use Bulk Create if available; otherwise, loop this node.
+- Test with sandbox mode in Meritto to avoid live data.
+
+## Example Usage
+
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "country_dial_code": "+1",
+  "mobile": "1234567890"
+}
+```
+
+## Response Format
+
+```json
+{
+  "code": 200,
+  "message": "Lead has been created successfully.",
+  "status": true,
+  "data": {
+    "lead_id": "{32_char_lead_id}"
+  }
+}
+```
+## API Quotas
+
+```json
+{
+  "quota": {
+    "rate_limit": 300,
+    "remaining": 298,
+    "reset": "2025-10-28T13:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400 Bad Request: Invalid email or missing required fields.
+- 409 Conflict: Duplicate email/mobile.
+- 401 Unauthorized: Invalid API key.
+- 429 Too Many Requests: Rate limit exceeded.
+- 500 Internal Server Error: Temporary Meritto outage.

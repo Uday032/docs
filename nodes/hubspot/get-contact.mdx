@@ -1,0 +1,87 @@
+---
+title: "Get Contact"
+description: "Quickly retrieve complete contact details from HubSpot using a Contact ID — ideal for AI agents, workflows, or syncing data across tools."
+---
+
+This node pulls all standard and custom properties, lifecycle stage, engagement history, and associations (e.g., companies, deals).
+
+## Features
+
+- Full contact profile with custom fields
+- Includes email, phone, lifecycle stage, owner
+- Returns associated records (company, deals)
+- Real-time data from HubSpot CRM
+- Works with all HubSpot plans
+
+## Available Operations
+
+Fetch Contact by ID
+- Get a single contact using its unique HubSpot ID.
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| **contactId** | String | The HubSpot Contact ID (numeric). |
+
+
+## Best Practices
+
+- Always validate availability before booking
+- Use Find → Filter → Book chain in workflows
+- Send confirmation via email/SMS after booking
+- Add to CRM (e.g., Attio, HubSpot) post-booking
+- Use webhooks to trigger follow-ups (e.g., prep email 1h before)
+
+## Example Usage
+
+### Get Contact Details
+
+```json
+{
+  "contactId": "987654321"
+}
+```
+
+## Response Format
+
+```json
+{
+"id": "987654321",
+  "properties": {
+    "firstname": "Alex",
+    "lastname": "Rivera",
+    "email": "alex@company.com",
+    "phone": "+15551234567",
+    "lifecyclestage": "lead",
+    "hs_owner_id": "12345678",
+    "company": "Acme Corp",
+    "jobtitle": "Marketing Manager"
+  },
+  "associations": {
+    "companies": [
+      {
+        "id": "1122334455",
+        "type": "contact_to_company"
+      }
+    ],
+    "deals": [
+      {
+        "id": "9988776655",
+        "type": "contact_to_deal"
+      }
+    ]
+  },
+  "createdAt": "2025-01-15T10:30:00Z",
+  "updatedAt": "2025-10-28T14:20:00Z"
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Contact not found: 404 — "Contact does not exist"
+- Invalid ID: 400 — "Invalid contact ID format"
+- Auth failed: 401 — "Invalid token or scopes"
+- Rate limit: 429 — "Too many requests"

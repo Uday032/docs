@@ -1,0 +1,98 @@
+---
+title: "Book an Appointment"
+description: "Learn about the Book an Appointment integration and how to schedule confirmed meetings directly into your calendar via Cal.com or similar."
+---
+
+This node creates a confirmed booking with attendee details, sends invites, and blocks the time slot—ideal for sales demos, support calls, or onboarding.
+
+## Features
+
+Our Book an Appointment integration provides:
+
+- Instant booking with attendee name, email, phone
+- Automatic calendar invites (Google, Outlook, etc.)
+- Time zone-aware scheduling
+- Custom location (Zoom, Google Meet, in-person)
+- Booking confirmation with link and ICS file
+
+## Available Operations
+
+Create Booking
+- Reserve a time slot and notify all parties.
+
+Key Capabilities:
+
+- Validates availability before booking
+- Supports recurring events (future)
+- Adds custom fields (via advanced config)
+- Triggers webhooks on booking creation
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| calBookingEventId | Select  | The event to book (e.g., "30-min Call"). |
+| attendeeName | String  | Full name of the person booking. |
+| timeZone | Select  | Attendee’s time zone. |
+| phoneNumber | Number  | Contact phone (for SMS reminders). |
+| email | String  | Email for invite and confirmation. |
+| startTime | Datetime  | Exact start time (ISO 8601). Must be available. |
+| location | Select  | Meeting type. Options load from event settings. |
+
+## Best Practices
+
+- Always validate availability before booking
+- Use Find → Filter → Book chain in workflows
+- Send confirmation via email/SMS after booking
+- Add to CRM (e.g., Attio, HubSpot) post-booking
+- Use webhooks to trigger follow-ups (e.g., prep email 1h before)
+
+## Example Usage
+
+### Find Available Time Slots
+
+```json
+{
+  "calBookingEventId": "30min-demo",
+  "attendeeName": "Sarah Chen",
+  "timeZone": "America/Los_Angeles",
+  "phoneNumber": 14155552671,
+  "email": "sarah@company.com",
+  "startTime": "2025-11-05T10:00:00-08:00",
+  "location": "Zoom"
+}
+```
+
+## Response Format
+
+```json
+{
+  "booking": {
+    "id": "book_abc123",
+    "uid": "evt_xyz789",
+    "start_time": "2025-11-05T18:00:00Z",
+    "end_time": "2025-11-05T18:30:00Z",
+    "status": "ACCEPTED",
+    "title": "30min Demo with Sarah Chen",
+    "location": "Zoom",
+    "meeting_url": "https://zoom.us/j/987654321",
+    "attendees": [
+      {
+        "name": "Sarah Chen",
+        "email": "sarah@company.com",
+        "timeZone": "America/Los_Angeles"
+      }
+    ],
+    "web_url": "https://cal.com/booking/book_abc123"
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Slot taken: 409 "Time slot no longer available"
+- Invalid email/phone: 400 "Validation failed"
+- Event not found: 404 "Invalid eventId"
+- Rate limit: 429 "Too many bookings"

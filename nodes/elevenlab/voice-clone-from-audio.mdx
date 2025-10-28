@@ -1,0 +1,101 @@
+---
+title: "Voice Clone from Audio"
+description: "Instant voice cloning from audio files"
+---
+
+The Eleven Labs Voice Clone From Audio File node creates custom voice clones from an uploaded audio file using ElevenLabs' Instant Voice Cloning technology. It analyzes multi-speaker audio, separates speakers based on the provided transcript, and generates unique voice IDs for each speaker. This is essential for personalized dubbing, audiobooks, or AI agents that need to mimic real voices while preserving tone, emotion, and accent.
+
+## Features
+
+Our Eleven Labs Voice Clone integration provides:
+
+- Instant cloning from audio URLs (MP3, WAV, M4A supported)
+- Multi-speaker separation and individual clones
+- Language-aware cloning for 29+ languages
+- High-quality neural models for natural prosody and emotion
+- Automatic optimization for accents and speaking styles
+
+## Available Operations
+
+Voice Cloning
+
+- Clone voices from audio with transcript guidance
+- Generate voice IDs for immediate use in TTS/dubbing
+- Support for professional or casual voice styles
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| sourceLanguage | Select  | Source language of the audio for accurate cloning (ISO 639-1 code). Improves separation and quality. |
+| originalAudioUrl | String  | Public URL of the original audio file (30s–3min recommended; max 100MB). Clean, noise-free audio yields best results. |
+| audioTranscript  | String  | JSON array of transcript segments for speaker diarization. Schema: `[{"messageId":1,"speaker":1,"original":"Hello world","start":0.0,"end":2.5}, ...]`. |
+
+
+
+## Best Practices
+
+- Use 1-3min of clear, varied speech per speaker for optimal clones (avoid music/background noise).
+- Provide precise timestamps in transcript to aid diarization.
+- Test clones immediately in a TTS node to verify quality.
+- For multi-language: Clone per language; English base for best results.
+- Store voiceIds securely; they persist across sessions.
+- Start with Free tier for prototypes; upgrade for production (e.g., Pro for unlimited clones).
+- If cloning fails, preprocess audio with noise reduction tools.
+
+## Example Usage
+
+## Text to Speech
+
+```json
+{
+  "sourceLanguage": "en",
+  "originalAudioUrl": "https://example.com/dialogue.mp3",
+  "audioTranscript": "[{\"messageId\":1,\"speaker\":1,\"original\":\"Hello, how are you?\",\"start\":0.0,\"end\":2.5},{\"messageId\":2,\"speaker\":2,\"original\":\"Bien, gracias.\",\"start\":2.6,\"end\":4.0}]"
+}
+```
+
+## Response Format
+Cloning Response
+- Array of cloned voice objects:
+```json
+[
+  {
+    "speakerId": "speaker_1",
+    "voiceId": "EXAVITQu4vr4xnSDxMaL"  // Unique ElevenLabs voice ID
+  },
+  {
+    "speakerId": "speaker_2",
+    "voiceId": "pNInz6obpgDQGcFmaJgB"
+  }
+]
+```
+
+- **speakerId**: Matches transcript speaker (e.g., "1").
+- **voiceId**: Ready-to-use ID for TTS/dubbing (store for reuse).
+
+
+## API Quotas
+
+- Rate limit: 60 RPM (requests per minute); higher on paid plans.
+- Monitor via ElevenLabs dashboard or Svalync analytics.
+
+```json
+{
+  "quota": {
+    "monthly_limit": 30000,
+    "remaining_credits": 28500,
+    "reset_date": "2025-11-28T00:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400 Bad Request: Invalid audio URL, transcript schema, or language.
+- 413 Payload Too Large: Audio >100MB or transcript too long.
+- 402 Payment Required: Quota exceeded or insufficient credits.
+- 429 Rate Limit: Too many requests; retry after 60s.
+- 500 Internal: Cloning failed (e.g., noisy audio)—retry with cleaner sample.

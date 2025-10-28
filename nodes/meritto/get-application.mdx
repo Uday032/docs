@@ -1,0 +1,100 @@
+---
+title: "Get Application"
+description: "Get Application Details from Meritto"
+---
+
+The Get Application Details node fetches a paginated list of application records from Meritto forms, filtered by various criteria like status or date. Ideal for monitoring enrollment funnels, reporting, or triggering actions on completions.
+
+## Features
+
+Our Get Application Details integration provides:
+
+- Paginated results for large datasets
+- Multi-field filtering (status, date, etc.)
+- Form-specific queries
+- Export-ready structured data
+
+## Available Operations
+
+Applications
+
+- List applications with filters
+- Pagination and sorting support
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| formId | Select  | ID of the Meritto form to query (from dropdown). |
+| pageSize | Number | Number of records per page (1-100). |
+| filter-field | Select  | Field to filter on (e.g., application_stage). See options. |
+| filter-value | String  | Value to match (e.g., "completed"). |
+
+**Filter options:**
+
+- application_no
+- application_stage
+- payment_status
+- payment_method
+- form_start_date
+- application_completion_date
+- last_updated_date
+- form_status
+- form_completion_percentage
+- lead_id
+
+## Best Practices
+
+- Use small pageSize for testing; scale up.
+- Combine filters for precision (e.g., date + status).
+- Paginate in loops for full exports.
+- Map to dashboards via integrations.
+
+## Example Usage
+
+
+```json
+{
+  "formId": "form_xyz",
+  "pageSize": 10,
+  "filter-field": "application_stage",
+  "filter-value": "completed"
+}
+```
+
+## Response Format
+Applications List
+```json
+{
+  "list": [
+    {
+      "application_no": "APP001",
+      "application_stage": "completed",
+      "payment_status": "paid",
+      "payment_method": "credit_card",
+      "form_start_date": 1698768000,
+      "application_completion_date": "2025-10-28T10:00:00Z",
+      "last_updated_date": 1698772000,
+      "form_status": "active",
+      "form_completion_percentage": 100,
+      "lead_id": "lead_12345"
+    }
+  ]
+}
+```
+## API Quotas
+
+```json
+{
+  "quota": {
+    "rate_limit": 300
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 404: Lead not found.
+- 401: Unauthorized.

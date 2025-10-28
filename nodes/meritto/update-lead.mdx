@@ -1,0 +1,80 @@
+---
+title: "Update Lead"
+description: "Update an existing lead in Meritto"
+---
+
+The Update Lead Details node modifies existing lead information in Meritto, such as updating contact info after verification or adding notes. Optional fields allow partial updates without overwriting data. Useful for nurturing workflows where leads progress through stages.
+
+## Features
+
+Our Update Lead Details integration provides:
+
+- Partial updates to avoid data loss
+- Field-level validation and sanitization
+- Audit trail for changes
+- Bulk support via array inputs
+
+## Available Operations
+
+Leads
+
+- Update lead by ID
+- Optional fields for targeted changes
+- Return updated record
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| leadId | String  | Unique Meritto lead ID to update. |
+| name | String  | Updated full name. |
+| email | String  | Updated email (triggers re-verification). |
+| country_dial_code | String  | Updated dial code. |
+| mobile | String  | Updated mobile number. |
+
+## Best Practices
+
+- Fetch current details first with Get Lead to merge changes.
+- Use conditionals for optional fields to avoid null overwrites.
+- For bulk updates, prefer Bulk Update node.
+- Log changes in a separate audit workflow.
+- Re-verify contacts after updates for accuracy.
+
+## Example Usage
+
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "country_dial_code": "+1",
+  "mobile": "1234567890"
+}
+```
+
+## Response Format
+String content (updated lead summary or empty on success).
+```json
+{
+  "content": "Lead updated successfully. New email: updated@example.com"
+}
+```
+## API Quotas
+
+```json
+{
+  "quota": {
+    "rate_limit": 300,
+    "remaining": 299
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 404 Not Found: Lead ID invalid.
+- 400: Invalid format in updated fields.
+- 409: Email/mobile already in use by another lead.
+- 403: Insufficient permissions.

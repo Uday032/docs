@@ -1,0 +1,129 @@
+---
+title: "Translate Text"
+description: "Translate transcribed text into a target language while preserving speaker identity, context, and structure."
+---
+
+The Translate Text node translates transcribed text (e.g., from videos or audio) into a target language while preserving speaker identity, context, and structure. It uses advanced AI models for nuanced translations, incorporating optional video-specific details like character names or summaries to improve accuracy and cultural relevance. Ideal for dubbing workflows, multilingual content creation, or global customer support.
+
+This operation supports 100+ languages and integrates seamlessly with the Speech to Text node—pass its convertedParagraphsList directly as input.
+
+## Features
+
+Our Translate Text integration provides:
+
+- Accurate, context-aware translation across 100+ languages
+- Speaker diarization preservation (maintains who said what)
+- Enhanced outputs with emotions, timestamps, or SSML for TTS
+- Video-specific improvements via names, summaries, and notes
+- Batch processing for multi-segment transcriptions
+
+## Available Operations
+
+Text Translation
+
+- Translate structured transcription arrays
+- Apply contextual hints for better results
+- Generate formatted outputs (plain text, timed, emotional, or speech-ready)
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| originalLanguage | String  | Source language code or name (e.g., "en" or "English"). Auto-detect possible but manual improves accuracy. |
+| translationLangauge | String  | Target language code or name (e.g., "es" or "Spanish"). |
+| characterNames | String  | Comma-separated names of people/characters in the video for context-aware translation (e.g., proper name handling). |
+| summary | String  | Brief video summary to guide translation tone/context (e.g., "Sci-fi adventure about space explorers"). |
+| optionalInfo | String  | Additional notes (e.g., slang, cultural references, or domain-specific terms). |
+| transcriptionArray | String  | JSON string of the transcription array (from Speech to Text output). Format: `[{"messageId":1,"speaker":1,"original":"Hello world","start":0,"end":2}, ...].` |
+| outputFormat  | Select  | Choose output style: SSML (for TTS), Text (plain), Enhanced Text (with emotions), Text With Word Timestamps, or Enhanced Text With Word Timestamps. |
+
+
+## Best Practices
+
+- Chain with Speech to Text: Use its convertedParagraphsList directly—stringify it for transcriptionArray.
+- Provide rich context: Always include summary and characterNames for 10-20% better accuracy in dialogues.
+- Choose output wisely: SSML for voiceovers; timestamps for subtitles; emotions for engaging content.
+- Test small batches: Start with 1-2 segments to verify tone.
+- Handle long texts: Split large transcriptions into multiple nodes if over limits.
+- Cultural check: Review outputs manually for idioms; use optionalInfo for glossaries.
+- Language codes: Prefer ISO (e.g., "en-US" for dialects) for precision.
+
+## Example Usage
+
+### Translate Text
+
+```json
+{
+  "originalLanguage": "en",
+  "translationLangauge": "es",
+  "characterNames": "Alice,Bob",
+  "summary": "Team status update meeting",
+  "optionalInfo": "Use professional tone",
+  "transcriptionArray": "[{\"messageId\":1,\"speaker\":1,\"original\":\"Hello team, let's start.\",\"start\":0,\"end\":3},{\"messageId\":2,\"speaker\":2,\"original\":\"Great, updates please.\",\"start\":3,\"end\":6}]",
+  "outputFormat": "textWithEmotions"
+}
+```
+
+## Response Format
+
+Translation Response
+- An array of translated segments:
+
+```json
+[
+  {
+    "messageId": 1,
+    "speaker": 1,
+    "ssml": "<speak><prosody rate=\"medium\">¡Hola equipo, empecemos.</prosody></speak>"  // Or text/emotional variant based on outputFormat
+  },
+  {
+    "messageId": 2,
+    "speaker": 2,
+    "ssml": "<speak><prosody rate=\"medium\" pitch=\"high\">Genial, por favor actualizaciones.</prosody><break time=\"500ms\"/></speak>"
+  }
+]
+```
+
+- **messageId**: Matches input for alignment.
+- **speaker**: Preserved from input.
+- **ssml**: Speech Synthesis Markup Language (if selected); otherwise, 
+- plain text, timed text `(e.g., with {start:0,end:3})`, or emotional `(e.g., with tags like [excited])`.
+
+For other formats:
+
+- **text**: Plain translated string.
+- **textWithEmotions**: Includes emotion tags (e.g., [happy]Translated text[/happy]).
+- **Timestamps**: Adds word-level `{word: "Hola", start:0.1, end:0.5}` arrays.
+
+
+## API Quotas
+Svalync translation quotas (based on plan):
+
+- Free: 50,000 characters/month
+- Pro: 500,000 characters/month
+- Premium: 2,000,000 characters/month
+- Enterprise: Custom
+
+Each translation call ≈ 0.5 credits per 1,000 characters. Rate limit: 10 concurrent translations.
+
+```json
+{
+  "quota": {
+    "monthly_limit": 500000,
+    "remaining_chars": 450000,
+    "reset_date": "2025-11-28T00:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400 Bad Request: Invalid language codes or malformed JSON in transcriptionArray.
+- 413 Payload Too Large: Transcription exceeds 100,000 characters.
+422 Unprocessable: Missing required fields or unsupported language pair.
+- 429 Rate Limit: Exceeded concurrent requests.
+- 500 Internal: Translation model error (rare; retry advised).
+
+Use workflow conditionals to route errors to notifications.

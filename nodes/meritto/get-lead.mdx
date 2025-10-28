@@ -1,0 +1,71 @@
+---
+title: "Get Lead"
+description: "Get Lead Details from Meritto"
+---
+
+The Get Lead Details node retrieves comprehensive information for a single lead by its ID, including contact details and metadata. Essential for personalization in emails, scoring, or reporting workflows.
+
+## Features
+
+Our Get Lead Details integration provides:
+
+- Full lead profile retrieval
+- Includes timestamps and status
+- Supports conditional fetching
+- Cache-friendly for repeated queries
+
+## Available Operations
+
+Leads
+
+- Fetch lead by ID
+- Return structured JSON
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| leadId | String  | Meritto lead ID to retrieve. |
+
+## Best Practices
+
+- Cache results for 5-10min to reduce calls.
+- Combine with filters for dynamic queries.
+
+## Example Usage
+
+
+```json
+{
+  "leadId": "lead_12345"
+}
+```
+
+## Response Format
+Lead Response 
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "country_dial_code": "+1",
+  "mobile": "1234567890",
+  "lead_id": "lead_12345"
+}
+```
+## API Quotas
+
+```json
+{
+  "quota": {
+    "rate_limit": 300,
+    "remaining": 300
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 404: Lead not found.
+- 401: Unauthorized.

@@ -1,0 +1,70 @@
+---
+title: "Send Message"
+description: "Learn about the Send WhatsApp Message integration capabilities and how to send text messages to contacts via WhatsApp Business API."
+---
+
+This node enables you to send automated messages to WhatsApp numbers, perfect for customer notifications, alerts, or personalized outreach within workflows. It leverages the WhatsApp Business API for reliable, compliant messaging.
+
+## Features
+
+Our Send WhatsApp Message integration provides:
+
+- Direct text message delivery to WhatsApp contacts
+- Support for dynamic variables `(e.g., {{customer_name}})`
+- Integration with CRM or form triggers for personalized messaging
+- Delivery status tracking for monitoring success
+
+## Available Operations
+
+Send a Text Message
+- Dispatch a single text message to a specified phone number.
+Key Capabilities:
+
+- Supports plain text up to 4,096 characters (WhatsApp limit)
+- Handles emojis and basic formatting (e.g., bold, italics)
+- Sends via verified WhatsApp Business account
+- Logs message status (sent, delivered, read)
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| message | string  | The text content of the WhatsApp message. Can include variables. |
+
+Tips for message:
+
+- Keep messages concise `(<160 chars for quick reads)`.
+- Avoid excessive links to prevent flagging as spam.
+
+## Example Usage
+
+### Basic Single Post Draft
+
+```json
+{
+   "message": "Hi {{customer_name}}, your support ticket #{{ticket_id}} is now open. We'll reply soon!"
+}
+```
+
+## Response Format
+
+```json
+{
+  "response": {
+    "status": "sent",
+    "message_id": "wamid.12345678901234567890",
+    "timestamp": "2025-10-28T01:27:00Z",
+    "recipient_id": "+12025550123"
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid recipient: 400 "Phone number not registered or opted out"
+- Message too long: 413 "Exceeds 4096 characters"
+- Auth failure: 401 "Invalid access token"
+- Rate limit: 429 "Too many messages—wait 60s"
+- Template required: 403 "Non-opted users need approved templates"

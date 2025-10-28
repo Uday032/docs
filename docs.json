@@ -171,6 +171,76 @@
                   "nodes/attio/add-values",
                   "nodes/attio/update-records"
                 ]
+              },
+              {
+                "group": "Zoho Desk",
+                "pages": [
+                  "nodes/zohodesk/get-ticket-details",
+                  "nodes/zohodesk/create-ticket"
+                ]
+              },
+              {
+                "group": "Whatsapp",
+                "pages": ["nodes/whatsapp/send-message"]
+              },
+              {
+                "group": "Cal",
+                "pages": [
+                  "nodes/cal/find-availability",
+                  "nodes/cal/book-appointment"
+                ]
+              },
+              {
+                "group": "Wati",
+                "pages": ["nodes/wati/send-message"]
+              },
+              {
+                "group": "Freshdesk",
+                "pages": [
+                  "nodes/freshdesk/get-ticket-details",
+                  "nodes/freshdesk/create-ticket"
+                ]
+              },
+              {
+                "group": "Hubspot",
+                "pages": ["nodes/hubspot/get-contact"]
+              },
+              {
+                "group": "Zohocrm",
+                "pages": [
+                  "nodes/zohocrm/get-module",
+                  "nodes/zohocrm/create-module"
+                ]
+              },
+              {
+                "group": "Github",
+                "pages": [
+                  "nodes/github/get-profile",
+                  "nodes/github/get-contributors",
+                  "nodes/github/get-user-details-for-profiles",
+                  "nodes/github/get-profile-with-filters"
+                ]
+              },
+              "nodes/speechtotext/speech-to-text",
+              "nodes/text-to-speech/text-to-speech",
+              "nodes/translatetext/translate-text",
+              {
+                "group": "Eleven labs",
+                "pages": [
+                  "nodes/elevenlab/voice-clone-from-audio",
+                  "nodes/elevenlab/voice-dub"
+                ]
+              },
+              {
+                "group": "Meritto",
+                "pages": [
+                  "nodes/meritto/create-lead",
+                  "nodes/meritto/update-lead",
+                  "nodes/meritto/get-lead",
+                  "nodes/meritto/get-bulk-lead",
+                  "nodes/meritto/get-application",
+                  "nodes/meritto/update-bulk-lead"
+                ]
               }
             ]
           },

@@ -1,0 +1,82 @@
+---
+title: "Create Module"
+description: "Create records in any Zoho CRM module (e.g., Leads, Contacts, Deals) using a dynamic module selector."
+---
+
+Dynamically create records in any Zoho CRM module (Leads, Contacts, Accounts, etc.) with full control over standard and custom fields.
+Ideal for lead capture forms, AI-generated contacts, or cross-app sync.
+
+## Features
+
+- Dynamic module creation (choose target at runtime)
+- Auto-creates owner assignment, lead source, etc.
+- Supports custom fields via additional inputs
+- Returns new record ID and web URL
+- Triggers Zoho workflows & automations
+
+## Available Operations
+
+Create Record from Selected Module
+- Insert a new record with full field mapping.
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| modules | Select  | Choose the Zoho CRM module (e.g., Leads, Contacts) |
+| title | String  | Record title (e.g., Mr., Dr.) |
+| firstName | String  | First name |
+| lastName | String  | Last name |
+| company | String  | Company name |
+| email | String  | Email address |
+| phone | String  | Phone number |
+
+## Best Practices
+
+- Use AI to fill fields before creation
+- Set lead source via custom field
+- Chain with Get Record to confirm
+- Trigger Zoho Flow on creation
+
+## Example Usage
+
+### Find Available Time Slots
+
+```json
+{
+  "modules": "Leads"
+}
+```
+### With Record ID from previous node:
+
+```json
+{
+  "modules": "Leads",
+  "title": "Ms.",
+  "firstName": "Emma",
+  "lastName": "Wilson",
+  "company": "Growth Labs",
+  "email": "emma@growthlabs.io",
+  "phone": "+447700900123"
+}
+```
+
+## Response Format
+
+```json
+{
+  "id": "554423000000234001",
+  "status": "success",
+  "message": "Record added successfully",
+  "web_url": "https://crm.zoho.com/crm/org123/tab/Leads/554423000000234001"
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Duplicate email: 409 — "Email already exists"
+- Invalid field: 400 — "Field not found in module"
+- Missing required: 400 — "Last Name is required"
+- Auth error: 401

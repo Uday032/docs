@@ -1,0 +1,104 @@
+---
+title: "Get Contributors"
+description: "Fetch a list of contributors for a specific GitHub repository using their username."
+---
+
+The Get Contributors by Github Repository node fetches a list of contributors for a specific GitHub repository, including their contribution counts. Perfect for analyzing team activity, crediting collaborators, or automating repo audits.
+
+## Features
+
+Our Get Contributors by Github Repository integration provides:
+
+- List of repository contributors
+- Contribution counts per user
+- User profile links and avatars
+- Pagination support for large repos
+- Anonymous contributor inclusion (optional)
+
+## Available Operations
+
+Repositories
+
+- List contributors with commit counts
+- Paginated results (up to 100 per page)
+- Sorted by contributions (descending)
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| githubRepoUrl | String  | Full GitHub repo URL |
+| maxSearchResultsPerPage | Number  | Number of contributors per page (1-100). |
+| startPage | Number  | Starting page number for pagination. |
+| endPage | Number  | Ending page number to fetch. |
+
+## Best Practices
+
+- Parse URL correctly; use full HTTPS for validation.
+- For large repos, iterate pages incrementally.
+- Include anon=1 query if needed (via custom params in advanced mode).
+- Combine with user profile node for deeper data.
+
+## Example Usage
+
+### Fetch Profile
+
+```json
+{
+  "githubRepoUrl": "https://github.com/octocat/Hello-World",
+  "maxSearchResultsPerPage": "10",
+  "startPage": "1",
+  "endPage": "1"
+}
+```
+
+## Response Format
+
+```json
+[
+  {
+    "login": "octocat",
+    "id": 1,
+    "node_id": "MDQ6VXNlcjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/octocat",
+    "html_url": "https://github.com/octocat",
+    "followers_url": "https://api.github.com/users/octocat/followers",
+    "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+    "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+    "organizations_url": "https://api.github.com/users/octocat/orgs",
+    "repos_url": "https://api.github.com/users/octocat/repos",
+    "events_url": "https://api.github.com/users/octocat/events",
+    "received_events_url": "https://api.github.com/users/octocat/received_events",
+    "type": "User",
+    "site_admin": false,
+    "contributions": 32
+  }
+]
+```
+## API Quotas
+GitHub API rate limits:
+
+- Same as general GitHub API: 5,000/hour authenticated.
+- Contributors limited to top 100 (API constraint; anonymous beyond that).
+
+```json
+{
+  "quota": {
+    "limit": 5000,
+    "remaining": 4990
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 404 Not Found: Repo does not exist.
+- 403 Forbidden: No access to private repo.
+- 422 Validation: Invalid repo URL or params.
+- 204 No Content: Empty repo (no contributors).

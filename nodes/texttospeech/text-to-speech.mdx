@@ -1,0 +1,103 @@
+---
+title: "Text to Speech"
+description: "Convert text into audio files."
+---
+
+The Text to Speech node generates natural-sounding audio from translated or structured text inputs, supporting multi-speaker synthesis with customizable voices. It integrates seamlessly with the Translate Text node, taking its output to produce dubbed audio files. Ideal for creating voiceovers, audiobooks, podcasts, or multilingual videos with human-like intonation.
+
+## Features
+
+Our Text to Speech integration provides:
+
+- Multi-speaker audio generation with voice mapping
+- Support for SSML (Speech Synthesis Markup Language) for prosody, pauses, and emphasis
+- 220+ premium voices in 40+ languages and variants
+- Advanced models for conversational or narrative styles
+- High-fidelity output in formats like MP3 or WAV
+- Streaming synthesis for real-time applications
+
+## Available Operations
+
+Audio Synthesis
+
+- Synthesize text/SSML into audio segments
+- Multi-speaker handling via input array
+- Voice selection and mapping for dialogues
+- Batch generation for long-form content
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| inputArray | String  | JSON string of the input array (from Translate Text output). Format:`[{"messageId":1,"speaker":1,"ssml":"Hello <break time='1s'/>","start":0,"end":2}, ...]`. Use "text" or "ssml" per segment. |
+| translationLanguage | Select  | Target language code for synthesis (e.g., "en-US"). Auto-matches input if possible. |
+| textFormat  | Select  | Input format: "text" (plain) or "ssml" (with markup for advanced control). |
+| model  | Select  | TTS model/tier: Standard (cost-efficient), WaveNet (expressive), Neural2 (general), Studio (narrative), Chirp 3: HD (conversational), or Studio Multispeaker (dialogues). |
+| voiceIdsMapping  | String  | Optional JSON mapping speakers to voice IDs (e.g., `{"1": "en-US-Neural2-A", "2": "en-US-Neural2-B"}`). Defaults to neutral voices if omitted. |
+
+
+## Best Practices
+
+- Use direct URLs (e.g., from S3 or YouTube) for fastest processing.
+- Specify language to boost accuracy (auto-detect works but may falter on accents).
+- For long audio (>10min), split into chunks using a prior workflow step.
+- Enable timestamps only if needed—they increase processing time by 20-30%.
+- Test with short clips first; combine outputs in a downstream "Merge Text" node.
+- Ensure audio quality: Clear speech > noisy environments for 95%+ accuracy.
+
+## Example Usage
+
+## Text to Speech
+
+```json
+{
+  "inputArray": "[{\"messageId\":1,\"speaker\":1,\"ssml\":\"<speak>Hello <break time='500ms'/> team.</speak>\",\"start\":0,\"end\":3},{\"messageId\":2,\"speaker\":2,\"ssml\":\"<speak>Great, updates please.</speak>\",\"start\":3,\"end\":6}]",
+  "translationLanguage": "en-US",
+  "textFormat": "ssml",
+  "model": "google-tts",
+  "voiceIdsMapping": "{\"1\":\"en-US-Neural2-A\",\"2\":\"en-US-Neural2-B\"}"
+}
+```
+
+## Response Format
+Audio Response
+- An array of audio URLs (one per segment or concatenated if single):
+```json
+[
+  {
+    "url": "https://storage.googleapis.com/svalync-audio/segment-1.mp3"
+  },
+  {
+    "url": "https://storage.googleapis.com/svalync-audio/segment-2.mp3"
+  }
+]
+```
+
+- **url**: Direct link to generated MP3/WAV file (expires in 7 days; download for permanence).
+- **For single-speaker/long audio**: Single object in array.
+
+
+## API Quotas
+
+
+```json
+{
+  "quota": {
+    "monthly_limit": 5000000,
+    "remaining_chars": 4500000,
+    "reset_date": "2025-11-28T00:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400 Bad Request: Invalid SSML or unsupported language/voice combo.
+- 413 Payload Too Large: Input exceeds 5,000 characters per request.
+- 422 Unprocessable: Malformed JSON in inputArray or voiceIdsMapping.
+- 429 Rate Limit: Exceeded concurrent syntheses.
+- 500 Internal: Model unavailable (retry with exponential backoff).
+
+Route errors to logging nodes in workflows.

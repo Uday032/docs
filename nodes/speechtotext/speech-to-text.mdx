@@ -1,0 +1,120 @@
+---
+title: "Speech to Text"
+description: "Convert audio files into structured text transcripts."
+---
+
+The Speech to Text node converts audio files into structured text transcripts, supporting multi-speaker identification, punctuation, and optional word-level timestamps. This is perfect for automating meeting transcriptions, podcast summaries, customer call analysis, or voice-to-text workflows in Svalync.
+
+## Features
+
+Our Speech to Text integration provides:
+
+- High-accuracy transcription with punctuation
+- Speaker diarization (automatic speaker labeling)
+- Multi-language support (99+ languages)
+- Optional word timestamps for precise timing
+- Structured output with paragraphs and metadata
+- Handles common audio formats (MP3, WAV, M4A, etc.)
+
+## Available Operations
+
+Audio Transcription
+
+- Transcribe audio from URL
+- Detect and label speakers
+- Generate timed paragraphs and words
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| audioUrl | String  | The publicly accessible URL of the audio file `(supports MP3, WAV, M4A, OGG, etc.). Max 25MB`. |
+| currentlanguage | Select  | The primary language of the audio for better accuracy. Auto-detect if unspecified, but manual selection improves results. |
+| includeWordTimestamps  | Select  | Whether to include start/end timestamps for individual words in the output. |
+
+
+## Best Practices
+
+- Use direct URLs (e.g., from S3 or YouTube) for fastest processing.
+- Specify language to boost accuracy (auto-detect works but may falter on accents).
+- For long audio (>10min), split into chunks using a prior workflow step.
+- Enable timestamps only if needed—they increase processing time by 20-30%.
+- Test with short clips first; combine outputs in a downstream "Merge Text" node.
+- Ensure audio quality: Clear speech > noisy environments for 95%+ accuracy.
+
+## Example Usage
+
+### Speech to Text
+
+```json
+{
+  "audioUrl": "https://example.com/meeting-recording.mp3",
+  "currentlanguage": "en",
+  "includeWordTimestamps": "true"
+}
+```
+
+## Response Format
+
+```json
+{
+  "transcript": "Full concatenated transcript text with punctuation.",
+  "convertedParagraphsList": [
+    {
+      "messageId": 1,
+      "original": "Raw text segment before punctuation.",
+      "start": 0.0,
+      "end": 5.2,
+      "speaker": 1,
+      "words": [
+        {
+          "start": 0.1,
+          "end": 0.3,
+          "punctuated_word": "Hello"
+        },
+        {
+          "start": 0.4,
+          "end": 0.6,
+          "punctuated_word": ","
+        }
+        // ... more words
+      ]
+    }
+    // ... more paragraphs
+  ],
+  "messageIdsBySpeaker": {
+    "1": [1, 3, 5],
+    "2": [2, 4]
+  }
+}
+```
+
+- **transcript**: Plain text summary.
+- **convertedParagraphsList**: Timed segments by speaker with word details (if enabled).
+- **messageIdsBySpeaker**: Mapping of speaker IDs to their paragraph IDs.
+
+
+## API Quotas
+
+- Secondary rate limit: 30 requests/minute.
+- Max 1,000 results total per search.
+
+```json
+{
+  "quota": {
+    "monthly_limit": 100,
+    "remaining_minutes": 85,
+    "reset_date": "2025-11-28T00:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common error scenarios:
+
+- 400 Bad Request: Invalid audio URL or unsupported format.
+- 413 Payload Too Large: Audio exceeds 25MB limit.
+- 422 Unprocessable: Unsupported language or empty audio.
+- 429 Rate Limit: Too many concurrent requests.
+- 500 Internal: Transcription model unavailable.

@@ -1,0 +1,122 @@
+---
+title: "Get Profile with Filters"
+description: "Fetch complete public profile data of any GitHub user or organization by their username. "
+---
+
+The Get Github Profiles node searches for GitHub users or organizations using advanced filters and natural language queries. Great for talent scouting, community building, or market research via AI-powered searches.
+
+## Features
+
+Our Get Github Profiles integration provides:
+
+- Advanced user/org search
+- AI natural language to query mapping
+- Multi-filter support `(location, language, followers, etc.)`
+- Paginated results with sorting
+- Qualifier-based precision `(e.g., language:python)`
+
+## Available Operations
+
+Search
+
+- Search users by keywords, filters
+- Sort by followers, repos, joined date
+- Paginate up to 1,000 results total (100/page max)
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| aiText | String  | Natural language query (AI converts to API q param). |
+| language | String  | Comma-separated languages. Added as `language:python,java.` |
+| followers | String  | Min followers `(e.g., >100)`. |
+| location | String  | Location filter |
+| repos | String  | Min repos  `(e.g., >50)`. |
+| type | Select  | User or Organization. |
+| keywordSearch | String  | Base keywords for search. |
+| searchIn | Select  | Field to search: name, login, email. |
+| created | Datetime  | After this date `(e.g., created:>2024-01-01)`. |
+| sort  | Select  | Sort by: followers, repositories, joined. |
+| maxSearchResultsPerpage  | String  | Results per page (1-100). |
+| noOfPages  | String  | Number of pages to fetch. |
+
+## Best Practices
+
+- Use AI text for complex queries; refine with filters.
+- Start with 1 page to test; scale up.
+- Combine qualifiers in q for precision `(e.g., python location:India - followers:>100)`.
+- Handle incomplete_results for large searches.
+
+## Example Usage
+
+### Fetch Profile
+
+```json
+{
+  "aiText": "Python developers in India",
+  "language": "Python",
+  "followers": "100",
+  "location": "India",
+  "repos": "10",
+  "keywordSearch": "developer",
+  "searchIn": "name",
+  "sort": "followers",
+  "maxSearchResultsPerpage": "10",
+  "noOfPages": "2"
+}
+```
+
+## Response Format
+
+```json
+{
+  "total_count": 42,
+  "incomplete_results": false,
+  "items": [
+    {
+      "login": "user1",
+      "id": 123,
+      "node_id": "MDQ6VXNlcjEyMw==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/123?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/user1",
+      "html_url": "https://github.com/user1",
+      "followers_url": "https://api.github.com/users/user1/followers",
+      "following_url": "https://api.github.com/users/user1/following{/other_user}",
+      "gists_url": "https://api.github.com/users/user1/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/user1/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/user1/subscriptions",
+      "organizations_url": "https://api.github.com/users/user1/orgs",
+      "repos_url": "https://api.github.com/users/user1/repos",
+      "events_url": "https://api.github.com/users/user1/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/user1/received_events",
+      "type": "User",
+      "site_admin": false,
+      "score": 1.1234
+    }
+  ]
+}
+```
+## API Quotas
+GitHub API rate limits:
+
+- Secondary rate limit: 30 requests/minute.
+- Max 1,000 results total per search.
+
+```json
+{
+  "quota": {
+    "limit": 5000,
+    "remaining": 4990,
+    "reset": "2025-10-28T12:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common error scenarios:
+
+- 422 Validation: Empty query or invalid qualifiers.
+- 403 Forbidden: Rate limit exceeded.
+- 503 Service Unavailable: Temporary outage.

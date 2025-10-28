@@ -1,0 +1,85 @@
+---
+title: "Create Ticket"
+description: "Learn about the Create a Ticket in ZohoDesk integration capabilities and how to programmatically generate new support tickets in your Zoho Desk portal."
+---
+
+This node automates ticket creation from forms, emails, or AI triggers—perfect for inbound support, lead routing, or internal requests.
+
+## Features
+
+Our Create a Ticket in ZohoDesk integration provides:
+
+- Assignment to departments and contacts
+- Optional descriptions and phone for context
+- Support for tags, priorities, and custom fields (advanced)
+- Returns ticket ID for immediate follow-up
+
+## Available Operations
+
+Create New Ticket
+- Submit a new ticket with core details.
+
+Key Capabilities:
+
+- Auto-creates contacts if ID not provided (upsert logic)
+- Sets initial status to "Open"
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| subject | String  | The ticket's title or summary. |
+| departmentId | String  | ID of the department (e.g., Support, Sales). |
+| contactId | String  | ID of the requester/contact. |
+| description | String  | Detailed issue explanation. |
+| phone | String  | Customer's phone for callbacks. |
+
+## Best Practices
+
+- Validate IDs upstream (e.g., fetch contacts first)
+- Use dynamic vars for subject/description from triggers
+- Set priority/status in advanced config for urgency
+- Follow up: Chain with Get Ticket for confirmation
+- Compliance: Log creations and avoid spam (e.g., rate-limit forms)
+
+## Example Usage
+
+### Basic Ticket Creation 
+
+```json
+{
+  "subject": "Billing Inquiry",
+  "departmentId": "1234567890",
+  "contactId": "987654321",
+  "description": "Question about recent charge.",
+  "phone": "+1-555-0123"
+}
+```
+
+## Response Format
+
+```json
+{
+  "data": {
+    "id": "903000000000100",
+    "ticket_number": "TK-12346",
+    "subject": "Billing Inquiry",
+    "status": "Open",
+    "priority": "Medium",
+    "department_id": "1234567890",
+    "requester_id": "987654321",
+    "created_time": "2024-01-03T10:00:00Z",
+    "modified_time": "2024-01-03T10:00:00Z"
+  }
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Invalid input: 400 "Missing required fields like subject"
+- Unauthorized: 401 "OAuth token invalid"
+- Forbidden: 403 "No Desk.tickets.CREATE scope"
+- Unprocessable: 422 "Invalid departmentId or contactId"
+- Rate limit: 429 "Retry after delay"

@@ -1,0 +1,73 @@
+---
+title: "Get Module"
+description: "Fetch detailed records from any Zoho CRM module (e.g., Leads, Contacts, Deals) using a dynamic module selector."
+---
+
+This node lets you retrieve full record data — including custom fields — from any module in your Zoho CRM, making it perfect for dynamic workflows where the target module varies.
+
+## Features
+
+- Dynamic module selection (Leads, Contacts, Accounts, etc.)
+- Returns all standard + custom fields
+- Includes record owner, created time, associations
+- Real-time data from Zoho CRM
+- Works across all Zoho CRM editions
+
+## Available Operations
+
+Retrieve Record from Selected Module
+- Get a single record by ID from the chosen module.
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| modules | Select  | Choose the Zoho CRM module (e.g., Leads, Contacts). Options load from your CRM. |
+
+
+## Example Usage
+
+### Find Available Time Slots
+
+```json
+{
+  "modules": "Leads"
+}
+```
+### With Record ID from previous node:
+
+```json
+{
+  "recordId": "123456789012345",
+  "module": "Contacts"
+}
+```
+
+## Response Format
+
+```json
+{
+  "id": "123456789012345",
+  "First_Name": "Sarah",
+  "Last_Name": "Chen",
+  "Email": "sarah@techco.com",
+  "Phone": "+14155552671",
+  "Company": "TechCo Inc.",
+  "Lead_Source": "Website",
+  "Owner": {
+    "name": "John Admin",
+    "id": "111222333"
+  },
+  "Created_Time": "2025-10-28T09:15:00+05:30",
+  "custom_field_1": "Enterprise Plan"
+}
+```
+
+
+## Error Handling
+Common error scenarios:
+
+- Module not found: 404 — "Invalid module name"
+- Record not found: 404 — "No record with this ID"
+- Auth failed: 401 — "Invalid token"
+- Rate limit: 429 — "Too many requests"

@@ -1,0 +1,81 @@
+---
+title: "Get Bulk Lead"
+description: "Get Bulk Lead Details from Meritto"
+---
+
+The Get Bulk Lead Details node retrieves details for multiple leads by comma-separated IDs, optimizing for batch queries. Great for reporting, data syncs, or cleaning up lists.
+
+## Features
+
+Our Get Bulk Lead Details integration provides:
+
+- Up to 100 IDs per call
+- Parallel fetching for speed
+- Error-tolerant (skips invalid IDs)
+
+## Available Operations
+
+Leads
+
+- Bulk fetch by ID list
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| leadId | String  | Comma-separated Meritto lead IDs. |
+
+## Best Practices
+
+- Limit to 50-100 IDs to avoid timeouts.
+- Split large lists across calls.
+- Use with search nodes for dynamic ID collection.
+
+## Example Usage
+
+
+```json
+{
+  "leadIds": "lead_12345,lead_67890"
+}
+```
+
+## Response Format
+Lead Response 
+```json
+{
+  "content": [
+    {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "country_dial_code": "+1",
+      "mobile": "1234567890",
+      "lead_id": "lead_12345"
+    },
+     {
+      "name": "Sam Doe",
+      "email": "sam@example.com",
+      "country_dial_code": "+1",
+      "mobile": "1234568990",
+      "lead_id": "lead_67890"
+    }
+  ]
+}
+```
+## API Quotas
+
+```json
+{
+  "quota": {
+    "rate_limit": 300,
+    "remaining": 300
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400: Too many IDs or invalid format.
+- Partial success: Array includes only valid leads.

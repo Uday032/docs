@@ -1,0 +1,92 @@
+---
+title: "Get Profile"
+description: "Fetch complete public profile data of any GitHub user by their username."
+---
+
+The Get Github Profile node allows you to retrieve detailed information about a specific GitHub user by their username. This is ideal for workflows that need to fetch user data, such as profile details, repository counts, or follower statistics, to personalize automations or analyze contributor activity.
+
+## Features
+
+Our Get Profile integration provides:
+
+- Full user profile: bio, location, company, email (if public)
+- Stats: followers, following, public repos, gists
+- Links: blog, Twitter, LinkedIn
+- Real-time data from GitHub API
+- No authentication needed for public profil
+
+## Available Operations
+
+Retrieve User Profile
+- Get detailed profile of a single GitHub user.
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| name | String  | The GitHub username (login) of the user to fetch. |
+
+## Best Practices
+
+- Use authentication for higher rate limits.
+- Cache responses for repeated queries.
+- Handle 404s gracefully in workflows.
+- Validate username before API call to avoid errors.
+
+## Example Usage
+
+### Fetch Profile
+
+```json
+{
+  "name": "octocat"
+}
+```
+
+## Response Format
+
+```json
+{
+  "login": "octocat",
+  "id": 12345678,
+  "name": "Octocat",
+  "company": "Tech Xoil",
+  "location": "Redmond, WA",
+  "email": null,
+  "bio": "CEO at Tech xoil. Passionate about technology and innovation.",
+  "blog": "https://news.microsoft.com/exec/octocat/",
+  "twitter_username": "octocat",
+  "public_repos": 5,
+  "public_gists": 0,
+  "followers": 250000,
+  "following": 120,
+  "created_at": "2010-01-15T12:00:00Z",
+  "updated_at": "2025-10-28T14:30:00Z",
+  "avatar_url": "https://avatars.githubusercontent.com/u/12345678?v=4",
+  "html_url": "https://github.com/octocat"
+}
+```
+## API Quotas
+GitHub API rate limits:
+
+- Unauthenticated: 60 requests per hour.
+- Authenticated: 5,000 requests per hour.
+- No per-endpoint quota, but monitor via response headers `(X-RateLimit-Limit, X-RateLimit-Remaining)`.
+
+```json
+{
+  "quota": {
+    "limit": 5000,
+    "remaining": 4990,
+    "reset": "2025-10-28T12:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common error scenarios:
+
+- User not found: 404 — "User does not exist"
+- Invalid username: 400 — "Username cannot be empty"
+- Rate limit: 429 — "Too many requests"

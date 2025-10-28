@@ -1,0 +1,97 @@
+---
+title: "Voice Dub"
+description: "Voice Dubbing"
+---
+
+The Eleven Labs Voice Dub node dubs an original audio file into a new language or voice by replacing speech with synthesized audio using specified voice clones. It aligns timing, preserves emotions/timing, and supports multi-speaker dubbing. Perfect for localizing videos, podcasts, or calls while maintaining original pacing and speaker identity.
+
+## Features
+
+Our Eleven Labs Voice Dub integration provides:
+
+- Automatic translation and lip-sync aligned dubbing
+- Multi-speaker dubbing with voice mapping
+- 32-language support with cultural adaptation
+- High-fidelity output preserving original timing and tone
+- Batch dubbing for long-form content
+
+## Available Operations
+
+Audio Dubbing
+
+- Dub audio using cloned or built-in voices
+- Translate and synthesize in one step
+- Generate dubbed audio files with timestamps
+
+
+## Configuration
+
+| Parameter       | Type    | Description                                    |
+| --------------- | ------- | ---------------------------------------------- |
+| sourceLanguage | Select  | Source language of the audio for accurate cloning (ISO 639-1 code). Improves separation and quality. |
+| originalAudioUrl | String  | URL of the audio to dub (max 25MB; supports MP3/WAV). |
+| voiceIdsList  | String  | JSON mapping of speakers to voice IDs (cloned or built-in). Schema: `{"speaker_1": "EXAVITQu4vr4xnSDxMaL", "speaker_2": "pNInz6obpgDQGcFmaJgB"}`. |
+| audioTranscript  | String  | JSON transcript array (same schema as cloning). Used for alignment and translation guidance.. |
+
+
+
+## Best Practices
+
+- Pre-clone voices with the Clone node for best matching.
+- Ensure transcript timestamps align closely (±0.5s) to original audio for sync.
+- For videos: Pair with lip-sync tools post-dub.
+- Test on short clips; dubbing latency ~1-2min per minute.
+- Use multilingual_v2 model for cross-language dubs.
+- Monitor credits closely—dubbing is credit-intensive.
+- For long files: Split into segments and stitch in a workflow.
+
+## Example Usage
+
+## Text to Speech
+
+```json
+{
+  "sourceLanguage": "en",
+  "originalAudioUrl": "https://example.com/english-dialogue.mp3",
+  "voiceIdsList": "{\"1\":\"EXAVITQu4vr4xnSDxMaL\",\"2\":\"pNInz6obpgDQGcFmaJgB\"}",
+  "audioTranscript": "[{\"messageId\":1,\"speaker\":1,\"original\":\"Hello team.\",\"start\":0,\"end\":2},{\"messageId\":2,\"speaker\":2,\"original\":\"Hi.\",\"start\":2.1,\"end\":2.5}]"
+}
+```
+
+## Response Format
+Dubbing Response
+- Simple success indicator (dubbed audio URL available via Svalync storage or webhook):
+```json
+[
+  {
+    "success": true
+  }
+]
+```
+
+- On success: true (audio generated; access via workflow output or ElevenLabs history).
+- On failure: false with error details in logs.
+
+
+## API Quotas
+
+- Rate limit: 30 RPM on Creator; 100+ on higher plans.
+
+```json
+{
+  "quota": {
+    "monthly_limit": 100000,
+    "remaining_credits": 85000,
+    "reset_date": "2025-11-28T00:00:00Z"
+  }
+}
+```
+
+## Error Handling
+Common API errors:
+
+- 400: Mismatched transcript or invalid voice IDs.
+- 413: Audio too long/large.
+- 402: Credits insufficient for dubbing.
+- 429: Rate limit hit.
+- 500: Alignment failure (e.g., poor transcript sync).
